@@ -1,0 +1,7 @@
+{
+    "LEARNING_RATE": 0.001,
+    "EPOCHS":10,
+    "BATCH_SIZE":265,
+    "INPUT_SIZE": 224,
+    "OUT_SIZE":2
+}
