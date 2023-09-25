@@ -64,3 +64,7 @@ class VGG19(nn.Module):
             nn.Dropout(0.5),
             nn.Linear(4096, num_classes)
         )
+
+
+class FaceNet(nn.Module):
+    pass
