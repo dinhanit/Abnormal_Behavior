@@ -1,1 +1,2 @@
-# Testing git
+def show():
+    print('ok')
