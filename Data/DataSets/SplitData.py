@@ -1,7 +1,7 @@
 import os
 import random
 import shutil
-
+#print(os.getcwd())
 origin_dir = "Origin" 
 split_data_dir ="SplitData"
 train_dir = os.path.join(split_data_dir, "train")
