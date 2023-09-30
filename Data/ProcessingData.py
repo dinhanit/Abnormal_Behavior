@@ -1,6 +1,7 @@
 import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader
+import numpy as np
 
 # Chuẩn bị transform
 train_transforms = transforms.Compose([
@@ -46,15 +47,13 @@ def Data_Loader(data):
     print(f"Kích thước y:", y.shape)  # Kích thước y_train: (số lượng mẫu,)
     return X, y
 
-Data_Loader(train_data)
-Data_Loader(test_data)
-
+np.save('train_data.npy', Data_Loader(train_data))
+np.save('test_data.npy', Data_Loader(test_data))
 
 def show_image(image_path):
     from PIL import Image
     import matplotlib.pyplot as plt
-    import numpy as np
-
+   
     img = Image.open(image_path)
     plt.imshow(img)
     plt.show()
