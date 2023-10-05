@@ -50,12 +50,10 @@ def Data_Loader(data):
     return X, y
 
 # Get X and y for train_data and save as .pth files
-X_train, y_train = Data_Loader(train_data)
-torch.save((X_train, y_train), 'train_data.pth')
+torch.save(Data_Loader(train_data), 'train_data.pth')
 
 # Get X and y for test_data and save as .pth files
-X_test, y_test = Data_Loader(test_data)
-torch.save((X_test, y_test), 'test_data.pth')
+torch.save(Data_Loader(test_data), 'test_data.pth')
 
 def show_image(image_path):
     from PIL import Image
