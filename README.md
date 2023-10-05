@@ -22,12 +22,17 @@ The Final Exam Abnormal Behavior Recognition project is aimed at developing a sy
    pip install -r requirements.txt
 ```
 # Usage
+- Run
+  ```bash
+    python main.py
+    ```
+# Custom
 - Data
     ```bash
     cd Data/
     ```
     1. Split Data
-    ```code
+    ```python
         python SplitData.py
     ```
     2. Processing Data
@@ -40,7 +45,7 @@ The Final Exam Abnormal Behavior Recognition project is aimed at developing a sy
     cd Model/
     ```
     1. Training
-    ```code
+    ```python
         python Train.py
     ```
     2. Test
