@@ -8,32 +8,48 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 import json
 import torchvision
+import pickle
 
 with open('Model/param.json', 'r') as json_file:
     data = json.load(json_file)
 
 for key, value in data.items():
     globals()[key] = value
+
+# train_transforms = transforms.Compose([
+#     transforms.Resize((224)),
+#     transforms.CenterCrop(224),
+#     transforms.ToTensor(),
+#     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+# ])
+
+# test_transforms = transforms.Compose([
+#     transforms.Resize((224, 224)),
+#     transforms.ToTensor(),
+#     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+# ])
+
+# train_data = torchvision.datasets.ImageFolder(root='./Data/DataSets/SplitData/test', transform=train_transforms)
+# test_data = torchvision.datasets.ImageFolder(root='./Data/DataSets/SplitData/train', transform=test_transforms)
+
+
+# with open('train_data.pkl', 'wb') as file:
+#     pickle.dump(train_data, file)
+
+# with open('test_data.pkl', 'wb') as file:
+#     pickle.dump(train_data, file)
     
-train_transforms = transforms.Compose([
-    transforms.Resize((224)),
-    transforms.CenterCrop(224),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-])
+with open('train_data.pkl', 'rb') as file:
+    loaded_train_data = pickle.load(file)
 
-test_transforms = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-])
-
+with open('test_data.pkl', 'rb') as file:
+    loaded_test_data = pickle.load(file)
+    
 BATCH_SIZE = 64
-train_data = torchvision.datasets.ImageFolder(root='./Data/DataSets/SplitData/test', transform=train_transforms)
-test_data = torchvision.datasets.ImageFolder(root='./Data/DataSets/SplitData/train', transform=test_transforms)
 
-TRAINLOADER = DataLoader(train_data, batch_size=BATCH_SIZE, shuffle=True)
-TESTLOADER = DataLoader(test_data, batch_size=BATCH_SIZE, shuffle=False)
+
+TRAINLOADER = DataLoader(loaded_train_data, batch_size=BATCH_SIZE, shuffle=True)
+TESTLOADER = DataLoader(loaded_test_data, batch_size=BATCH_SIZE, shuffle=False)
 
 model = CustomCNN(num_classes=2)
 
