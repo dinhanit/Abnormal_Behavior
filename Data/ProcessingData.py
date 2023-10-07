@@ -1,7 +1,7 @@
 import torchvision
 from torchvision import transforms
-from torch.utils.data import DataLoader
 import numpy as np
+from torch.utils.data import DataLoader
 import pickle
 
 # Chuẩn bị transform
@@ -33,14 +33,12 @@ classes_name = train_data.classes
 # print("Number of train: ", len(train_data))
 # print("Number of test: ", len(test_data))
 
-with open("train_data.pkl", "wb") as file:
-    # Serialize and save the object to the file
+with open('train_data.pkl', 'wb') as file:
     pickle.dump(train_data, file)
 
 with open("test_data.pkl", "wb") as file:
     # Serialize and save the object to the file
     pickle.dump(test_data, file)
-
 
 
 def show_image(image_path):
