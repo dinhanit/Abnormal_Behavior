@@ -2,7 +2,7 @@ import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader
 import numpy as np
-import torch
+import pickle
 
 # Chuẩn bị transform
 train_transforms = transforms.Compose([
@@ -33,25 +33,13 @@ classes_name = train_data.classes
 # print("Number of train: ", len(train_data))
 # print("Number of test: ", len(test_data))
 
-def Data_Loader(data, batch_size):
-    # Tạo DataLoader
-    data_loader = DataLoader(data, batch_size=batch_size, shuffle=True)
+with open("train_data.pkl", "wb") as file:
+    # Serialize and save the object to the file
+    pickle.dump(train_data, file)
 
-    # Kiểm tra kích thước của trainset và testset
-    for batch in data_loader:
-        batch_shape = len(batch[0])
-        break  # Exit after checking the first batch
-    print(f"Shape of the data batches: {batch_shape}")
-
-    print('Load Done')
-    return data_loader
-
-batch_size = 64 
-# Get X and y for train_data and save as .pth files
-torch.save(Data_Loader(train_data, batch_size), 'train_data.pth')
-
-# Get X and y for test_data and save as .pth files
-torch.save(Data_Loader(test_data, batch_size), 'test_data.pth')
+with open("test_data.pkl", "wb") as file:
+    # Serialize and save the object to the file
+    pickle.dump(test_data, file)
 
 
 
@@ -69,3 +57,25 @@ def show_image(image_path):
     plt.imshow(img_transformed)
     plt.show()
 # show_image('k.jpg')
+
+
+
+def Data_Loader(data, batch_size):
+    # Tạo DataLoader
+    data_loader = DataLoader(data, batch_size=batch_size, shuffle=True)
+
+    # Kiểm tra kích thước của trainset và testset
+    for batch in data_loader:
+        batch_shape = len(batch[0])
+        break  # Exit after checking the first batch
+    print(f"Shape of the data batches: {batch_shape}")
+
+    print('Load Done')
+    return data_loader
+
+# batch_size = 64 
+# # Get X and y for train_data and save as .pth files
+# torch.save(Data_Loader(train_data, batch_size), 'train_data.pth')
+
+# # Get X and y for test_data and save as .pth files
+# torch.save(Data_Loader(test_data, batch_size), 'test_data.pth')

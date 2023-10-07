@@ -1,16 +1,13 @@
-import torch
+import pickle
 
-def load_data(data): 
-    loaded_array = torch.load(data)
+def load_data(data): #FUNCTION TO LOAD DATA 
+    with open(data, "rb") as file:
+    # Load the serialized object from the file
+        loaded_data = pickle.load(file)
+    #print(loaded_data)
 
-    print(loaded_array)
-    return loaded_array
+    print("Loaded Done")
+    return loaded_data
 
-    # X = loaded_array[0]
-    # y = loaded_array[1]
-    # print(X.shape)
-    # print(y.shape)
-    # return X, y
-
-# load_data('train_data.pth')
-# load_data('test_data.pth')
+# load_data('train_data.pkl')
+# load_data('test_data.pkl')
