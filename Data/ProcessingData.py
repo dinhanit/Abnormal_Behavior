@@ -4,7 +4,6 @@ from torch.utils.data import DataLoader
 import numpy as np
 import torch
 
-
 # Chuẩn bị transform
 train_transforms = transforms.Compose([
     transforms.Resize((224)),
@@ -34,20 +33,27 @@ classes_name = train_data.classes
 # print("Number of train: ", len(train_data))
 # print("Number of test: ", len(test_data))
 
-def Data_Loader(data):
+def Data_Loader(data, batch_size):
     # Tạo DataLoader
-    data_loader = DataLoader(data, batch_size=len(data), shuffle=True)
+    data_loader = DataLoader(data, batch_size=batch_size, shuffle=True)
 
-    # Kiểm tra kích thước của X_train và y_train
-    #print(f"Kích thước y:", data_loader.shape)  # Kích thước y_train: (số lượng mẫu,)
+    # Kiểm tra kích thước của trainset và testset
+    for batch in data_loader:
+        batch_shape = len(batch[0])
+        break  # Exit after checking the first batch
+    print(f"Shape of the data batches: {batch_shape}")
+
     print('Load Done')
     return data_loader
 
+batch_size = 64 
 # Get X and y for train_data and save as .pth files
-torch.save(Data_Loader(train_data), 'train_data.pth')
+torch.save(Data_Loader(train_data, batch_size), 'train_data.pth')
 
 # Get X and y for test_data and save as .pth files
-torch.save(Data_Loader(test_data), 'test_data.pth')
+torch.save(Data_Loader(test_data, batch_size), 'test_data.pth')
+
+
 
 def show_image(image_path):
     from PIL import Image
