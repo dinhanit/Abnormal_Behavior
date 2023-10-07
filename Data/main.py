@@ -1,7 +1,7 @@
-import numpy as np 
+import torch
 
-def load_data(data):  #Fucntion to read "train_data.npy" and "test_data.npy"
-    loaded_array = np.load(data, allow_pickle=True)
+def load_data(data): 
+    loaded_array = torch.load(data)
     X = loaded_array[0]
     y = loaded_array[1]
     
@@ -9,4 +9,5 @@ def load_data(data):  #Fucntion to read "train_data.npy" and "test_data.npy"
     # print(y.shape)
     return X, y 
 
-#load_data('train_data.npy')
+# load_data('train_data.pth')
+# load_data('test_data.pth')

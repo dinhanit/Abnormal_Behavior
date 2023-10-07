@@ -38,24 +38,16 @@ def Data_Loader(data):
     # Tạo DataLoader
     data_loader = DataLoader(data, batch_size=len(data), shuffle=True)
 
-    # Lặp qua DataLoader để lấy dữ liệu và nhãn
-    for images, labels in data_loader:
-        X = images
-        y = labels
-        break  # Dừng sau một lần lặp để tránh lặp tiếp
-
     # Kiểm tra kích thước của X_train và y_train
-    print(f"Kích thước X:", X.shape)  # Kích thước X_train: (số lượng mẫu, số kênh, chiều cao, chiều rộng)
-    print(f"Kích thước y:", y.shape)  # Kích thước y_train: (số lượng mẫu,)
-    return X, y
+    #print(f"Kích thước y:", data_loader.shape)  # Kích thước y_train: (số lượng mẫu,)
+    print('Load Done')
+    return data_loader
 
 # Get X and y for train_data and save as .pth files
-X_train, y_train = Data_Loader(train_data)
-torch.save((X_train, y_train), 'train_data.pth')
+torch.save(Data_Loader(train_data), 'train_data.pth')
 
 # Get X and y for test_data and save as .pth files
-X_test, y_test = Data_Loader(test_data)
-torch.save((X_test, y_test), 'test_data.pth')
+torch.save(Data_Loader(test_data), 'test_data.pth')
 
 def show_image(image_path):
     from PIL import Image
