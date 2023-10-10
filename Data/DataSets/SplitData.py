@@ -24,6 +24,7 @@ normal_dir = os.path.join(origin_dir, "Normal")
 abnormal_images = os.listdir(abnormal_dir)
 normal_images = os.listdir(normal_dir)
 
+random.seed(42)
 random.shuffle(abnormal_images)
 random.shuffle(normal_images)
 

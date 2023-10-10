@@ -18,9 +18,8 @@ test_transforms = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
-# Tải dữ liệu
-train_data = torchvision.datasets.ImageFolder(root='./DataSets/SplitData/train', transform=train_transforms)
-test_data = torchvision.datasets.ImageFolder(root='./DataSets/SplitData/test', transform=test_transforms)
+train_data = torchvision.datasets.ImageFolder(root='./Data/DataSets/SplitData/train', transform=train_transforms)
+test_data = torchvision.datasets.ImageFolder(root='./Data/DataSets/SplitData/test', transform=test_transforms)
 # Số lượng các lớp
 num_classes = len(train_data.classes)
 # Tên của các lớp
@@ -36,9 +35,9 @@ classes_name = train_data.classes
 with open('train_data.pkl', 'wb') as file:
     pickle.dump(train_data, file)
 
-with open("test_data.pkl", "wb") as file:
-    # Serialize and save the object to the file
+with open('test_data.pkl', 'wb') as file:
     pickle.dump(test_data, file)
+
 
 
 def show_image(image_path):
