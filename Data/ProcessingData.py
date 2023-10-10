@@ -1,26 +1,47 @@
-import torchvision
-from torchvision import transforms
-import pickle
+import os
+from PIL import Image
+import numpy as np
 
-train_transforms = transforms.Compose([
-    transforms.Resize((224)),
-    transforms.CenterCrop(224),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-])
+# Define the path to your dataset folder
+p="train"
+dataset_folder = fr"DataSets\SplitData\{p}"
 
-test_transforms = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-])
+# Initialize empty lists to store images and labels
+images = []
+labels = []
 
-train_data = torchvision.datasets.ImageFolder(root='./DataSets/SplitData/test', transform=train_transforms)
-test_data = torchvision.datasets.ImageFolder(root='./DataSets/SplitData/train', transform=test_transforms)
+# Define a dictionary to map class names to numerical labels
+class_to_label = {"Abnormal": 0, "Normal": 1}
 
+# Define the target image size
+target_size = (224, 224)
 
-with open('train_data.pkl', 'wb') as file:
-    pickle.dump(train_data, file)
+# Iterate through each subfolder in the dataset folder
+for class_name in class_to_label.keys():
+    class_folder = os.path.join(dataset_folder, class_name)
+    
+    # Iterate through each image file in the class folder
+    for image_file in os.listdir(class_folder):
+        if image_file.endswith(".png"):
+            image_path = os.path.join(class_folder, image_file)
+            
+            # Load the image using PIL
+            image = Image.open(image_path)
 
-with open('test_data.pkl', 'wb') as file:
-    pickle.dump(train_data, file)
+            # Resize the image to the target size
+            image = image.resize(target_size, Image.ANTIALIAS)
+            
+            # Convert the image to a NumPy array
+            image = np.array(image)
+            image = np.transpose(image, (2, 0, 1))
+            
+            # Append the image and its corresponding label to the lists
+            images.append(image)
+            labels.append(class_to_label[class_name])
+
+# Convert the lists to NumPy arrays
+images = np.array(images,dtype=np.float32)
+labels = np.array(labels,dtype=np.float32)
+
+# Save the NumPy arrays to a file
+np.savez("Data_"+p+".npz", images=images, labels=labels)
