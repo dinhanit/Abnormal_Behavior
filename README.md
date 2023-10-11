@@ -4,6 +4,8 @@
 The Final Exam Abnormal Behavior Recognition project is aimed at developing a system that can detect and recognize abnormal behavior during university final exams. The project utilizes computer vision and deep learning techniques to monitor and analyze student behavior to identify any actions that may indicate academic dishonesty or irregularities.
 # Evaluate
 ![image](https://inst.eecs.berkeley.edu/~cs194-26/sp20/upload/files/proj4/cs194-26-aff/accuracy_graph.png)
+# System
+![image](diagram.png)
 
 # Detail
   - Technical:
