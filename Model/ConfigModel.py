@@ -2,7 +2,6 @@ from BaseModel import BinaryClassifier
 import torch.nn as nn
 import torch
 import torch.optim as optim
-import json
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
 from param import *
@@ -19,8 +18,6 @@ class CustomDataset(Dataset):
     def __getitem__(self, index):
         return self.features[index], self.labels[index]
 
-#Config
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print('DEVICE:',DEVICE)
 model = BinaryClassifier()
 criterion = nn.CrossEntropyLoss()

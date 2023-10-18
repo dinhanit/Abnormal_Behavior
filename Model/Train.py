@@ -69,4 +69,4 @@ def Save_Perform():
 if args.save_csv != "":
     Save_Perform()
 if args.save_model != "":
-    torch.save(model,'weight')
+    torch.save(model,'.model/weight')
