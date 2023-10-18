@@ -1,5 +1,7 @@
 from ConfigModel import *
 from sklearn.metrics import f1_score
+import pandas as pd
+import argparse
 
 performance= []
 for epoch in range(EPOCHS):
@@ -47,10 +49,24 @@ for epoch in range(EPOCHS):
             true_labels_test.extend(labels.tolist())
 
     avg_loss_test = total_loss_test / total_samples
+    
     test_f1 = f1_score(true_labels_test, predictions_test, average='weighted')
+    
     performance.append([running_loss / len(TRAINLOADER),avg_loss_test,train_f1,test_f1])
     print(f"Epoch [{epoch+1}/{EPOCHS}] Loss Train: {performance[epoch][0] :.4f} Loss Test: {performance[epoch][1]:.4f} F1 Train: {performance[epoch][2]:.4f} F1 Test: {performance[epoch][3] :.4f}")
-#Save Performance
-import pandas as pd
-df = pd.DataFrame(performance, columns=['Loss Train', 'Loss Test', 'F1 Train','F1 Test'])
-df.to_csv('Performance.csv',index=False)
+
+
+parser = argparse.ArgumentParser(description='Your script description')
+parser.add_argument('--save-csv', type=str, default='', help='Path to save the performance CSV file')
+parser.add_argument('--save-model', type=str, default='', help='Path to save the trained model')
+args = parser.parse_args()
+
+def Save_Perform():
+    global performance
+    df = pd.DataFrame(performance, columns=['Loss Train', 'Loss Test', 'F1 Train','F1 Test'])
+    df.to_csv('Performance.csv',index=False)
+
+if args.save_csv != "":
+    Save_Perform()
+if args.save_model != "":
+    torch.save(model,'weight')
