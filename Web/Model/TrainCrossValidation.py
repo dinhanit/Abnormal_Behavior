@@ -1,64 +1,80 @@
 from ConfigModel import *
 from sklearn.metrics import f1_score
-import argparse
-import pandas as pd
-from sklearn.model_selection import KFold
-from param import *
 
-num_folds = 5 
+from sklearn.model_selection import StratifiedKFold
 
-kf = KFold(n_splits=num_folds, shuffle=True, random_state=42)
-fold = 0
+# Define the number of folds
 
-for train_indices, val_indices in kf.split(x):
-    train_features, train_labels = x[train_indices], y[train_indices]
-    val_features, val_labels = x[val_indices], y[val_indices]
+skf = StratifiedKFold(n_splits=n_folds, shuffle=True)
 
-    train_dataset = CustomDataset(train_features, train_labels)
-    val_dataset = CustomDataset(val_features, val_labels)
+# Initialize lists to store evaluation results
+fold_accuracies = []
+
+for fold, (train_indices, val_indices) in enumerate(skf.split(data_train.features, data_train.labels)):
+    # Create data loaders for the current fold
+    train_subset = torch.utils.data.Subset(data_train, train_indices)
+    val_subset = torch.utils.data.Subset(data_train, val_indices)
+    train_loader = DataLoader(train_subset, batch_size=BATCH_SIZE, shuffle=True)
+    val_loader = DataLoader(val_subset, batch_size=BATCH_SIZE, shuffle=False)
     
-    train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE)
-
+    # Create a new model for each fold (if needed)
+    model = BinaryClassifier()
     model.to(DEVICE)
-
-    fold += 1
-
+    
+    # Training loop for the current fold
     for epoch in range(EPOCHS):
         model.train()
-        for batch_features, batch_labels in train_loader:
-            batch_features, batch_labels = batch_features.to(DEVICE), batch_labels.to(DEVICE)
+        for batch in train_loader:
+            inputs, labels = batch
+            inputs, labels = inputs.to(DEVICE), labels.to(DEVICE)
+            
             optimizer.zero_grad()
-            outputs = model(batch_features)
-            loss = criterion(outputs, batch_labels)
+            outputs = model(inputs)
+            loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
 
-        print(f'Fold [{fold}/{num_folds}] - Epoch [{epoch+1}/{EPOCHS}] - Training Loss: {loss.item():.4f}')
+    # Validation loop for the current fold
+    model.eval()
+    correct = 0
+    total = 0
+    with torch.no_grad():
+        for batch in val_loader:
+            inputs, labels = batch
+            inputs, labels = inputs.to(DEVICE), labels.to(DEVICE)
+            outputs = model(inputs)
+            _, predicted = torch.max(outputs.data, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
 
-        # Evaluation on the validation set
-        model.eval()
-        with torch.no_grad():
-            val_loss = 0.0
-            for val_batch_features, val_batch_labels in val_loader:
-                val_batch_features, val_batch_labels = val_batch_features.to(DEVICE), val_batch_labels.to(DEVICE)
-                val_outputs = model(val_batch_features)
-                val_loss += criterion(val_outputs, val_batch_labels).item()
-            val_loss /= len(val_loader)
+    fold_accuracy = 100 * correct / total
+    fold_accuracies.append(fold_accuracy)
 
-        print(f'Fold [{fold}/{num_folds}] - Epoch [{epoch+1}/{EPOCHS}] - Validation Loss: {val_loss:.4f}')
+    print(f'Fold {fold + 1} - Accuracy: {fold_accuracy:.2f}%')
 
+# Calculate and print the mean accuracy across all folds
+mean_accuracy = np.mean(fold_accuracies)
+print(f'Mean Accuracy: {mean_accuracy:.2f}%')
 
-parser = argparse.ArgumentParser(description='Your script description')
-parser.add_argument('--save-csv', type=str, default='', help='Path to save the performance CSV file')
-parser.add_argument('--save-model', type=str, default='', help='Path to save the trained model')
-args = parser.parse_args()
+model.eval() 
+total_loss_test = 0.0
+total_samples = 0
+predictions_test = []
+true_labels_test = []
+with torch.no_grad():
+    for inputs, labels in TESTLOADER:
+        inputs = inputs.to(DEVICE)
+        labels = labels.to(DEVICE).long()
+        outputs = model(inputs)
+        loss_test = criterion(outputs, labels)
+        total_loss_test += loss_test.item() * len(labels)
+        total_samples += len(labels)
 
-# def Save_Perform():
-#     global performance
-#     df = pd.DataFrame(performance, columns=['Loss Train', 'Loss Validation', 'F1 Train', 'F1 Validation'])
-#     df.to_csv(f'Performance_Fold{fold}.csv', index=False)
-# if args.save_csv != "":
-#     Save_Perform()
-if args.save_model != "":
-    torch.save(model,'weight')
+        _, predicted = torch.max(outputs.data, 1)
+        predictions_test.extend(predicted.tolist())
+        true_labels_test.extend(labels.tolist())
+
+avg_loss_test = total_loss_test / total_samples
+    
+test_f1 = f1_score(true_labels_test, predictions_test, average='weighted')
+print('F1 : ',test_f1)

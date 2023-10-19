@@ -25,20 +25,16 @@ model.to(DEVICE)
 criterion.to(DEVICE)
 
 optimizer = optim.Adam(model.parameters(), lr=float(LEARNING_RATE))
-scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=7)
+scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=5)
 
-data_train = np.load("CombinedData_train.npz")
-x = data_train['landmarks']
-y = data_train['labels']
-dataset_train = CustomDataset(x, y)
 
-data_train = np.load("CombinedData_train.npz")
+data_train = np.load("Data/CombinedData_train.npz")
 data_train = CustomDataset(data_train['landmarks'],data_train['labels'])
 
-data_test = np.load("CombinedData_test.npz")
+data_test = np.load("Data/CombinedData_test.npz")
 data_test = CustomDataset(data_test['landmarks'],data_test['labels'])
 
-TRAINLOADER = DataLoader(dataset_train, batch_size=BATCH_SIZE, shuffle=True)
+TRAINLOADER = DataLoader(data_train, batch_size=BATCH_SIZE, shuffle=True)
 TESTLOADER = DataLoader(data_test, batch_size=BATCH_SIZE, shuffle=False)
 
 
