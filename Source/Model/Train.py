@@ -4,6 +4,9 @@ import pandas as pd
 import argparse
 
 performance= []
+best_validation_loss = np.inf
+epochs_without_improvement = 0
+early_stopping_patience = 5
 for epoch in range(EPOCHS):
     model.train()
     running_loss = 0.0
@@ -54,6 +57,16 @@ for epoch in range(EPOCHS):
     
     performance.append([running_loss / len(TRAINLOADER),avg_loss_test,train_f1,test_f1])
     print(f"Epoch [{epoch+1}/{EPOCHS}] Loss Train: {performance[epoch][0] :.4f} Loss Test: {performance[epoch][1]:.4f} F1 Train: {performance[epoch][2]:.4f} F1 Test: {performance[epoch][3] :.4f}")
+    if avg_loss_test < best_validation_loss:
+        best_validation_loss = avg_loss_test
+        epochs_without_improvement = 0
+    else:
+        epochs_without_improvement += 1
+
+        # If no improvement for a certain number of epochs, stop training
+    if epochs_without_improvement >= early_stopping_patience:
+        print(f"Early stopping after {early_stopping_patience} epochs without improvement.")
+        break
 
 
 parser = argparse.ArgumentParser(description='Your script description')
