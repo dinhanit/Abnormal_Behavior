@@ -1,21 +1,10 @@
 import optuna
-from sklearn.datasets import load_breast_cancer
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score
 from BaseModel import BinaryClassifier
-import torch.nn as nn
 import torch
 import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader
 import numpy as np
-from param import *
 from ConfigModel import *
-
-# Define the device (CPU or GPU)
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-TRAINLOADER = DataLoader(data_train, batch_size=BATCH_SIZE, shuffle=True)
-TESTLOADER = DataLoader(data_test, batch_size=BATCH_SIZE, shuffle=False)
 
 
 def objective(trial):
@@ -29,7 +18,7 @@ def objective(trial):
     if optimizer_type == 'Adam':
         learning_rate = trial.suggest_float('adam_learning_rate', 1e-5, 1.0, log=True)
         optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-        
+
     elif optimizer_type == 'SGD':
         learning_rate = trial.suggest_float('sgd_learning_rate', 1e-5, 1.0, log=True)
         momentum = trial.suggest_float('sgd_momentum', 0.0, 1.0)
@@ -92,28 +81,19 @@ def objective(trial):
         test_f1 = f1_score(true_labels_test, predictions_test, average='weighted')
 
         performance.append([running_loss / len(TRAINLOADER), avg_loss_test, train_f1, test_f1])
-        # print(f"Epoch [{epoch+1}/{EPOCHS}] Loss Train: {performance[epoch][0] :.4f} Loss Test: {performance[epoch][1]:.4f} F1 Train: {performance[epoch][2]:.4f} F1 Test: {performance[epoch][3] :.4f}")
-            # Check if validation loss has improved
         if avg_loss_test < best_validation_loss:
             best_validation_loss = avg_loss_test
             epochs_without_improvement = 0
         else:
             epochs_without_improvement += 1
-
-        # If no improvement for a certain number of epochs, stop training
         if epochs_without_improvement >= early_stopping_patience:
-            # print(f"Early stopping after {early_stopping_patience} epochs without improvement.")
             break
 
     return train_f1
 
-
-
 study = optuna.create_study(direction='maximize')
 study.optimize(objective, n_trials=100)
 
-
 # Best value for hyperparameter
-
 print("Best value for each hyperparameter:", study.best_params)
 print("F1-score", study.best_value)
