@@ -18,7 +18,7 @@ def Inference(img):
     probabilities = F.softmax(output, dim=1)
     # predicted_class = torch.argmax(probabilities, dim=1).item()
     print(probabilities)
-    if probabilities[0][0]>=0.8:
+    if probabilities[0][1]<0.001:
         predicted_class = 0
     else:
         predicted_class = 1
