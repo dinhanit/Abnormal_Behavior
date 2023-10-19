@@ -31,7 +31,7 @@ def objective(trial):
     best_validation_loss = np.inf
     epochs_without_improvement = 0
     early_stopping_patience = 5
-    for epoch in range(EPOCHS):
+    for _ in range(EPOCHS):
         model.train()
         running_loss = 0.0
         predictions_train = []

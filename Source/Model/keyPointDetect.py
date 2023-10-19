@@ -17,8 +17,7 @@ desired_keypoint_indices.extend(cheeks)
 desired_keypoint_indices.extend(nose)
 desired_keypoint_indices.extend(left_eyes)
 desired_keypoint_indices.extend(right_eyes)
-max_keypoints = len(desired_keypoint_indices) #############
-
+max_keypoints = len(desired_keypoint_indices) 
 def DetectKeyPoint(image):
     # Convert the frame to RGB
     rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -36,5 +35,5 @@ def DetectKeyPoint(image):
 
         return np.array(frame_data, dtype=np.float32)
     else:
-        return np.array([0.0, 0.0, 0.0] * max_keypoints) ###############
+        return np.array([0.0, 0.0, 0.0] * max_keypoints)
     

@@ -5,8 +5,8 @@ import torch.nn.functional as F
 import cv2
 from param import DEVICE
 
-model = torch.load(".model/Weight")
- 
+model = torch.load(".model/Weight").to(DEVICE)
+
 def Inference(img):
     global model
     label = ['Abnormal','Normal']
