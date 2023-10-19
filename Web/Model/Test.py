@@ -7,7 +7,7 @@ from param import DEVICE
 
 model = torch.load(".model/Weight")
  
-def Inferent(img):
+def Inference(img):
     global model
     label = ['Abnormal','Normal']
     kp = DetectKeyPoint(img)
@@ -44,7 +44,7 @@ if not cap.isOpened():
 
 while True:
     ret, frame = cap.read()
-    label = Inferent(frame)
+    label = Inference(frame)
     frame = cv2.putText(frame, label, org, font, font_scale, font_color[label], thickness, cv2.LINE_AA)
     cv2.imshow('Camera Stream', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
