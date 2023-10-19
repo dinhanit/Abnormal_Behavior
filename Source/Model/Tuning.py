@@ -21,21 +21,15 @@ TESTLOADER = DataLoader(data_test, batch_size=BATCH_SIZE, shuffle=False)
 def objective(trial):
     """Define the objective function"""
 
-    # Suggest a learning rate from the search space
-    # learning_rate = trial.suggest_float('learning_rate', 1e-5, 1.0, log=True)
-
-    # Define the model, criterion, and optimizer here
     model = BinaryClassifier().to(DEVICE)
-    # criterion = nn.CrossEntropyLoss().to(DEVICE)
-    # optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-    # scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=5)
-        # Suggest an optimizer type
+    
+    # Suggest hyperparameters for the chosen optimizer
     optimizer_type = trial.suggest_categorical('optimizer_type', ['Adam', 'SGD'])
 
-    # Suggest hyperparameters for the chosen optimizer
     if optimizer_type == 'Adam':
         learning_rate = trial.suggest_float('adam_learning_rate', 1e-5, 1.0, log=True)
         optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+        
     elif optimizer_type == 'SGD':
         learning_rate = trial.suggest_float('sgd_learning_rate', 1e-5, 1.0, log=True)
         momentum = trial.suggest_float('sgd_momentum', 0.0, 1.0)
@@ -45,6 +39,9 @@ def objective(trial):
     scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=5)
 
     performance = []
+    best_validation_loss = np.inf
+    epochs_without_improvement = 0
+    early_stopping_patience = 5
     for epoch in range(EPOCHS):
         model.train()
         running_loss = 0.0
@@ -97,8 +94,19 @@ def objective(trial):
         performance.append([running_loss / len(TRAINLOADER), avg_loss_test, train_f1, test_f1])
         # print(f"Epoch [{epoch+1}/{EPOCHS}] Loss Train: {performance[epoch][0] :.4f} Loss Test: {performance[epoch][1]:.4f} F1 Train: {performance[epoch][2]:.4f} F1 Test: {performance[epoch][3] :.4f}")
             # Check if validation loss has improved
+        if avg_loss_test < best_validation_loss:
+            best_validation_loss = avg_loss_test
+            epochs_without_improvement = 0
+        else:
+            epochs_without_improvement += 1
+
+        # If no improvement for a certain number of epochs, stop training
+        if epochs_without_improvement >= early_stopping_patience:
+            # print(f"Early stopping after {early_stopping_patience} epochs without improvement.")
+            break
 
     return train_f1
+
 
 
 study = optuna.create_study(direction='maximize')
