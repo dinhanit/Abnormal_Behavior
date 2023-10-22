@@ -1,0 +1,414 @@
+{
+    "intents": 
+    [
+        {
+            "tag": "Mở đầu",
+            "patterns": 
+            [
+                "em chào anh ad ạ",
+                "em chào anh admin ạ",
+                "em chào chị ad ạ",
+                "em chào thầy nhé",
+                "em chào thầy cô nhé",
+                "xin chào ad min",
+                "em chào admin nhé",
+                "chào ad min đẹp trai nhá",
+                "xin chào admin nhe",
+                "chào ad đẹp trai nha",
+                "xin chào tất cả mọi người",
+                "xin chào admin ạ hihi",
+                "em chào ad dễ thương",
+                "mình chào admin của page nhé",
+                "mình chào bạn admin nhé"
+            ],
+            "responses": 
+            [
+                "Chào bạn",
+                "Xin chào bạn",
+                "Chào bạn nhé",
+                "Xin chào bạn nhé",
+                "Xin chào"
+            ]
+        },
+        {
+            "tag": "Xin phép hỏi",
+            "patterns": 
+            [
+                "admin cho em hỏi cái ni",
+                "anh ad min ơi cho em hỏi",
+                "anh ad min cho em hỏi ạ",
+                "em có một câu hỏi cho ad ạ",
+                "em có cái này thắc mắc ad ạ",
+                "em có thắc mắc 1 chút admin ạ",
+                "em hơi thắc mắc một chút",
+                "em có chút thắc mắc admin ơi",
+                "em muốn hỏi cái này được ko",
+                "cho em hỏi cái này có được ko",
+                "em hỏi cái ni với được không ạ",
+                "ad ơi cho em hỏi cái ni",
+                "ad cho tui hỏi 1 câu với",
+                "admin cho mình hỏi cái ni với",
+                "cho tui hỏi cái này nhé ad",
+                "mình hỏi cái này với admin ơi",
+                "ad ơi mình hỏi cái này nhé",
+                "mình hỏi ad 1 câu nhé"
+            ],
+            "responses": 
+            [
+                "Bạn cứ hỏi đi",
+                "Bạn hỏi đi",
+                "Ok bạn hỏi đi"
+            ]
+        },
+        {
+            "tag": "Kết thúc",
+            "patterns": 
+            [
+                "Cảm ơn admin rất nhiều",
+                "Cảm ơn admin nhiều nhiều",
+                "Cảm ơn ad min nhiều lắm ạ",
+                "Cảm ơn ad nhiều nhé hehe",
+                "Em cảm ơn anh chị rất nhiều",
+                "Em rất cảm ơn ạ em hiểu rõ rồi",
+                "Cảm ơn ad nhiều nhé",
+                "xin được cảm ơn anh chị",
+                "em xin cảm ơn anh chị ạ",
+                "em xin cảm ơn admin nhiều",
+                "em cảm ơn admin em rõ rồi",
+                "ok em cảm ơn ad em hiểu rồi",
+                "ok ad nhé em hiểu rồi",
+                "ok cảm ơn ạ em hiểu rồi",
+                "okay ad ạ em đã hiểu",
+                "okay em cảm ơn ạ em đã hiểu",
+                "okay ạ em đã hiểu",
+                "okay rồi ad ạ em rõ rồi"
+            ],
+            "responses": 
+            [
+                "Okay",
+                "Ok bạn",
+                "Không có gì"
+            ]
+        },
+        {
+            "tag": "Chuẩn tiếng anh đầu vào",
+            "patterns": 
+            [
+                "Dạ ad cho tui hỏi về cái yêu cầu ielts đầu vào",
+                "Cho hỏi về Chuẩn tiếng Anh đầu vào",
+                "Cho tớ hỏi về chuẩn tiếng Anh đầu vào",
+                "Cho tớ hỏi 1 chút về chuẩn tiếng Anh đầu vào",
+                "Ad cho tớ hỏi cái chuẩn tiếng Anh đầu vào",
+                "Ad cho mình hỏi 1 chút về chuẩn tiếng Anh đầu vào",
+                "Cho tớ hỏi về chuẩn tiếng anh khi vào",
+                "cho hỏi về chuẩn tiếng anh đầu vào ạ",
+                "xin cho biết về chuẩn ielts đầu vào",
+                "thắc mắc về yêu cầu toefl đầu vào",
+                "cho hỏi điều kiện toefl là mấy vậy",
+                "xin hỏi Yêu cầu ielts như thế nào",
+                "cho tớ hỏi về điều kiện ielts khi vào",
+                "thế còn Ielts đầu vào thì sao ạ",
+                "tiếng anh khi vào yêu cầu như nào",
+                "Toefl đầu vào cần cao không vậy",
+                "thế toefl đầu vào thì sao ad ơi",
+                "Dạ cho em hỏi về cái yêu cầu ielts đầu vào",
+                "Chuẩn ngoại ngữ đầu vào là như thế nào",
+                "Cho hỏi về chuẩn ngoại ngữ đầu vào của sinh viên",
+                "Cho em hỏi chuẩn ngoại ngữ đầu vào của sinh viên"
+            ],
+            "responses": 
+            [
+                "Sau năm thứ nhất sinh viên được yêu cầu đạt chứng chỉ tiếng Anh TOEFL iBT 52 hoặc IELTS 5.0 trở lên tùy vào ngành học"
+            ]
+        },
+        {
+            "tag": "Chuẩn tiếng anh đầu ra",
+            "patterns": 
+            [
+                "Điểm ielts hay toefl cần đạt để tốt nghiệp?",
+                "Bao nhiêu chấm ielts mới tốt nghiệp được admin",
+                "mấy điểm toefl mới được tốt nghiệp thế ạ",
+                "Cho mình hỏi về yêu cầu tiếng anh tốt nghiệp",
+                "Ad cho hỏi ielts bao nhiêu thì ra trường được ạ",
+                "Dạ ad cho hỏi ielts mấy chấm được ra trường ạ",
+                "Bao nhiêu điểm toefl được ra trường hả ad",
+                "Điểm ngoại ngữ cần đạt để được tốt nghiệp?",
+                "mấy điểm ngoại ngữ mới cho tốt nghiệp ạ",
+                "Bao nhiêu điểm tiếng anh sinh viên mới tốt nghiệp được ạ?",
+                "Cho hỏi về yêu cầu ngoại ngữ cần đạt để tốt nghiệp",
+                "Ad cho hỏi ielts mấy chấm thì có thể ra trường ạ",
+                "Dạ ad cho hỏi ielts cần đạt bao nhiêu để ra trường ạ",
+                "Bao nhiêu điểm toefl thì mới được ra trường ad",
+                "Điểm ielts hay toefl cần đạt để tốt nghiệp là bao nhiêu?",
+                "cần đạt mấy chấm ielts mới tốt nghiệp được ạ ad",
+                "cần đạt mấy điểm toefl mới tốt nghiệp được ad ơi",
+                "Cho hỏi điều kiện tiếng anh để tốt nghiệp là như thế nào",
+                "Ad cho hỏi ielts mấy chấm mới được ra trường thế",
+                "Dạ ad ơi, ielts mấy chấm thì được ra trường vậy ạ",
+                "Cần đạt mấy điểm toefl để sinh viên được ra trường"
+            ],
+            "responses": 
+            [
+                "Chuẩn tiếng anh đầu ra yêu cầu sinh viên đạt IELTS 6.0 trở lên mới có thể tốt nghiệp bạn nhé"
+            ]
+        },
+        {
+            "tag": "Đã có chứng chỉ",
+            "patterns": 
+            [
+                "Ad ơi mình có chứng chỉ toefl rồi phải thi lại không",
+                "Dạ em có chứng chỉ tiếng anh rồi thì sao giờ ạ",
+                "nếu có chứng chỉ rồi thì có thi lại không",
+                "Em đã có bằng ielts rồi, vậy có thi lại không ạ",
+                "Em có bằng ielts rồi thì sao giờ hả ad",
+                "Em có bằng toefl thì có được không ad",
+                "Em có bằng toefl rồi thì có được ko ad ơi",
+                "nếu em Có bằng toefl rồi thì cần thi lại ko ạ ad",
+                "Ad cho hỏi cái, có bằng toefl rồi có cần thi lại không",
+                "Dạ em đã có chứng chỉ tiếng anh thì em cần phải thi lại không",
+                "nếu Có chứng chỉ ngoại ngữ rồi thì có được tính không",
+                "Em có bằng ielts rồi có được ko thế ạ admin",
+                "Em đã có bằng ielts rồi có tính ko thế ad ơi",
+                "Em có điểm toefl rồi thì được ko ad",
+                "Em đã có điểm toefl rồi ad ơi, vậy có được tính ko",
+                "Có bằng toefl rồi có được ko admin ới ời"
+            ],
+            "responses": 
+            [
+                "Nếu chứng chỉ tiếng anh của bạn đạt đúng điều kiện đề ra và thời gian xét chứng chỉ nằm trong thời gian còn hạn sử dụng của chứng chỉ đó thì không cần thi lại bạn nhé!"
+            ]
+        },
+        {
+            "tag": "Khả năng học tiếng anh",
+            "patterns": 
+            [
+                "Trình tiếng Anh em khá yếu, có nên học khoa mình ko",
+                "Tiếng Anh em thấp điểm lắm sợ không học được",
+                "anh văn em tệ nên em không dám đăng ký",
+                "Tiếng Anh em kém lắm, em không biết nên học không",
+                "anh văn của em chưa tốt lắm em sợ không học được",
+                "Tiếng Anh mình kém lắm ad, học có được ko",
+                "Tiếng Anh của em kém thì không biết học được không ạ",
+                "Em sợ anh văn em yếu không học được thôi",
+                "ngoại ngữ của em còn dở, có học được không ạ",
+                "Huhu em sợ anh văn em yếu học không nổi",
+                "Khả năng tiếng Anh tệ có học khoa mình nổi không ad",
+                "ngoại ngữ em tệ lắm em sợ không học nổi á",
+                "Tiếng Anh dốt nên em không dám đăng ký ad ơi",
+                "ngoại ngữ em khá kém ko biết nên học không",
+                "anh văn còn chưa tốt lắm nên em sợ không học nổi",
+                "anh văn của em kém lắm ad ơi, học khoa mình được ko thế",
+                "ngoại ngữ em dở ko biết học được không",
+                "Em sợ anh văn em dở không học nổi á",
+                "anh văn em còn dở, học nổi ko á ad",
+                "Huhu ad ơi em sợ tiếng Anh dở thì học ko được á"
+            ],
+            "responses": 
+            [
+                "Tiếng anh yếu cũng hoàn toàn có thể theo học bạn nhé, khoa FAST có kết hợp với trung tâm anh ngữ để tổ chức dạy tiếng anh cho các em trong năm đầu tiên"
+            ]
+        },
+        {
+            "tag": "Nội dung đào tạo",
+            "patterns": 
+            [
+                "Chương trình đào tạo như thế nào vậy ad ơi",
+                "Em muốn biết chi tiết hơn về chương trình đào tạo",
+                "Em muốn hỏi ad 1 chút về chương trình đào tạo",
+                "khoa mình Đào tạo những ngành học gì",
+                "khoa đào tạo các lĩnh vực nào thế",
+                "các thầy cô Giảng dạy lĩnh vực mô rứa ad",
+                "Giảng dạy ngành mô rứa admin",
+                "Giảng dạy các chuyên ngành nào vậy ạ",
+                "cho em tìm hiểu về chương trình đào tạo của khoa",
+                "mình muốn Tìm hiểu khoa mình dạy cái gì",
+                "tui muốn Tìm hiểu xem thử khoa mình giảng dạy gì",
+                "Lĩnh vực mà khoa mình đào tạo là chi rứa ad",
+                "Chương trình của khoa như răn rứa ad",
+                "Em muốn biết về chương trình của khoa có được ko",
+                "Em muốn hỏi cụ thể chương trình đào tạo khoa",
+                "khoa Đào tạo về những ngành học gì ạ ad",
+                "khoa Đào tạo các lĩnh vực gì thế ad",
+                "Giảng dạy các ngành nghề gì thế ạ",
+                "Khoa mình có ngành học chính nào vậy ad",
+                "Khoa mình các thầy cô dạy cái gì vậy ad ơi",
+                "em muốn hiểu thêm nữa về chương trình của khoa",
+                "thầy muốn Tìm hiểu khoa mình dạy những môn gì",
+                "mình cần Tìm hiểu xem thử giảng dạy gì",
+                "cho biết Lĩnh vực khoa mình đào tạo sinh viên là gì?"
+            ],
+            "responses": 
+            [
+                "FAST có các ngành đào tạo như sau: Điện tử viễn thông, Hệ thống nhúng, Tin học công nghiệp, Sản xuất tự động, ... "
+            ]
+        },
+        {
+            "tag": "Cơ sở vật chất",
+            "patterns": 
+            [
+                "Cơ sở có đáp ứng tốt không thế",
+                "vật chất của khoa tình trạng thế nào",
+                "cơ sở vật chất tình trạng ntn",
+                "Cơ sở hạ tầng có hiện đại ko ad ơi",
+                "Ad ơi cơ sở hạ tầng hiện đại ko",
+                "phòng ốc thực hành có to rộng hay ko",
+                "phòng thí nghiệm có hiện đại ko vậy",
+                "thiết bị nghiên cứu có tối tân không",
+                "Cơ sở vật chất có tối tân không ad",
+                "Cơ sở vật chất của khoa hiện đại ko",
+                "cơ sở chất lượng như thế nào",
+                "hạ tầng thì chất lượng ra sao ad ơi",
+                "Ad ơi hạ tầng chất lượng tốt ko thế",
+                "phòng ốc thực hành có còn mới ko ạ",
+                "phòng thí nghiệm có mới đẹp ko",
+                "thiết bị nghiên cứu có còn sử dụng tốt ko",
+                "Cơ sở vật chất còn hiện đại không vậy ad",
+                "Cơ sở vật chất của khoa sử dụng ổn ko ad ",
+                "vật chất của khoa tình trạng ra sao admin",
+                "hạ tầng trong khoa tình trạng như thế nào ad ơi",
+                "Ad ơi cơ sở hạ tầng có còn mới ko thế",
+                "phòng ốc thực hành thì có ổn áp ko vậy",
+                "phòng thí nghiệm có đầy đủ trang thiết bị ko",
+                "thiết bị nghiên cứu có sử dụng tốt hay ko ad"
+            ],
+            "responses": 
+            [
+                "Cơ sở vật chất rất đầy đủ bạn nhé, từ phòng ốc cho tới trang thiết bị học tập, nghiên cứu."
+            ]
+        },
+        {
+            "tag": "Xét tuyển",
+            "patterns": 
+            [
+                "Dạ cho hỏi cách khoa xét tuyển",
+                "Dạ cho em hỏi cách khoa xét tuyển ạ",
+                "các Tổ hợp điểm xét tuyển là gì",
+                "Cho tui hỏi về tổ hợp xét tuyển",
+                "Cho em hỏi các tổ hợp điểm xét tuyển là gì",
+                "Dạ ad cho hỏi có tổ hợp điểm xét tuyển nào",
+                "ad cho hỏi cách thức tuyển sinh của khoa",
+                "Dạ ad em hỏi cách tuyển sinh ạ",
+                "Tổ hợp xét tuyển sinh là những tổ hợp nào",
+                "Cho hỏi chút về tổ hợp thi đại học",
+                "Cho em hỏi về tổ hợp xét tuyển đại học của khoa",
+                "Dạ admin cho hỏi tổ hợp thi tuyển",
+                "Dạ ad cho em hỏi hình thức tuyển sinh",
+                "Dạ ad cho hỏi hình thức xét tuyển của khoa ạ",
+                "Tổ hợp xét tuyển gồm tổ hợp nào thế",
+                "tổ hợp điểm xét tuyển đại học gồm tổ hợp nào",
+                "tổ hợp xét tuyển của khoa mình có cái nào",
+                "ad cho hỏi tổ hợp xét tuyển ra sao vậy",
+                "Dạ ad cho hỏi hình thức xét tuyển của khoa",
+                "ad cho mình hỏi cách tuyển sinh ở đây",
+                "Tổ hợp điểm tuyển sinh đi ad ơi",
+                "Cho hỏi về tổ hợp điểm tuyển sinh đại học đi admin"
+            ],
+            "responses": 
+            [
+                "Hiện tại có 2 tổ hợp xét tuyển là A01 và D07. Thông tin chi tiết hơn về hồ sơ, giấy tờ, tuyển thẳng, ... bạn có thể xem chi tiết tại http://dut.udn.vn"
+            ]
+        },
+        {
+            "tag": "Học phí",
+            "patterns": 
+            [
+                "ad cho hỏi học phí bao nhiêu 1 năm ạ",
+                "Tiền học của khoa hiện nay là",
+                "Học phí một năm của khoa là mấy",
+                "Cho em hỏi kinh phí học một kì ạ",
+                "Dạ ad cho hỏi về mức phí 1 kì ạ",
+                "Dạ ad cho em hỏi kinh phí 1 kỳ với",
+                "Ad cho hỏi mức học phí một kỳ là mấy vậy ạ",
+                "Tiền học phí 1 kỳ bao nhiêu vậy ad",
+                "mức Học phí phải nộp một năm là bao nhiêu",
+                "ad cho hỏi học phí bao tiền tổng cộng",
+                "Tiền học phí các ngành là bao nhiêu",
+                "Học phí trung bình một năm là mấy",
+                "Cho hỏi học phí trung bình 1 kì là mấy",
+                "ad cho hỏi học phí tổng cộng 1 kỳ với",
+                "Dạ ad cho hỏi học phí tổng cộng một năm với ạ",
+                "Ad cho hỏi giá tiền học trung bình một kỳ là bao tiền",
+                "Tiền học 1 kỳ tổng cộng là mấy tiền vậy",
+                "Học phí phải nộp trung bình một năm là bao nhiêu",
+                "ad cho hỏi học phí các ngành là mấy tiền vậy ạ",
+                "Tiền học của khoa trung bình lại là mấy",
+                "Học phí một năm tổng lại là bao nhiêu thế",
+                "Cho em hỏi về học phí đầy đủ của một kì học",
+                "Dạ ad cho hỏi về học phí 1 kì phải đóng mấy ạ",
+                "Dạ cho em hỏi giá tiền 1 năm cần đóng với ạ"
+            ],
+            "responses": 
+            [
+                "Mức học phí ở Chương trình Tiên tiến là 17 triệu đồng/1 sv/1 học kỳ, tương đương 17 triệu đồng/1 sv/1 năm"
+            ]
+        },
+        {
+            "tag": "Du học",
+            "patterns": 
+            [
+                "Du học có dễ xin không ad",
+                "Em hỏi về du học chuyển tiếp với",
+                "Em thắc mắc du học từ năm đầu được không",
+                "Du học thì điểm của em có được bảo lưu không",
+                "Du học thì được đi những nước nào ạ",
+                "Em muốn biết cơ hội du học nhiều không",
+                "Thủ tục xin visa du học khó không",
+                "Dễ đi du học đại học nước ngoài không",
+                "Du học khó không admin hay dễ",
+                "du học chuyển tiếp là như thế nào thế ad",
+                "Em đi du học từ năm 1 có được ko ad",
+                "đi Du học điểm em có được bảo lưu hay không",
+                "mình được Du học ở nước nào vậy ad",
+                "sinh viên cơ hội du học có cao không ad",
+                "ad ơi làm Thủ tục du học có khó ko",
+                "Dễ đi học nước ngoài không vậy ad",
+                "đi Du học có dễ như họ bảo ko ad",
+                "Em thắc mắc về việc du học chuyển tiếp ạ",
+                "Em muốn đi học nước ngoài từ sớm được ko",
+                "Du học thì điểm số em có được bảo lưu hay không ạ",
+                "Du học thì được đi các nước nào vậy ad",
+                "cơ hội du học có nhiều như quảng cáo ko",
+                "Thủ tục làm hồ sơ du học có rắc rối không ạ",
+                "đi du học có rắc rối không vậy ad"
+            ],
+            "responses": 
+            [
+                "Cơ hội du học là rất nhiều bạn nhé, khoa mình có các trường đối tác liên kết và có cộng đồng cựu sinh viên rải rác ở nhiều nơi trên thế giới."
+            ]
+        },
+        {
+            "tag": "Việc làm",
+            "patterns": 
+            [
+                "Ad ơi có nhiều sinh viên có việc làm tốt nghiệp không",
+                "cho hỏi sinh viên thì kiếm việc làm ở đâu",
+                "làm sao để mình có việc làm lương cao sau này ạ",
+                "có cách nào mà mình dễ kiếm việc làm không ạ",
+                "việc làm này có yêu cầu như thế nào ạ",
+                "khi nào mình đi xin việc làm được?",
+                "khả năng em sau này có việc làm cao không ạ",
+                "tần suất sinh viên kiếm được việc làm có cao không ạ",
+                "Ad ơi có việc sau khi tốt nghiệp dễ không",
+                "cho hỏi sinh viên kiếm việc làm ở công ti nào",
+                "làm sao có việc làm công ti tốt vậy ạ",
+                "có cách nào kiếm việc làm ở công ti tốt không ạ",
+                "việc làm này kiếm ở công ty nào ạ",
+                "khi nào thì đi xin việc làm thực tập được ạ",
+                "khả năng có việc làm ở công ty tốt cao không ạ ad",
+                "tần suất có việc làm lương cao có nhiều không ạ",
+                "Ad ơi tỉ lệ có việc lương cao sau khi ra trường cao không",
+                "cho hỏi sau khi ra trường kiếm việc làm ở công ti nào",
+                "làm sao có việc làm lương cao sau này thế ạ",
+                "có cách nào dễ xin được việc tốt không ạ",
+                "việc làm này mình kiếm ở doanh nghiệp nào ạ",
+                "khi nào có thể xin việc ở các doanh nghiệp được ạ",
+                "khả năng kiếm được việc ở các doanh nghiệp có cao không",
+                "có việc làm lương cao ở doanh nghiệp có khó ko ạ"
+            ],
+            "responses": 
+            [
+                "Viettel, Mobifone, Intel, eSilicon, Synopsys, FPT,... Rất nhiều công ty tổ chức tuyển dụng sinh viên khoa FAST nói riêng và sinh viên Bách Khoa nói chung."
+            ]
+        }
+    ]
+}

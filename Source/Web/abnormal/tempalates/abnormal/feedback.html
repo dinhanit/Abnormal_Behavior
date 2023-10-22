@@ -1,0 +1,264 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Videograph Template">
+    <meta name="keywords" content="Videograph, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Feedback</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="{% url 'home_page' %}"><img src="{% static 'images/fpt.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="header__nav__option">
+                        <nav class="header__nav__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="{% url 'home_page' %}">Home</a></li>
+                                <li><a href="{% url 'members' %}">Members</a></li>
+                                <li><a href="{% url 'feedback' %}">Feedback</a></li>
+                                <li><a href="{% url 'chatbot_view' %}">Chatbot</a></li>
+                                <li><a href="{% url 'feedback_analysis' %}">Feedback Analysis</a></li>
+                                <li><a href="./contact.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header__nav__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="https://github.com/dinhanit/FPT_Chat" target="_blank"><i class="fa fa-github"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option spad set-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Sentiment Analysis</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Portfolio Section Begin -->
+    <section >
+        <div class="container" data-setbg="{% static 'images/testimonial-bg.jpg' %}">
+            <form method="post" action="{% url 'analyze_sentiment1' %}">
+                {% csrf_token %}
+                <div class="input-container"> <!-- Added a container for centering -->
+                    <label for="text" class="neon-text">Enter Feedback:</label><br>
+                    <textarea id="text" name="text" rows="4" cols="50"></textarea><br><br>
+                    <button type="submit" class="submit" id="analyze-button">Analyze</button>
+                </div>
+                <!-- Loading Animation SVG -->
+                <div class="loading-animation">
+                    <main>
+                        <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0%" stop-color="#5ebd3e" />
+                                    <stop offset="33%" stop-color="#ffb900" />
+                                    <stop offset="67%" stop-color="#f78200" />
+                                    <stop offset="100%" stop-color="#e23838" />
+                                </linearGradient>
+                                <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                                    <stop offset="0%" stop-color="#e23838" />
+                                    <stop offset="33%" stop-color="#973999" />
+                                    <stop offset="67%" stop-color="#009cdf" />
+                                    <stop offset="100%" stop-color="#5ebd3e" />
+                                </linearGradient>
+                            </defs>
+                            <g fill="none" stroke-linecap="round" stroke-width="16">
+                                <g class="ip__track" stroke="#ddd">
+                                    <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+                                    <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+                                </g>
+                                <g stroke-dasharray="180 656">
+                                    <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0" d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+                                    <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358" d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+                                </g>
+                            </g>
+                        </svg>
+                    </main>
+                </div>
+            </form>
+            
+        </div>
+    </section>
+    <!-- Portfolio Section End -->
+
+<!-- Your form code -->
+    <style>
+        .breadcrumb__text {
+            text-align: center;
+        }
+
+        label[for="text"] {
+            color: white; /* Set the text color to white */
+        }
+        .loading-animation {
+            position: absolute;
+            top: 50%; /* Align the animation vertically at the center */
+            left: 50%; /* Align the animation horizontally at the center */
+            transform: translate(-50%, -50%); /* Center the animation precisely */
+            display: none; /* Initially hidden */
+        }
+        * {
+            border: 0;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --hue: 223;
+            --bg: hsl(var(--hue),90%,95%);
+            --fg: hsl(var(--hue),90%,5%);
+            --trans-dur: 0.3s;
+            font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));
+        }
+        main {
+            padding: 1.5em 0;
+        }
+        .ip {
+            width: 4em;
+            height: 2em;
+        }
+        .ip__track {
+            stroke: hsl(var(--hue),90%,90%);
+            transition: stroke var(--trans-dur);
+        }
+        .ip__worm1,
+        .ip__worm2 {
+            animation: worm1 2s linear infinite;
+        }
+        .ip__worm2 {
+            animation-name: worm2;
+        }
+        
+        /* Dark theme */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: hsl(var(--hue),90%,5%);
+                --fg: hsl(var(--hue),90%,95%);
+            }
+            .ip__track {
+                stroke: hsl(var(--hue),90%,15%);
+            }
+        }
+        
+        /* Animation */
+        @keyframes worm1 {
+            from {
+                stroke-dashoffset: 0;
+            }
+            50% {
+                animation-timing-function: steps(1);
+                stroke-dashoffset: -358;
+            }
+            50.01% {
+                animation-timing-function: linear;
+                stroke-dashoffset: 358;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        @keyframes worm2 {
+            from {
+                stroke-dashoffset: 358;
+            }
+            50% {
+                stroke-dashoffset: 0;
+            }
+            to {
+                stroke-dashoffset: -358;
+            }
+        }
+        body {
+            margin: 0; /* Remove default margin to cover the entire viewport */
+            padding: 0; /* Remove default padding */
+            background-image: url("{% static 'img/breadcrumb-bg.jpg' %}");
+            background-size: cover; /* Make the background image cover the entire element */
+            background-repeat: no-repeat; /* Prevent background image from repeating */
+            background-attachment: fixed; /* Keep the background image fixed while scrolling */
+            /* Additional background properties can be added here */
+                /* ... (previous styles) ... */
+        }
+        /* Center the input container */
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 50vh;
+        }
+
+    </style>
+    <script>
+        const analyzeButton = document.getElementById('analyze-button');
+        const loadingAnimation = document.querySelector('.loading-animation');
+
+        analyzeButton.addEventListener('click', function() {
+            analyzeButton.classList.add('loading'); // Add loading class
+            loadingAnimation.style.display = 'block'; // Show the loading animation
+
+            // Simulate loading delay for demonstration
+            setTimeout(function() {
+                analyzeButton.classList.remove('loading'); // Remove loading class
+                loadingAnimation.style.display = 'none'; // Hide the loading animation
+            }, 2000); // Replace with your actual logic
+        });
+    </script>
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

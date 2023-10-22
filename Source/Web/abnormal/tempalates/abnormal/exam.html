@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam online</title>
+</head>
+<body>
+    <h1>Camera Tracking</h1>
+    <video id="camera-stream" autoplay></video>
+    <canvas id="video-canvas" style="display: none;"></canvas>
+    <button id="start-button">Start</button>
+    <button id="stop-button" style="display: none;">Stop</button>
+
+    <form method="post" action="{% url 'abnormal' %}">
+        <input type="hidden" name="video_data" id="video-data" value="">
+        <button type="submit">Submit Video</button>
+    </form>
+
+    <script>
+        const cameraStream = document.getElementById('camera-stream');
+        const videoCanvas = document.getElementById('video-canvas');
+        const videoDataInput = document.getElementById('video-data');
+        const startButton = document.getElementById('start-button');
+        const stopButton = document.getElementById('stop-button');
+    
+        let videoStream;
+    
+        startButton.addEventListener('click', async () => {
+            try {
+                videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                cameraStream.srcObject = videoStream;
+                startButton.style.display = 'none';
+                stopButton.style.display = 'inline';
+    
+                // Periodically capture video frames and send them to the server
+                const canvasContext = videoCanvas.getContext('2d');
+                const captureInterval = setInterval(() => {
+                    canvasContext.drawImage(cameraStream, 0, 0, videoCanvas.width, videoCanvas.height);
+                    const imageData = videoCanvas.toDataURL('image/jpeg'); // You can change the format
+                    videoDataInput.value = imageData;
+                }, 1000); // Adjust the capture interval as needed
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        });
+    
+        stopButton.addEventListener('click', () => {
+            if (videoStream) {
+                videoStream.getTracks().forEach((track) => {
+                    track.stop();
+                });
+            }
+            clearInterval(captureInterval);
+            startButton.style.display = 'inline';
+            stopButton.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Camera Access</title>
+</head>
+<body>
+    <h1>Camera Access</h1>
+    <video id="camera-stream" autoplay></video>
+
+    <script>
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                document.getElementById('camera-stream').srcObject = stream;
+            })
+            .catch(function (error) {
+                console.error('Error accessing camera:', error);
+            });
+    </script>
+</body>
+</html>

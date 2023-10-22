@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Videograph Template">
+    <meta name="keywords" content="Videograph, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Members</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="{% url 'home_page' %}"><img src="{% static 'images/fpt.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="header__nav__option">
+                        <nav class="header__nav__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="{% url 'home_page' %}">Home</a></li>
+                                <li><a href="{% url 'members' %}">Members</a></li>
+                                <li><a href="{% url 'feedback' %}">Feedback</a></li>
+                                <li><a href="{% url 'chatbot_view' %}">Chatbot</a></li>
+                                <li><a href="{% url 'feedback_analysis' %}">Feedback Analysis</a></li>
+                                <li><a href="./contact.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header__nav__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="https://github.com/dinhanit/FPT_Chat" target="_blank"><i class="fa fa-github"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Testimonial Section Begin -->
+    <section class="testimonial spad set-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title center-title">
+                        <span>Group4</span>
+                        <h2>Members's Role</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="testimonial__slider owl-carousel">
+                    <div class="col-lg-4">
+                        <div class="testimonial__item">
+                            <div class="testimonial__text">
+                                <p>Web Designer, Server Building</p>
+                            </div>
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__pic">
+                                    <img src="{% static 'images/dat.jpg' %}" alt="">
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Nguyen Thanh Dat</h5>
+                                    <span>QE170110</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial__item">
+                            <div class="testimonial__text">
+                                <p>Modeling</p>
+                            </div>
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__pic">
+                                    <img src="{% static 'images/an.jpg' %}" alt="">
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Ngo Dinh An</h5>
+                                    <span>QE170066</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial__item">
+                            <div class="testimonial__text">
+                                <p>Data Processing</p>
+                            </div>
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__pic">
+                                    <img src="{% static 'images/duy.jpg' %}" alt="">
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Duong Thanh Duy</h5>
+                                    <span>QE170105</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial__item">
+                            <div class="testimonial__text">
+                                <p>Tokenizer</p>
+                            </div>
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__pic">
+                                    <img src="{% static 'images/trung.jpg' %}" alt="">
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Truong Phuoc Trung</h5>
+                                    <span>QE170090</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial__item">
+                            <div class="testimonial__text">
+                                <p>Exploratory Data Analysis</p>
+                            </div>
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__pic">
+                                    <img src="{% static 'images/lam.jpg' %}" alt="">
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Hoang Thanh Lam</h5>
+                                    <span>QE170013</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial Section End -->
+    <style>
+        body {
+            margin: 0; /* Remove default margin to cover the entire viewport */
+            padding: 0; /* Remove default padding */
+            background-image: url("{% static 'img/testimonial-bg.jpg' %}");
+            background-size: cover; /* Make the background image cover the entire element */
+            background-repeat: no-repeat; /* Prevent background image from repeating */
+            background-attachment: fixed; /* Keep the background image fixed while scrolling */
+            /* Additional background properties can be added here */
+                /* ... (previous styles) ... */
+        }
+    </style>
+
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

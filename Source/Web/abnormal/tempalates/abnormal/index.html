@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Videograph Template">
+    <meta name="keywords" content="Videograph, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="{% url 'home_page' %}"><img src="{% static 'images/fpt.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="header__nav__option">
+                        <nav class="header__nav__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="{% url 'home_page' %}">Home</a></li>
+                                <li><a href="{% url 'members' %}">Members</a></li>
+                                <li><a href="{% url 'feedback' %}">Feedback</a></li>
+                                <li><a href="{% url 'chatbot_view' %}">Chatbot</a></li>
+                                <li><a href="{% url 'feedback_analysis' %}">Feedback Analysis</a></li>
+                                <li><a href="./contact.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header__nav__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="https://github.com/dinhanit/FPT_Chat" target="_blank"><i class="fa fa-github"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="hero__slider owl-carousel">
+            <div class="hero__item set-bg" data-setbg="{% static 'images/home1.jpg' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <span>Group4 Project</span>
+                                <h2>FPT University Quy Nhon</h2>
+                                <a href="#" class="primary-btn">See more about us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__item set-bg" data-setbg="{% static 'images/home2.jpg' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <span>Sentiment Analysis</span>
+                                <h2>Feedback about our University</h2>
+                                <a href="#" class="primary-btn">See more about us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__item set-bg" data-setbg="{% static 'images/home3.jpg' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <span>Chatbot</span>
+                                <h2>Comunicating with our Chatbot</h2>
+                                <a href="#" class="primary-btn">See more about us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Services Section Begin -->
+    <section class="services spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="services__title">
+                        <div class="section-title">
+                            <span>Our services</span>
+                            <h2>What We do?</h2>
+                        </div>
+                        <p>If you hire a videographer of our team you will get a video professional to make a custom
+                            video for your business and, once the project is over.</p>
+                        <a href="#" class="primary-btn">View all services</a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="services__item">
+                                <div class="services__item__icon">
+                                    <img src="{% static 'img/icons/si-1.png' %}" alt="">
+                                </div>
+                                <h4>Motion graphics</h4>
+                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
+                                    post production services can put the finishing touches.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="services__item">
+                                <div class="services__item__icon">
+                                    <img src="{% static 'img/icons/si-2.png' %}" alt="">
+                                </div>
+                                <h4>Scriptwriting and editing</h4>
+                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
+                                    post production services can put the finishing touches.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="services__item">
+                                <div class="services__item__icon">
+                                    <img src="{% static 'img/icons/si-3.png' %}" alt="">
+                                </div>
+                                <h4>Video distribution</h4>
+                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
+                                    post production services can put the finishing touches.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="services__item">
+                                <div class="services__item__icon">
+                                    <img src="{% static 'img/icons/si-4.png' %}" alt="">
+                                </div>
+                                <h4>Video hosting</h4>
+                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
+                                    post production services can put the finishing touches.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section End -->
+
+
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
