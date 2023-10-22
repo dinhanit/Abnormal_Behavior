@@ -1,0 +1,12 @@
+Normal: 
+Ngồi thằng, nhìn trong khoảng màn hình (20 ảnh)
+Ngồi thoải mái, nhìn trong màn hình (20)
+Xoay trái, phải, trên, dưới nhẹ (40, 10 mỗi loại)
+Ngồi chống cằm, nghiêng trái phải (20)
+
+Abnormal:
+Cúi xuống nhìn đt (20)
+Ngồi thẳng, xoay trái, phải nhiều (20)
+Ngồi thoải mái, xoay trái, phải nhiều 2 (20)
+Nghiêng, nhón người nhìn màn hình phía trên (40)
+

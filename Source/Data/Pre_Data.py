@@ -1,14 +1,16 @@
 import os
-from PIL import Image
+import pandas as pd
 import numpy as np
+from Pre_Image import get_landmark_from_image
 
 # Define the path to your dataset folder
 p="train"
 dataset_folder = fr"DataSets\SplitData\{p}"
 
 # Initialize empty lists to store images and labels
-images = []
+landmarks_list = []
 labels = []
+data = []
 
 # Define a dictionary to map class names to numerical labels
 class_to_label = {"Abnormal": 0, "Normal": 1}
@@ -26,22 +28,18 @@ for class_name in class_to_label.keys():
             image_path = os.path.join(class_folder, image_file)
             
             # Load the image using PIL
-            image = Image.open(image_path)
+            landmark = get_landmark_from_image(image_path)
+            landmark = np.array(landmark)
 
-            # Resize the image to the target size
-            image = image.resize(target_size, Image.ANTIALIAS)
-            
-            # Convert the image to a NumPy array
-            image = np.array(image)
-            image = np.transpose(image, (2, 0, 1))
-            
-            # Append the image and its corresponding label to the lists
-            images.append(image)
-            labels.append(class_to_label[class_name])
+            # Append the data row (landmarks and label) to the list
+            data.append(list(landmark) + [class_to_label[class_name]])
 
-# Convert the lists to NumPy arrays
-images = np.array(images,dtype=np.float32)
-labels = np.array(labels,dtype=np.float32)
+# Define column names for your DataFrame
+column_names = [f"keypoint_{i}" for i in range(1, len(landmark) + 1)] + ["labels"]
 
-# Save the NumPy arrays to a file
-np.savez("Data_"+p+".npz", images=images, labels=labels)
+# Convert the list of data to a pandas DataFrame with specified column names
+df = pd.DataFrame(data, columns=column_names)
+
+# Save the DataFrame to a CSV file
+csv_filename = "Prepared_Data_" + p + ".csv"
+df.to_csv(csv_filename, index=False)
