@@ -2,58 +2,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Exam online</title>
+    <title>Live Webcam Feed</title>
 </head>
 <body>
-    <h1>Camera Tracking</h1>
-    <video id="camera-stream" autoplay></video>
-    <canvas id="video-canvas" style="display: none;"></canvas>
-    <button id="start-button">Start</button>
-    <button id="stop-button" style="display: none;">Stop</button>
-
-    <form method="post" action="{% url 'abnormal' %}">
-        <input type="hidden" name="video_data" id="video-data" value="">
-        <button type="submit">Submit Video</button>
-    </form>
+    <h1>Live Webcam Feed</h1>
+    <video id="webcam-stream" autoplay></video>
 
     <script>
-        const cameraStream = document.getElementById('camera-stream');
-        const videoCanvas = document.getElementById('video-canvas');
-        const videoDataInput = document.getElementById('video-data');
-        const startButton = document.getElementById('start-button');
-        const stopButton = document.getElementById('stop-button');
-    
-        let videoStream;
-    
-        startButton.addEventListener('click', async () => {
-            try {
-                videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
-                cameraStream.srcObject = videoStream;
-                startButton.style.display = 'none';
-                stopButton.style.display = 'inline';
-    
-                // Periodically capture video frames and send them to the server
-                const canvasContext = videoCanvas.getContext('2d');
-                const captureInterval = setInterval(() => {
-                    canvasContext.drawImage(cameraStream, 0, 0, videoCanvas.width, videoCanvas.height);
-                    const imageData = videoCanvas.toDataURL('image/jpeg'); // You can change the format
-                    videoDataInput.value = imageData;
-                }, 1000); // Adjust the capture interval as needed
-            } catch (error) {
+        const videoElement = document.getElementById('webcam-stream');
+        const csrfToken = '{{ csrf_token }}';
+
+        // Function to capture and send frames to Django server
+        const captureAndSendFrame = () => {
+            const canvasElement = document.createElement('canvas');
+            const context = canvasElement.getContext('2d');
+            
+            // Capture a frame from the webcam
+            context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+            
+            // Convert the captured frame to a data URL (base64 encoded image)
+            const imageData = canvasElement.toDataURL('image/jpeg');
+
+            // Send the captured frame to the Django server
+            fetch("{% url 'abnormal' %}", {
+                method: 'POST',
+                body: JSON.stringify({ frame_data: imageData, csrfmiddlewaretoken: '{{ csrf_token }}' }),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message); // Log the response from the server
+            })
+            .catch(error => {
+                console.error('Error sending frame:', error);
+            });
+
+            // Repeat the process to capture and send frames
+            requestAnimationFrame(captureAndSendFrame);
+        };
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                videoElement.srcObject = stream;
+                captureAndSendFrame(); // Start capturing and sending frames
+            })
+            .catch(function (error) {
                 console.error('Error accessing camera:', error);
-            }
-        });
-    
-        stopButton.addEventListener('click', () => {
-            if (videoStream) {
-                videoStream.getTracks().forEach((track) => {
-                    track.stop();
-                });
-            }
-            clearInterval(captureInterval);
-            startButton.style.display = 'inline';
-            stopButton.style.display = 'none';
-        });
+            });
     </script>
 </body>
 </html>

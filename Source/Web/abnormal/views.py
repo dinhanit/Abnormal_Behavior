@@ -13,7 +13,8 @@ import base64
 from io import BytesIO
 import json
 from .Pho_Chat import Chat
-# from..Model.Test import Inferent
+from django.views.decorators.csrf import csrf_exempt
+from.Model.Test import Inference
 
 #python manage.py runsslserver --cert abnormal_certificate.crt --key abnormal.key 0.0.0.0:8000
 #python manage.py runsslserver --cert abnormal_certificate.crt --key abnormal.key 192.168.1.8:8000
@@ -39,7 +40,8 @@ def analyze_sentiment1(request):
             
         return render(request, 'abnormal/result.html', {'text': input_text, 'sentiment': label})
 
-    return render(request, 'abnormal/analyze.html')
+    response_data = {'message': 'Frame processed fail'}  # Replace with your actual response data
+    return JsonResponse(response_data)
 
 
 def home_page(request):
@@ -132,13 +134,18 @@ def hischatbot(request):
 def exam(request):
     return render(request, 'abnormal/exam.html')
 
+@csrf_exempt
 def abnormal(request):
-    if request.method == "POST":
-        video_data = request.POST.get("video_data", "")
+    if request.method == 'POST':
+        frame_data = request.POST.get('frame_data')  # Get the captured frame data
+        # Perform your model prediction or processing on the frame_data here
+        # ...
+        label = Inference(frame_data)
+        print(label)
 
-        # Process the video data (e.g., save to a file or database)
-        # You can customize the processing logic here
-
-        return HttpResponse("Video received and processed successfully!")
-
-    return render(request, 'abnormal/index.html')
+        response_data = {'label': label}  # Replace with your actual response data
+        return JsonResponse(response_data)
+    else:
+        return JsonResponse({'message': 'Invalid request method'})
+    
+    

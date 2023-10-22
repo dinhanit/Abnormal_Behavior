@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Camera Access</title>
+    <title>Live Webcam Feed</title>
 </head>
 <body>
-    <h1>Camera Access</h1>
-    <video id="camera-stream" autoplay></video>
-
+    <h1>Live Webcam Feed</h1>
+    <video id="webcam-stream" autoplay></video>
     <script>
+        const videoElement = document.getElementById('webcam-stream');
+        const socket = new WebSocket('ws://yourdomain.com/ws/camera_feed/');  // Adjust the WebSocket URL
+
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(function (stream) {
-                document.getElementById('camera-stream').srcObject = stream;
+                videoElement.srcObject = stream;
+
+                // Capture and send frames to the server
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+
+                setInterval(async () => {
+                    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+                    const frameData = canvas.toDataURL('image/jpeg');
+                    socket.send(JSON.stringify({ frame_data: frameData }));
+                }, 100);
             })
             .catch(function (error) {
                 console.error('Error accessing camera:', error);
