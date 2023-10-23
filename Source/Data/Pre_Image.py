@@ -4,16 +4,20 @@ import numpy as np
 
 # Initialize MediaPipe Face Detection and Facial Landmarks models
 mp_face_mesh = mp.solutions.face_mesh
-face_mesh = mp_face_mesh.FaceMesh()
+face_mesh = mp_face_mesh.FaceMesh(refine_landmarks = True)
 
 # Define the indices of the desired keypoints (0 to 467)
 cheeks = [234, 93, 132, 58, 172, 136, 150, 149, 176, 148, 152, 377, 400, 378, 379, 365, 397, 288, 361, 323, 454]
-left_eyes = [33, 246, 161, 160, 159, 158, 157, 173, 133, 155, 154, 153, 145, 144, 163, 7]
-right_eyes = [263, 466, 388, 387, 386, 385, 384, 398, 362, 382, 381, 380, 374, 373, 390, 249]
+left_eyes = [33, 159, 133, 145,]
+right_eyes = [263, 386, 374, 362]
 nose = [1, 2, 5, 3, 248]
+left_iris = [474, 475, 476, 477]
+right_iris = [469, 470, 471, 472]
 desired_keypoint_indices = []  # Modify this list to choose your desired keypoints
 desired_keypoint_indices.extend(cheeks)
 desired_keypoint_indices.extend(nose)
+desired_keypoint_indices.extend(left_iris)
+desired_keypoint_indices.extend(right_iris)
 desired_keypoint_indices.extend(left_eyes)
 desired_keypoint_indices.extend(right_eyes)
 max_keypoints = len(desired_keypoint_indices) #############

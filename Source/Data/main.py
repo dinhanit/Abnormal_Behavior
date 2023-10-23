@@ -11,7 +11,7 @@ print("Array names in the .npz file:", array_names)
 
 # Access the keypoint array
 keypoint_array = data['landmarks']
-print(keypoint_array[0])
+print(keypoint_array.shape)
 # print(keypoint_array)
 # for frame_data in keypoint_array:
 #     print(frame_data)

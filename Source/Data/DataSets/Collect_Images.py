@@ -1,7 +1,13 @@
 import cv2
 import time
 import os
-
+""" This file contains the collect images task 
+    You have to:
+        -Input numbers of images you've already taken
+        -Input "1" to take Normal Image 
+        or "0" for Abnormal Image and code will take image automatically
+    You can specify the number of images you want to take in "num_images" variables
+"""
 if not os.path.exists("Origin"):
     os.makedirs("Origin")
 
