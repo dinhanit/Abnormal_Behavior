@@ -4,47 +4,75 @@ import cv2
 from param import DEVICE
 import numpy as np
 import mediapipe as mp
-
+import math
 # Initialize MediaPipe Face Detection and Facial Landmarks models
 mp_face_mesh = mp.solutions.face_mesh
-face_mesh = mp_face_mesh.FaceMesh(refine_landmarks = True)
+face_mesh = mp_face_mesh.FaceMesh(refine_landmarks=True)
 
 # Define the indices of the desired keypoints (0 to 467)
-cheeks = [234, 93, 132, 58, 172, 136, 150, 149, 176, 148, 152, 377, 400, 378, 379, 365, 397, 288, 361, 323, 454]
-left_eyes = [33, 159, 133, 145,]
-right_eyes = [263, 386, 374, 362]
-nose = [1, 2, 5, 3, 248]
-left_iris = [474, 475, 476, 477]
+cheeks = [454, 234, 151, 152, 10, 376, 352, 433, 123, 147, 213, 58, 132, 288, 361]#
 right_iris = [469, 470, 471, 472]
+left_iris = [474, 475, 476, 477]
 
-desired_keypoint_indices = []  # Modify this list to choose your desired keypoints
+desired_keypoint_indices = []
 desired_keypoint_indices.extend(cheeks)
-desired_keypoint_indices.extend(nose)
-desired_keypoint_indices.extend(left_iris)
 desired_keypoint_indices.extend(right_iris)
-desired_keypoint_indices.extend(left_eyes)
-desired_keypoint_indices.extend(right_eyes)
+desired_keypoint_indices.extend(left_iris)
+
 max_keypoints = len(desired_keypoint_indices)
 
-def DetectKeyPoint(image):
-    # Convert the frame to RGB
-    rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+def euclid_distance(point1, point2):
+    x1, y1 = point1
+    x2, y2 = point2
+    distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+    return distance
 
+def calculate_distances(points):
+    distances = []
+    for i in range(len(points)):
+        for j in range(i + 1, len(points)):
+            distance = euclid_distance(points[i], points[j])
+            distances.append(distance)
+    return distances
+
+def DetectKeyPoint(image):
+
+    rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     landmarks = face_mesh.process(rgb_image)
 
     if landmarks.multi_face_landmarks:
-        # Create a list to store data for this frame
-        frame_data = []
+        #frame_data = []
+        ih, iw, _ = image.shape 
         for face_landmarks in landmarks.multi_face_landmarks:
-            # Store index and landmark values for the desired keypoints
-            for index in desired_keypoint_indices:
-                landmark = face_landmarks.landmark[index]
-                frame_data.extend([landmark.x, landmark.y, landmark.z])
+            cheek_points = [(
+                face_landmarks.landmark[i].x *iw,
+                face_landmarks.landmark[i].y *ih
+            ) for i in cheeks]
 
-        return np.array(frame_data, dtype=np.float32)
+            left_iris_landmarks = [face_landmarks.landmark[i] for i in left_iris]
+            left_iris_center = (
+                np.mean([landmark.x *iw for landmark in left_iris_landmarks]),
+                np.mean([landmark.y *ih for landmark in left_iris_landmarks]),
+            )
+
+            right_iris_landmarks = [face_landmarks.landmark[i] for i in right_iris]
+            right_iris_center = (
+                np.mean([landmark.x *iw for landmark in right_iris_landmarks]),
+                np.mean([landmark.y *ih for landmark in right_iris_landmarks]),
+            )
+
+            iris_center = (
+                (left_iris_center[0] + right_iris_center[0]) / 2,
+                (left_iris_center[1] + right_iris_center[1]) / 2
+            )
+
+            points = cheek_points + [left_iris_center, right_iris_center]
+            #print(points)
+            distances = calculate_distances(points)
+
+        return np.array(distances, dtype=np.float32) 
     else:
-        return np.array([0.0, 0.0, 0.0] * max_keypoints)
-    
+        return np.array([0.0] * 136)
 
 def Inference(model,img):
     label = ['Abnormal','Normal']
@@ -54,9 +82,9 @@ def Inference(model,img):
     with torch.no_grad():
         output = model(torch.Tensor(kp).to(DEVICE))
     probabilities = F.softmax(output, dim=1)
-    # predicted_class = torch.argmax(probabilities, dim=1).item()
+    predicted_class = torch.argmax(probabilities, dim=1).item()
     print(probabilities)
-    if probabilities[0][1]>=0.35:
+    if probabilities[0][1]>=0.5:
         predicted_class = 1
     else:
         predicted_class = 0
