@@ -1,10 +1,11 @@
-from BaseModel import BinaryClassifier
+from BaseModel import *
 import torch.nn as nn
 import torch
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
 from param import *
+from torchsummary import summary
     
 #Load DataSet
 class CustomDataset(Dataset):
@@ -19,12 +20,14 @@ class CustomDataset(Dataset):
         return self.features[index], self.labels[index]
 
 print('DEVICE:',DEVICE)
-model = BinaryClassifier()
+model = BinaryClassifier1().to(DEVICE)
 criterion = nn.CrossEntropyLoss()
 model.to(DEVICE)
 criterion.to(DEVICE)
 
 optimizer = optim.Adam(model.parameters(), lr=float(LEARNING_RATE))
+# optimizer = optim.SGD(model.parameters(), lr=float(LEARNING_RATE))
+
 scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=5)
 
 
@@ -38,3 +41,4 @@ TRAINLOADER = DataLoader(data_train, batch_size=BATCH_SIZE, shuffle=True)
 TESTLOADER = DataLoader(data_test, batch_size=BATCH_SIZE, shuffle=False)
 
 
+summary(model,(1,1,174))
