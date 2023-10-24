@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
-from Pre_Image import get_landmark_from_image
+from Pre_image_2 import get_landmark_from_image
 
 # Define the path to your dataset folder
 p="train"
