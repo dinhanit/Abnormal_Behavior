@@ -5,6 +5,7 @@ import torch
 import torch.optim as optim
 import numpy as np
 from ConfigModel import *
+from lion_pytorch import Lion
 
 
 def objective(trial):
@@ -13,16 +14,16 @@ def objective(trial):
     model = BinaryClassifier().to(DEVICE)
     
     # Suggest hyperparameters for the chosen optimizer
-    optimizer_type = trial.suggest_categorical('optimizer_type', ['Adam', 'SGD'])
+    # Suggest hyperparameters for the chosen optimizer
+    optimizer_type = trial.suggest_categorical('optimizer_type', ['Adam', 'SGD','Lion'])
 
+    # Create an optimizer based on the trial's suggestions
     if optimizer_type == 'Adam':
-        learning_rate = trial.suggest_float('adam_learning_rate', 1e-5, 1.0, log=True)
-        optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-
+        optimizer = optim.Adam(model.parameters(), lr=trial.suggest_float('learning_rate', 1e-5, 1.0, log=True))
     elif optimizer_type == 'SGD':
-        learning_rate = trial.suggest_float('sgd_learning_rate', 1e-5, 1.0, log=True)
-        momentum = trial.suggest_float('sgd_momentum', 0.0, 1.0)
-        optimizer = optim.SGD(model.parameters(), lr=learning_rate, momentum=momentum)
+        optimizer = optim.SGD(model.parameters(), lr=trial.suggest_float('learning_rate', 1e-5, 1.0, log=True), momentum=trial.suggest_float('momentum', 0.0, 1.0))
+    elif optimizer_type == 'Lion':
+        optimizer = Lion(model.parameters(), lr=trial.suggest_float('learning_rate', 1e-5, 1.0, log=True))    
 
     criterion = nn.CrossEntropyLoss().to(DEVICE)
     scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=5)
@@ -31,7 +32,7 @@ def objective(trial):
     best_validation_loss = np.inf
     epochs_without_improvement = 0
     early_stopping_patience = 5
-    for _ in range(EPOCHS):
+    for epoch in range(EPOCHS):
         model.train()
         running_loss = 0.0
         predictions_train = []
