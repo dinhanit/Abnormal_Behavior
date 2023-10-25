@@ -48,7 +48,7 @@
                                 <li><a href="{% url 'members' %}">Members</a></li>
                                 <li><a href="{% url 'feedback' %}">Feedback</a></li>
                                 <li><a href="{% url 'chatbot_view' %}">Chatbot</a></li>
-                                <li><a href="{% url 'feedback_analysis' %}">Feedback Analysis</a></li>
+                                <li><a href="{% url 'exam' %}">Exam</a></li>
                                 <li><a href="./contact.html">Contact</a></li>
                             </ul>
                         </nav>
@@ -75,9 +75,9 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
-                                <span>Group4 Project</span>
-                                <h2>FPT University Quy Nhon</h2>
-                                <a href="#" class="primary-btn">See more about us</a>
+                                <span>FPT University Quy Nhon</span>
+                                <h2>Abnormal Actions in Exam online</h2>
+                                <a href="{% url 'members' %}" class="primary-btn">See more about us</a>
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             <div class="hero__text">
                                 <span>Sentiment Analysis</span>
                                 <h2>Feedback about our University</h2>
-                                <a href="#" class="primary-btn">See more about us</a>
+                                <a href="{% url 'members' %}" class="primary-btn">See more about us</a>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                             <div class="hero__text">
                                 <span>Chatbot</span>
                                 <h2>Comunicating with our Chatbot</h2>
-                                <a href="#" class="primary-btn">See more about us</a>
+                                <a href="{% url 'members' %}" class="primary-btn">See more about us</a>
                             </div>
                         </div>
                     </div>
@@ -123,8 +123,8 @@
                             <span>Our services</span>
                             <h2>What We do?</h2>
                         </div>
-                        <p>If you hire a videographer of our team you will get a video professional to make a custom
-                            video for your business and, once the project is over.</p>
+                        <p>Our project provides some services: Check abnormal actions when students do the exam online, 
+                            analyse feedback about our university, and use a chatbot.</p>
                         <a href="#" class="primary-btn">View all services</a>
                     </div>
                 </div>
@@ -135,9 +135,8 @@
                                 <div class="services__item__icon">
                                     <img src="{% static 'img/icons/si-1.png' %}" alt="">
                                 </div>
-                                <h4>Motion graphics</h4>
-                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
-                                    post production services can put the finishing touches.</p>
+                                <h4>Sentiment Analysis</h4>
+                                <p>when receive feedback, our service will show that's positive, negative or neutral feedback.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -145,9 +144,8 @@
                                 <div class="services__item__icon">
                                     <img src="{% static 'img/icons/si-2.png' %}" alt="">
                                 </div>
-                                <h4>Scriptwriting and editing</h4>
-                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
-                                    post production services can put the finishing touches.</p>
+                                <h4>Chatbot</h4>
+                                <p>You can ask about our school: student fees, infrastructure, ...</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -155,9 +153,8 @@
                                 <div class="services__item__icon">
                                     <img src="{% static 'img/icons/si-3.png' %}" alt="">
                                 </div>
-                                <h4>Video distribution</h4>
-                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
-                                    post production services can put the finishing touches.</p>
+                                <h4>Do exam online</h4>
+                                <p>We provide a page for tracking abnormal action of student when they do exam online</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -165,9 +162,8 @@
                                 <div class="services__item__icon">
                                     <img src="{% static 'img/icons/si-4.png' %}" alt="">
                                 </div>
-                                <h4>Video hosting</h4>
-                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
-                                    post production services can put the finishing touches.</p>
+                                <h4>New service</h4>
+                                <p>Develop in the future</p>
                             </div>
                         </div>
                     </div>

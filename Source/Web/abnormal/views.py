@@ -3,10 +3,10 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render
 from django.http import JsonResponse,HttpResponse, StreamingHttpResponse
-from .model_utils import model, tokenizer
+from .model_utils import model, tokenizer, model1, A
 import torch
-from .SetModel import Model
-from .VniAcronym import Acronym
+# from .SetModel import Model
+# from .VniAcronym import Acronym
 import pandas as pd
 import matplotlib.pyplot as plt
 import base64
@@ -14,13 +14,21 @@ from io import BytesIO
 import json
 from .Pho_Chat import Chat
 from django.views.decorators.csrf import csrf_exempt
-from.Model.Test import Inference
+
+
+import torch
+import torch.nn.functional as F
+import cv2
+from .Inference import Inference
+from .param import DEVICE
+
 
 #python manage.py runsslserver --cert abnormal_certificate.crt --key abnormal.key 0.0.0.0:8000
 #python manage.py runsslserver --cert abnormal_certificate.crt --key abnormal.key 192.168.1.8:8000
 def analyze_sentiment1(request):
-    M = Model('fine_tuned_model_best')
-    A = Acronym()
+    global model1, A
+    M = model1
+    A = A
     if request.method == 'POST':
         input_text = request.POST['text']
         tokenized_text = A.Solve_Acr(input_text)
@@ -128,14 +136,13 @@ def hischatbot(request):
         # Create a JsonResponse with the variable's data
         response_data = {'data': json_data}  # You can add more keys to the dictionary if needed
         return JsonResponse(response_data)
-    
-
 
 def exam(request):
     return render(request, 'abnormal/exam.html')
 
 @csrf_exempt
 def abnormal(request):
+    global model1
     if request.method == 'POST':
         frame_data = request.POST.get('frame_data')  # Get the captured frame data
         # Perform your model prediction or processing on the frame_data here

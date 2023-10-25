@@ -1,10 +1,18 @@
 from ConfigModel import *
 from sklearn.metrics import f1_score
-
+import argparse
+from param import *
 from sklearn.model_selection import StratifiedKFold
 
-# Define the number of folds
+parser = argparse.ArgumentParser(description='Your script description')
+parser.add_argument('--save-model', type=str, default='', help='Path to save the trained model')
+parser.add_argument('--folds', type=int, default=5, help='folds to training CrossValidation')
+args = parser.parse_args()
 
+if args.save_model != "":
+    torch.save(model,'.model/weight')
+n_folds = args.folds
+    
 skf = StratifiedKFold(n_splits=n_folds, shuffle=True)
 
 # Initialize lists to store evaluation results
@@ -16,10 +24,6 @@ for fold, (train_indices, val_indices) in enumerate(skf.split(data_train.feature
     val_subset = torch.utils.data.Subset(data_train, val_indices)
     train_loader = DataLoader(train_subset, batch_size=BATCH_SIZE, shuffle=True)
     val_loader = DataLoader(val_subset, batch_size=BATCH_SIZE, shuffle=False)
-    
-    # Create a new model for each fold (if needed)
-    model = BinaryClassifier()
-    model.to(DEVICE)
     
     # Training loop for the current fold
     for epoch in range(EPOCHS):
