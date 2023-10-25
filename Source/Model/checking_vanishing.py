@@ -5,16 +5,24 @@ import argparse
 import matplotlib.pyplot as plt
 
 
-gradient_norms = [] 
+gradient_norms = []
 num_params = sum(p.numel() for p in model.parameters())
-performance= []
+performance = []
 param_gradient_norms = [[] for _ in range(num_params)]
+
+# Create a list to store gradient norms for each layer
+layer_gradient_norms = {name: [] for name, _ in model.named_parameters()}
+
+best_validation_loss = np.inf
+epochs_without_improvement = 0
+early_stopping_patience = 8
+
 for epoch in range(EPOCHS):
     model.train()
     running_loss = 0.0
     predictions_train = []
     true_labels_train = []
-    
+
     for inputs, labels in TRAINLOADER:
         inputs = inputs.to(DEVICE)
         labels = labels.to(DEVICE).long()
@@ -29,6 +37,7 @@ for epoch in range(EPOCHS):
             if param.grad is not None:
                 gradient_norm = param.grad.norm().item()
                 epoch_gradient_norms.append(gradient_norm)
+                layer_gradient_norms[name].append(gradient_norm)
                 print(f'{name}: {gradient_norm}')
 
         gradient_norms.append(epoch_gradient_norms)
@@ -44,11 +53,12 @@ for epoch in range(EPOCHS):
     if scheduler is not None:
         scheduler.step()
 
-    model.eval() 
+    model.eval()
     total_loss_test = 0.0
     total_samples = 0
     predictions_test = []
     true_labels_test = []
+
     with torch.no_grad():
         for inputs, labels in TESTLOADER:
             inputs = inputs.to(DEVICE)
@@ -63,11 +73,19 @@ for epoch in range(EPOCHS):
             true_labels_test.extend(labels.tolist())
 
     avg_loss_test = total_loss_test / total_samples
-    
+
     test_f1 = f1_score(true_labels_test, predictions_test, average='weighted')
-    
-    performance.append([running_loss / len(TRAINLOADER),avg_loss_test,train_f1,test_f1])
-    print(f"Epoch [{epoch+1}/{EPOCHS}] Loss Train: {performance[epoch][0] :.4f} Loss Test: {performance[epoch][1]:.4f} F1 Train: {performance[epoch][2]:.4f} F1 Test: {performance[epoch][3] :.4f}")
+
+    performance.append([running_loss / len(TRAINLOADER), avg_loss_test, train_f1, test_f1])
+    print(f"Epoch [{epoch+1}/{EPOCHS}] Loss Train: {performance[epoch][0]:.4f} Loss Test: {performance[epoch][1]:.4f} F1 Train: {performance[epoch][2]:.4f} F1 Test: {performance[epoch][3]:.4f}")
+    if avg_loss_test < best_validation_loss:
+        best_validation_loss = avg_loss_test
+        epochs_without_improvement = 0
+    else:
+        epochs_without_improvement += 1
+    if epochs_without_improvement >= early_stopping_patience:
+        break
+
 
 
 
@@ -76,6 +94,12 @@ parser.add_argument('--save-csv', type=str, default='', help='Path to save the p
 parser.add_argument('--save-model', type=str, default='', help='Path to save the trained model')
 args = parser.parse_args()
 
+def Save_Gradient_Norms():
+    global layer_gradient_norms
+    df = pd.DataFrame(layer_gradient_norms)
+    df.to_csv('LayerGradientNorms.csv', index=False)
+
+
 def Save_Perform():
     global performance
     df = pd.DataFrame(performance, columns=['Loss Train', 'Loss Test', 'F1 Train','F1 Test'])
@@ -83,23 +107,6 @@ def Save_Perform():
 
 if args.save_csv != "":
     Save_Perform()
+    Save_Gradient_Norms()
 if args.save_model != "":
     torch.save(model,'.model/weight')
-
-param_names = list(model.state_dict().keys())
-num_params = len(param_names)
-
-plt.figure(figsize=(12, 6))
-
-for epoch_gradients in gradient_norms:
-    for param_index, gradient_norm in enumerate(epoch_gradients):
-        param_gradient_norms[param_index].append(gradient_norm)
-
-for param_index in range(num_params):
-    plt.plot(range(len(param_gradient_norms[param_index])), param_gradient_norms[param_index], label=param_names[param_index])
-
-plt.xlabel('Epochs')
-plt.ylabel('Gradient Norm')
-plt.legend()
-plt.title('Gradient Norms Over Epochs')
-plt.show()
