@@ -35,7 +35,7 @@ for class_name in class_to_label.keys():
             data.append(list(landmark) + [class_to_label[class_name]])
 
 # Define column names for your DataFrame
-column_names = [f"keypoint_{i}" for i in range(1, len(landmark) + 1)] + ["labels"]
+column_names = [f"distance_{i}" for i in range(1, len(landmark) + 1)] + ["labels"]
 
 # Convert the list of data to a pandas DataFrame with specified column names
 df = pd.DataFrame(data, columns=column_names)

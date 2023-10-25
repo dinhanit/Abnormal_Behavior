@@ -7,19 +7,13 @@ mp_face_mesh = mp.solutions.face_mesh
 face_mesh = mp_face_mesh.FaceMesh(refine_landmarks = True)
 
 # Define the indices of the desired keypoints (0 to 467)
-cheeks = [234, 93, 132, 58, 172, 136, 150, 149, 176, 148, 152, 377, 400, 378, 379, 365, 397, 288, 361, 323, 454]
-left_eyes = [33, 159, 133, 145,]
-right_eyes = [263, 386, 374, 362]
-nose = [1, 2, 5, 3, 248]
+cheeks = [454, 234, 151, 152, 10, 376, 352, 433, 123, 147, 213, 58, 132, 288, 361]
 left_iris = [474, 475, 476, 477]
 right_iris = [469, 470, 471, 472]
 desired_keypoint_indices = []  # Modify this list to choose your desired keypoints
 desired_keypoint_indices.extend(cheeks)
-desired_keypoint_indices.extend(nose)
 desired_keypoint_indices.extend(left_iris)
 desired_keypoint_indices.extend(right_iris)
-desired_keypoint_indices.extend(left_eyes)
-desired_keypoint_indices.extend(right_eyes)
 max_keypoints = len(desired_keypoint_indices) #############
 
 def get_landmark_from_image(image_path):
