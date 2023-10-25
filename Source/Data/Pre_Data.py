@@ -4,7 +4,7 @@ import numpy as np
 from Pre_image_2 import get_landmark_from_image
 
 # Define the path to your dataset folder
-p="train"
+p="test"
 dataset_folder = fr"DataSets\SplitData\{p}"
 
 # Initialize empty lists to store images and labels
