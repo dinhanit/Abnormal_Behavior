@@ -1,6 +1,7 @@
 import numpy as np
 from Pre_Image import get_landmark_from_image
 import cv2
+
 def distance(keypoint,keypoints):
     n = len(keypoints)
     np_1 = np.array([keypoint]*n)
@@ -20,7 +21,12 @@ def Diff(img1,img2):
 img_normal = cv2.imread("image_10.jpg")
 img_abnormal = cv2.imread("image_31.jpg")
 print("Differ")
-print(Diff(img_normal,img_abnormal)[0].shape)
+result = Diff(img_normal,img_abnormal)
+
+
+import pandas as pd 
+df = pd.DataFrame(result)
+df.to_csv('test.csv', index=False)
 
 
 
