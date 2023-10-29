@@ -22,29 +22,29 @@ img_normal = cv2.imread("image_10.jpg")
 img_abnormal = cv2.imread("image_31.jpg")
 print("Differ")
 result = Diff(img_normal,img_abnormal)
-#print(result.shape)
+print(result)
 
 # import pandas as pd 
 # df = pd.DataFrame(result)
 # df.to_csv('test.csv', index=False)
 
-import pandas as pd
+# import pandas as pd
 
-# Assuming 'result' is your DataFrame
-df = pd.DataFrame(result)
+# # Assuming 'result' is your DataFrame
+# df = pd.DataFrame(result)
 
-# Set custom column names
-custom_column_names = list(range(0, 478))  # Replace with your actual column names
-df.columns = custom_column_names
+# # Set custom column names
+# custom_column_names = list(range(0, 478))  # Replace with your actual column names
+# df.columns = custom_column_names
 
-# Set custom row names
-custom_row_names = list(range(0, 478)) # Replace with your desired row names
-df.index = custom_row_names
-df.index.name = "Index"
-# Now, your DataFrame has custom row names and custom column names.
+# # Set custom row names
+# custom_row_names = list(range(0, 478)) # Replace with your desired row names
+# df.index = custom_row_names
+# df.index.name = "Index"
+# # Now, your DataFrame has custom row names and custom column names.
 
-# Save the DataFrame to a CSV file
-df.to_csv('test.csv', index=True, header=True)
+# # Save the DataFrame to a CSV file
+# df.to_csv('test.csv', index=True, header=True)
 
 
 
