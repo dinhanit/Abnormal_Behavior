@@ -16,6 +16,7 @@ def get_landmark_from_image(image):
 
     if landmarks.multi_face_landmarks:
         for face_landmarks in landmarks.multi_face_landmarks:
+            global frame_data 
             frame_data = []
             for i, landmark in enumerate(face_landmarks.landmark):
                 x, y = landmark.x * iw, landmark.y * ih
@@ -27,4 +28,4 @@ def get_landmark_from_image(image):
         return np.array([])
 
 # image = cv2.imread("image_10.jpg")
-# print(get_landmark_from_image(image).shape)
+# print(get_landmark_from_image(image))
