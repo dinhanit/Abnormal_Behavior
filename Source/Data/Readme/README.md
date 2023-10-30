@@ -37,7 +37,7 @@
 
 This is an overview of the branch directory
 
-![Image](Readme\road.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/fa020426-8549-4df6-bd50-ca8b81d10de0)
 
 
 <p align="right"><a href="#top">Back to Top</a></p>
@@ -52,7 +52,7 @@ This is an instructions on setting up project locally.
 <a id="Pipeline"></a>
 
 This is our flow to run this branch
-![Image](Readme\pipeline.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/f7248465-d2c7-494b-921f-c4e73e3096b7)
 
 ### Installation.
 <a id="installation"></a>
@@ -103,66 +103,65 @@ Below is all nesscesary packages that need to be installed
 
 + This is the original dataframe.
 
-![original_dataframe](Readme\dataframe_old.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/e7925f09-7a99-4859-88c1-290ce154bb0b)
 
 + Anomalies of the data set.
 
-![abnormal_data](Readme\abnormal_data.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/aea78a26-eac8-4fc9-a4e5-aa07dd6d03a1)
 
 + Delete abnormal values and save dataframe
 
-![dataframe](Readme\dataframe.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/cd739557-7f0d-4d0c-a3d8-4a99df0a768d)
 
 ### Check imbalanced data.
 <a id="check_imbalanced"></a>
 
 
-![check_imbalanced](Readme\check_class.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/87a8c178-ee09-4a70-b100-8cf87faae33e)
 
 ### Kernel Density Plots to visualize values in data.
 <a id="kernel_den"></a> 
 
 
-![kernel_density_train](Readme\kernel_density_train.png)
-![kernel_density_test](Readme\kernel_density_test.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/734d5a8a-832b-46d3-aa58-2906c14784bb)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/97b0c8e6-2249-4cf9-9768-90478df4d6bd)
 
 ### PCA.
 <a id="pca"></a>
 
 
-![pca](Readme\pca.png).
-
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/25cfac25-d77e-4c34-a3e4-8a62ee5565f9)
 
 
 + Histogram for Label in pca_dataframe.
-![histogram_train](Readme\histogram_train.png)
-![histogram_test](Readme\histogram_test.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/6a72c0a6-ade5-44e5-8057-552243452981)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/5123e25c-9502-4e0e-8fc2-70133d96da81)
 
 + Visualize PCA.
-![gif_train](Readme\video_train.gif)
-![gif_test](Readme\video_test.gif)
+![gif_train](video_train.gif)
+![gif_test](video_test.gif)
 
 ### Visualize on Image.
 <a id="visual_image"></a>
 
 + Visual keypoints on image.
 
-![visual_image](Readme\visual_image.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/64a90fb1-78c9-4012-862a-1f2e193ab120)
 
 + Visual distance keypoints on image.
 
-![visual_distance](Readme\visual_distance.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/e0f67a2c-439e-4e07-ad49-8083d06b4226)
 
 + Visual line image on 2D.
 
-![visual_2d](Readme\visual_2d.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/d8f94b6b-a8b3-41c0-b3ee-33b0e0bd8c1a)
 
 + Visual keypoints on 3D.
 
-![visual_3d](Readme\visual_3d.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/9d66fef2-e818-43ec-a947-8b92b41f94ff)
 
 + Visual all keypoint on 3D.
-![visual_all_landmark](Readme\visual_all_landmark.png)
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/188158aa-b26b-4a1a-8a23-5ad6e512e158)
 
 
 <p align="right"><a href="#top">Back to Top</a></p>
