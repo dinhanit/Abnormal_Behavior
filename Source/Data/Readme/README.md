@@ -172,7 +172,9 @@ Below is all nesscesary packages that need to be installed
 ## Development History.
 <a id="development_history"></a>
 
-![history](Readme\history.png)
+
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/a1e2a9d3-d8eb-447f-911c-0fe2d8b055f1)
+
 <p align="right"><a href="#top">Back to Top</a></p>
 
 
