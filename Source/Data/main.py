@@ -1,7 +1,7 @@
 import numpy as np
 
 # Load the data from the .npz file
-data = np.load('Preprocessed_Data_train.npz', allow_pickle=True)
+data = np.load('Preprocessed_Data_test.npz', allow_pickle=True)
 print(data)
 
 # Get the names of all the arrays in the .npz file

@@ -10,10 +10,11 @@ mp_face_mesh = mp.solutions.face_mesh
 face_mesh = mp_face_mesh.FaceMesh(refine_landmarks=True)
 
 # Define the indices of the desired keypoints (0 to 467)
-cheeks = [454, 234, 151, 152, 10, 376, 352, 433, 123, 147, 213, 58, 132, 288, 361]#
+#cheeks = [454, 234, 151, 152, 10, 376, 352, 433, 123, 147, 213, 58, 132, 288, 361]#
 right_iris = [469, 470, 471, 472]
 left_iris = [474, 475, 476, 477]
-
+##new points
+cheeks = [10, 32, 140, 148, 152, 171, 175, 176, 199, 200, 201, 208, 332, 338, 396, 421, 428] 
 desired_keypoint_indices = []
 desired_keypoint_indices.extend(cheeks)
 desired_keypoint_indices.extend(right_iris)
@@ -71,13 +72,13 @@ def get_landmark_from_image(image_path):
 
         return np.array(distances, dtype=np.float32) 
     else:
-        return np.array([0.0] * 136)
+        return np.array([0.0] * 171)
 
-image_path = 'image_31.jpg'  # Replace with your image path
-distances = get_landmark_from_image(image_path)
+# image_path = 'image_31.jpg'  # Replace with your image path
+# distances = get_landmark_from_image(image_path)
 
-print("Distances between points:")
-print(distances)
+# print("Distances between points:")
+# print(distances)
 
 
 
