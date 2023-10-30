@@ -1,4 +1,5 @@
 # Exam Abnormal Behavior Recognition (Data Branch)
+<p id="top"></p>
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -39,11 +40,11 @@ This is an overview of the branch directory
 ![Image](Readme\road.png)
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right"><a href="#top">Back to Top</a></p>
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Getting Started.
 <a id="getting-started"></a>
 
 This is an instructions on setting up project locally.
@@ -53,7 +54,7 @@ This is an instructions on setting up project locally.
 This is our flow to run this branch
 ![Image](Readme\pipeline.png)
 
-### Installation
+### Installation.
 <a id="installation"></a>
 
 Below is all nesscesary packages that need to be installed
@@ -67,7 +68,7 @@ Below is all nesscesary packages that need to be installed
    pip install mediapipe
    ```
 
-### Instructions Manual
+### Instructions Manual.
 <a id="instructions_manual"></a>
 
 1. As above pipeline charts, you need to collect data first. Open folder `DataSets`, run `Collect_Image_2.py`
@@ -89,12 +90,12 @@ Below is all nesscesary packages that need to be installed
 
 3. Run `EDA_data.ipynb`, return the numpy array data for tranning. 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right"><a href="#top">Back to Top</a></p>
 
 
 
 <!-- USAGE EXAMPLES -->
-## Exploratory Data Analysis (EDA)
+## Exploratory Data Analysis (EDA).
 <a id="exploratory_data_analysis_eda"></a>
 
 ### Dataframe.
@@ -164,7 +165,7 @@ Below is all nesscesary packages that need to be installed
 ![visual_all_landmark](Readme\visual_all_landmark.png)
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<p align="right"><a href="#top">Back to Top</a></p>
 
 
 
@@ -173,7 +174,7 @@ Below is all nesscesary packages that need to be installed
 <a id="development_history"></a>
 
 ![history](Readme\history.png)
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right"><a href="#top">Back to Top</a></p>
 
 
 
