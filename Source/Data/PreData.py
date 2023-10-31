@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
-from PreImage2 import get_landmark_from_image
+from PreImage import get_landmark_from_image
 
 def PreData(p):# Define the path to your dataset folder
     '''
@@ -51,4 +51,9 @@ def PreData(p):# Define the path to your dataset folder
 PreData("train")
 PreData("test")
 print("Preprocess all data done")
+
+
+
+
+
 

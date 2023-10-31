@@ -39,3 +39,5 @@ def get_landmark_from_image(image_path):
     else:
         return np.array([0.0, 0.0, 0.0] * max_keypoints) ###############
     
+    
+    
