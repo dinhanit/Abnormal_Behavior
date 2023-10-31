@@ -1,11 +1,16 @@
 import cv2
 import time
 import os
-""" This file contains the collect images task 
-    You have to:
-        -Input numbers of images you've already taken
-        -Input "n" to take Normal Image or "a" for Abnormal Image
-        for every single image
+""" 
+This file contains the collect images task 
+
+    Parameters:
+     -num_images_taken: Input numbers of images you've already taken
+     -key: Input "n" to take Normal Image or "a" for Abnormal Image
+        for every single image, while code is running
+
+     Returns:
+     - Images to Origin folder 
 """
 if not os.path.exists("Origin"):
     os.makedirs("Origin")
