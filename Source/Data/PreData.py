@@ -52,9 +52,9 @@ def PreData(p):# Define the path to your dataset folder
 # PreData("test")
 # print("Preprocess all data done")
 
-def save_data_to_npz(save_directory, train_data, test_data, train_file_name='PreprocessedData_train.npz', test_file_name='PreprocessedData_test.npz'):
+def PreprocessData(save_directory, train_data, test_data, train_file_name='PreprocessedData_train.npz', test_file_name='PreprocessedData_test.npz'):
     """
-    Save two pandas DataFrames as .npz files.
+    Preprocess data, remove null rows, and save it to .npz files.
 
     Parameters:
     - save_directory: The directory where the .npz files will be saved.
@@ -63,25 +63,43 @@ def save_data_to_npz(save_directory, train_data, test_data, train_file_name='Pre
     - train_file_name: The name of the .npz file for the training data (default is 'PreprocessedData_train.npz').
     - test_file_name: The name of the .npz file for the testing data (default is 'PreprocessedData_test.npz').
     """
+    def is_row_all_zero_except_label(df):
+        """
+        Check if all columns in the DataFrame, except the 'labels' column, are equal to 0 for each row.
+
+        Parameters:
+        df (DataFrame): The input DataFrame.
+
+        Returns:
+        (Series): A boolean Series indicating True for rows where all columns, except 'labels', are 0, and False otherwise. Rows where 'labels' may contain non-zero values.
+        """
+        return (df.drop('labels', axis=1) == 0).all(axis=1)
+
+    # Check for null rows
+    null_rows_train = is_row_all_zero_except_label(train_data)
+    null_rows_test = is_row_all_zero_except_label(test_data)
+
+    # Remove null rows and reset the index
+    train_data = train_data[~null_rows_train].reset_index(drop=True)
+    test_data = test_data[~null_rows_test].reset_index(drop=True)
+
     # Specify the file paths for the DataFrames
     combined_data_train_path = os.path.join(save_directory, train_file_name)
     combined_data_test_path = os.path.join(save_directory, test_file_name)
 
-    # Save CombinedData_train to its .npz file
+    # Save.npz file
     np.savez(combined_data_train_path, landmarks=train_data.iloc[:, :-1], labels=train_data.iloc[:, -1])
-
-    # Save CombinedData_test to its .npz file
     np.savez(combined_data_test_path, landmarks=test_data.iloc[:, :-1], labels=test_data.iloc[:, -1])
 
-# Define the directory where you want to save the .npz files
 save_directory = ""
 
 # Load the data from the .csv files into DataFrames
 PreparedData_train = pd.read_csv('PreparedData_train.csv')
 PreparedData_test = pd.read_csv('PreparedData_test.csv')
 
-# Call the function to save the DataFrames as .npz files
-save_data_to_npz(save_directory, PreparedData_train, PreparedData_test)
+#Call_func:
+PreprocessData(save_directory, PreparedData_train, PreparedData_test)
+
 
 
 

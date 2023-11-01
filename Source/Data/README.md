@@ -17,7 +17,7 @@
     </li>
     </li>
     <li><a href="#development_history">Development History.</a></li>
-    <li><a href="#choose_keypoints">Choose Keypoints.</a></li>
+    <li><a href="#choose_keypoints">How to choose keypoints?</a></li>
     <li>
       <a href="#exploratory_data_analysis_eda">Exploratory Data Analysis (EDA.)</a>
       <ul>
@@ -27,8 +27,7 @@
         <li><a href="#pca">5.4 PCA.</a></li>
         <li><a href="#visual_image">5.5 Visual On Image.</a></li>
       </ul>
-    <!-- </li>
-    <li><a href="#development_history">Development History.</a></li> -->
+
   </ol>
 </details>
 
@@ -37,16 +36,25 @@
 ## 1. About The Branch.
 <a id="about-the-branch"></a>
 
+### Examination regulations:
+
+- Student's laptop mush have camera, and it can work
+- While taking exam, don't cover the camera. If you cover, it means you're cheating 
+
+### Abnormal Criteria:
+- As above, cover the camera
+- Look outside (up/down/left/right) too long (over 10s)
+
 This is an overview of the branch directory.
 
 <img src="https://github.com/DangLeChi/ChiTest/assets/122540817/eb0aa49c-f755-44da-b07b-4be5b9c72331" width="440" height="350">
-
 
 <!-- GETTING STARTED -->
 ## 2. Getting Started.
 <a id="getting-started"></a>
 
 This is an instructions on setting up project locally.
+
 ### 2.1 Pipeline.
 <a id="Pipeline"></a>
 
@@ -71,9 +79,9 @@ Below is all nesscesary packages that need to be installed.
 ### 2.3 Instructions Manual.
 <a id="instructions_manual"></a>
 
-1. As above pipeline charts, you need to collect data first. Open folder `DataSets`, run `Collect_Image_2.py`
+1. As above pipeline charts, you need to collect data first. Open folder `DataSets`, run `CollectData2.py`
    ```python
-   python Collect_Image_2.py
+   python CollectData2.py
    ```
    After run that file, we will have images that will be data in `Origin` folder (we have already collected 800 images, namely 400/class). Then, run `SplitData.py`
    ```
@@ -81,14 +89,14 @@ Below is all nesscesary packages that need to be installed.
    ```
    It will split all images from `Origin` folder to `SplitData` folder (with ratio 8/2, we split 638 images for train set and 162 images for test set).
 
-2. Back to `Data` folder and run `Pre_Data`
+2. Back to `Data` folder and run `PreData`
    ```sh
-   python Pre_Data.py
+   python PreData.py
    ```
-   This code will call `Pre_Image.py` (Pre_Image return the landmarks from an image). `Pre_Data.py` will take all images from `SplitData/train` folder and get landmarks from all images, and save them to `Prepared_data_train.csv` files. 
-   Then, this files will have 638 rows represent for 638 images in train set. Similarly, `Prepared_data_test.csv` will contain 162 rows for 162 images in test set.
+   This code will call `PreImage.py` (Pre_Image return the landmarks from an image). `PreData.py` will take all images from `SplitData/train` folder and get landmarks from all images, and save them to `PreparedData_train.csv` files. 
+   Then, this files will have 638 rows represent for 638 images in train set. Similarly, `PreparedData_test.csv` will contain 162 rows for 162 images in test set.
 
-3. Run `EDA_data.ipynb`, return the numpy array data for tranning. 
+3. Run `AnalyzeData.ipynb`, return the numpy array data for tranning. 
 
 
 <!-- CONTRIBUTING -->
@@ -98,9 +106,14 @@ Below is all nesscesary packages that need to be installed.
 
 ![image](https://github.com/DangLeChi/ChiTest/assets/122540817/ba2cf671-7881-4f5b-8c9f-8b70c86406a8)
 
-## 4. Choose Keypoints.
+## 4. How to choose keypoints?
 <a id="choose_keypoints"></a>
 
+Firstly, Mediapipe API return 468 landmark points on human face (more 10 points for iris eyes). My team will choose the points that have the biggest change between Normal and Abnormal class. We will find that in `FindAllLandmarks.ipynb` as below:
+- Step 1: Take all landmarks points in one image and calculate distances pairwise. 
+- Step 2: Calculate mean distance value of all images in one class (Normal/Abnormal), return distance_matrices_normal and distance_matrices_abnormal variable. 
+- Step 3: Subtract two variables above to find the different between two classes. 
+- Step 4: Find the biggest sum on landmark distances (represent for biggest different), and take the first 20 biggest distance. As a result, we have 17 landmarks and 2 iris center points.  
 
 <!-- USAGE EXAMPLES -->
 ## 5. Exploratory Data Analysis (EDA).
