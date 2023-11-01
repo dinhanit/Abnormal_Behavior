@@ -2,8 +2,21 @@ from ConfigModel import *
 from sklearn.metrics import f1_score
 import pandas as pd
 import argparse
+import matplotlib.pyplot as plt
 
-performance= []
+
+# gradient_norms = []
+num_params = sum(p.numel() for p in model.parameters())
+performance = []
+# param_gradient_norms = [[] for _ in range(num_params)]
+
+# Create a list to store gradient norms for each layer
+best_validation_loss = np.inf
+epochs_without_improvement = 0
+early_stopping_patience = 20
+layer_gradient_norms = {name: [] for name, _ in model.named_parameters()}
+
+epoch_param_gradient_norms = {name: [] for name, _ in model.named_parameters()}
 
 for epoch in range(EPOCHS):
     model.train()
@@ -56,12 +69,31 @@ for epoch in range(EPOCHS):
     performance.append([running_loss / len(TRAINLOADER),avg_loss_test,train_f1,test_f1])
     print(f"Epoch [{epoch+1}/{EPOCHS}] Loss Train: {performance[epoch][0] :.4f} Loss Test: {performance[epoch][1]:.4f} F1 Train: {performance[epoch][2]:.4f} F1 Test: {performance[epoch][3] :.4f}")
 
+    # Calculate and save gradient norms at the end of each epoch
+    for name, param in model.named_parameters():
+        if param.grad is not None:
+            gradient_norm = param.grad.norm().item()
+            epoch_param_gradient_norms[name].append(gradient_norm)
+
+    if avg_loss_test < best_validation_loss:
+        best_validation_loss = avg_loss_test
+        epochs_without_improvement = 0
+        best_epoch = epoch
+    else:
+        epochs_without_improvement += 1
+    if epochs_without_improvement >= early_stopping_patience:
+        break
 
 
 parser = argparse.ArgumentParser(description='Your script description')
 parser.add_argument('--save-csv', type=str, default='', help='Path to save the performance CSV file')
 parser.add_argument('--save-model', type=str, default='', help='Path to save the trained model')
 args = parser.parse_args()
+
+def Save_Gradient_Norms():
+    df = pd.DataFrame(epoch_param_gradient_norms)
+    df.to_csv('EpochGradientNorms.csv', index=False)
+
 
 def Save_Perform():
     global performance
@@ -70,5 +102,7 @@ def Save_Perform():
 
 if args.save_csv != "":
     Save_Perform()
+    Save_Gradient_Norms()
 if args.save_model != "":
-    torch.save(model,'model/weight')
+    torch.save(model,'.model/weight')
+print(f"Epoch with the best test loss: {best_epoch + 1} (Loss: {best_validation_loss:.4f})")

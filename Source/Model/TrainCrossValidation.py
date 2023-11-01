@@ -10,7 +10,7 @@ parser.add_argument('--folds', type=int, default=5, help='folds to training Cros
 args = parser.parse_args()
 
 if args.save_model != "":
-    torch.save(model,'.model/weight')
+    torch.save(model,'model/weight')
 n_folds = args.folds
     
 skf = StratifiedKFold(n_splits=n_folds, shuffle=True)
