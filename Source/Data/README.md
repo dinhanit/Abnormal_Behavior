@@ -79,7 +79,7 @@ Below is all nesscesary packages that need to be installed.
 ### 2.3 Instructions Manual.
 <a id="instructions_manual"></a>
 
-1. As above pipeline charts, you need to collect data first. Open folder `DataSets`, run `CollectData2.py`
+1. As above pipeline charts, you need to collect data first. Open folder `DataSets`, run `CollectData.py`
    ```python
    python CollectData.py
    ```
