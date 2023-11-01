@@ -1,4 +1,4 @@
-# Exam Abnormal Behavior Recognition (Data Branch)
+# Exam Abnormal Behavior Recognition (Data Branch).
 <p id="top"></p>
 
 <!-- TABLE OF CONTENTS -->
@@ -16,17 +16,19 @@
         <li><a href="#instructions_manual">2.3 Instructions Manual.</a></li>
       </ul>
     </li>
+    </li>
+    <li><a href="#development_history">Development History.</a></li>
     <li>
       <a href="#exploratory_data_analysis_eda">Exploratory Data Analysis (EDA.)</a>
       <ul>
-        <li><a href="#dataframe">3.1 Dataframe.</a></li>
-        <li><a href="#check_imbalanced">3.2 Check Imbalanced Data.</a></li>
-        <li><a href="#kernel_den">3.3 Kernel Density Plots.</a></li>
-        <li><a href="#pca">3.4 PCA.</a></li>
-        <li><a href="#visual_image">3.5 Visual On Image.</a></li>
+        <li><a href="#dataframe">4.1 Dataframe.</a></li>
+        <li><a href="#check_imbalanced">4.2 Check Imbalanced Data.</a></li>
+        <li><a href="#kernel_den">4.3 Kernel Density Plots.</a></li>
+        <li><a href="#pca">4.4 PCA.</a></li>
+        <li><a href="#visual_image">4.5 Visual On Image.</a></li>
       </ul>
-    </li>
-    <li><a href="#development_history">Development History.</a></li>
+    <!-- </li>
+    <li><a href="#development_history">Development History.</a></li> -->
   </ol>
 </details>
 
@@ -35,9 +37,9 @@
 ## 1. About The Branch.
 <a id="about-the-branch"></a>
 
-This is an overview of the branch directory
+This is an overview of the branch directory.
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/eb0aa49c-f755-44da-b07b-4be5b9c72331" width="390" height="300">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/eb0aa49c-f755-44da-b07b-4be5b9c72331" width="420" height="330">
 
 
 <p align="right"><a href="#top">Back to Top</a></p>
@@ -53,18 +55,18 @@ This is an instructions on setting up project locally.
 
 This is our flow to run this branch.
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/8e577622-29f6-46c8-b3a4-54a03c3cc030" width="390" height="300">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/8e577622-29f6-46c8-b3a4-54a03c3cc030" width="420" height="330">
 
 ### 2.2 Installation.
 <a id="installation"></a>
 
-Below is all nesscesary packages that need to be installed
+Below is all nesscesary packages that need to be installed.
 
-1. Clone the repo
+1. Clone the repo.
    ```sh
    git clone https://github.com/dinhanit/Abnormal_Behavior.git
    ```
-2. Install the Mediapipe packages 
+2. Install the Mediapipe packages .
    ```python
    pip install mediapipe
    ```
@@ -95,11 +97,20 @@ Below is all nesscesary packages that need to be installed
 
 
 
+<!-- CONTRIBUTING -->
+## 3. Development History.
+<a id="development_history"></a>
+
+
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/ba2cf671-7881-4f5b-8c9f-8b70c86406a8)
+
+<p align="right"><a href="#top">Back to Top</a></p>
+
 <!-- USAGE EXAMPLES -->
-## 3. Exploratory Data Analysis (EDA).
+## 4. Exploratory Data Analysis (EDA).
 <a id="exploratory_data_analysis_eda"></a>
 
-### 3.1 Dataframe.
+### 4.1 Dataframe.
 <a id="dataframe"></a>
 
 + This is the original dataframe.
@@ -110,29 +121,30 @@ Below is all nesscesary packages that need to be installed
 
 ![image](https://github.com/DangLeChi/ChiTest/assets/122540817/2b644f0b-c7d8-42ae-a412-508080d8fb5a)
 
-+ Delete abnormal values and save dataframe
++ Delete abnormal values and save dataframe.
 
 ![image](https://github.com/DangLeChi/ChiTest/assets/122540817/44024f0f-2a57-4b78-81b6-20f965e1b7f5)
 
-### 3.2 Check imbalanced data.
+### 4.2 Check imbalanced data.
 <a id="check_imbalanced"></a>
 
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/63439c89-8425-41ae-8d54-092b84d857bd" width="550" height="230">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/63439c89-8425-41ae-8d54-092b84d857bd" width="600" height="280">
 
 
-### 3.3 Kernel Density Plots to visualize values in data.
+### 4.3 Kernel Density Plots to visualize values in data.
 <a id="kernel_den"></a> 
 
 
 <!-- ![image](https://github.com/DangLeChi/ChiTest/assets/122540817/a26254e3-b810-457d-9791-a1800014450d) -->
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/a26254e3-b810-457d-9791-a1800014450d" width="500" height="250">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/a26254e3-b810-457d-9791-a1800014450d" width="500" height="290">
+
 
 <!-- ![image](https://github.com/DangLeChi/ChiTest/assets/122540817/e37f89c6-2433-4a82-96bd-48e6519a0afc) -->
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/e37f89c6-2433-4a82-96bd-48e6519a0afc" width="500" height="250">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/e37f89c6-2433-4a82-96bd-48e6519a0afc" width="500" height="290">
 
 
-### 3.4 PCA.
+### 4.4 PCA.
 <a id="pca"></a>
 
 
@@ -142,16 +154,16 @@ Below is all nesscesary packages that need to be installed
 
 + Histogram for Label in pca_dataframe.
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/9e86edf7-5dd3-4098-b14b-92589d06c7eb" width="550" height="200">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/9e86edf7-5dd3-4098-b14b-92589d06c7eb" width="580" height="230">
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/4541c132-3139-4ce3-9cde-b83dccc7e704" width="550" height="200">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/4541c132-3139-4ce3-9cde-b83dccc7e704" width="580" height="230">
 
 + Visualize PCA.
 
 ![gif_train](visual_pca_train.gif)
 ![gif_test](visual_pca_test.gif)
 
-### 3.5 Visualize on Image.
+### 4.5 Visualize on Image.
 <a id="visual_image"></a>
 
 + Visualize selected keypoints on image.
@@ -175,14 +187,7 @@ Below is all nesscesary packages that need to be installed
 
 
 
-<!-- CONTRIBUTING -->
-## 4. Development History.
-<a id="development_history"></a>
 
-
-![image](https://github.com/DangLeChi/ChiTest/assets/122540817/ba2cf671-7881-4f5b-8c9f-8b70c86406a8)
-
-<p align="right"><a href="#top">Back to Top</a></p>
 
 
 
