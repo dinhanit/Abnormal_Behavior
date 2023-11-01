@@ -1,25 +1,11 @@
-from keyPointDetect import DetectKeyPoint
 import torch
 import torch.nn.functional as F
 import cv2
-from param import DEVICE
+from Param import DEVICE
+from Inference import Inference
 
-model = torch.load(".model/Weight").to(DEVICE)
+model = torch.load("model/Weight").to(DEVICE)
 
-def Inference(img):
-    global model
-    label = ['Abnormal', 'Normal']
-    kp = DetectKeyPoint(img)
-    kp = kp.reshape(1, -1)
-    model.eval()
-    with torch.no_grad():
-        output = model(torch.Tensor(kp).to(DEVICE))
-    probabilities = F.softmax(output, dim=1)
-    if probabilities[0][1] < 0.001:
-        predicted_class = 0
-    else:
-        predicted_class = 1
-    return label[predicted_class]
 
 font_color = {"Normal": (0, 255, 0),
               "Abnormal": (0, 0, 255)}
@@ -46,7 +32,7 @@ while True:
     if not ret:
         break
     frame_count += 1  # Increment the frame count
-    label = Inference(frame)
+    label = Inference(model,frame)
     frame = cv2.putText(frame, label, org, font, font_scale, font_color[label], thickness, cv2.LINE_AA)
     cv2.imshow('Video Stream', frame)
     key = cv2.waitKey(0)

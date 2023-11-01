@@ -4,7 +4,7 @@ import torch
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
-from param import *
+from Param import *
 from torchsummary import summary
     
 #Load DataSet
@@ -20,21 +20,20 @@ class CustomDataset(Dataset):
         return self.features[index], self.labels[index]
 
 print('DEVICE:',DEVICE)
+
 model = BinaryClassifier().to(DEVICE)
 criterion = nn.CrossEntropyLoss()
 model.to(DEVICE)
 criterion.to(DEVICE)
 
 optimizer = optim.Adam(model.parameters(), lr=float(LEARNING_RATE))
-# optimizer = optim.SGD(model.parameters(), lr=float(LEARNING_RATE))
-
 scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=5)
 
 
-data_train = np.load("../Data/train.npz")
+data_train = np.load(PATH_TRAIN)
 data_train = CustomDataset(data_train['landmarks'],data_train['labels'])
 
-data_test = np.load("../Data/test.npz")
+data_test = np.load(PATH_TEST)
 data_test = CustomDataset(data_test['landmarks'],data_test['labels'])
 
 TRAINLOADER = DataLoader(data_train, batch_size=BATCH_SIZE, shuffle=True)

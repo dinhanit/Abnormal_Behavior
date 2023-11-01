@@ -5,12 +5,9 @@ import argparse
 import matplotlib.pyplot as plt
 
 
-# gradient_norms = []
+
 num_params = sum(p.numel() for p in model.parameters())
 performance = []
-# param_gradient_norms = [[] for _ in range(num_params)]
-
-# Create a list to store gradient norms for each layer
 best_validation_loss = np.inf
 epochs_without_improvement = 0
 early_stopping_patience = 20

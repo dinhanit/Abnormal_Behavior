@@ -1,17 +1,42 @@
 import numpy as np
 from Inference import Inference
 import torch
-from param import *
-from fastapi import FastAPI, HTTPException, UploadFile
-from fastapi.responses import JSONResponse
-from fastapi.staticfiles import StaticFiles
+from Param import *
+from fastapi import FastAPI, UploadFile
 import cv2
+
+
 app = FastAPI()
 
-# model = torch.load('model/weight').to(DEVICE)
-model = torch.load('model/weight',map_location='cpu')
+
+# Load the pre-trained model
+model = torch.load('model/weight').to(DEVICE)
+# If you want to load the model on the CPU, use the following line instead:
+# model = torch.load('model/weight',map_location='cpu')
 
 def process_frame(frame_data):
+    """
+    Process an uploaded frame and perform inference using a pre-trained model.
+
+    Args:
+        frame_data: Raw frame data as bytes.
+
+    Returns:
+        label: Inference result, typically a classification label or prediction.
+
+    This function decodes the frame data, sends it to the pre-trained model, and returns the
+    result of the inference.
+
+    Example:
+    ```
+    frame_data = ...  # Load frame data from an image file or stream
+    label = process_frame(frame_data)
+    ```
+
+    Note:
+    Make sure the 'model' variable is properly loaded with the pre-trained model.
+
+    """
     nparr = np.frombuffer(frame_data, np.uint8)
     frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     label = Inference(model,frame)
@@ -19,7 +44,23 @@ def process_frame(frame_data):
 
 @app.post("/process_frame/")
 async def upload_frame(file: UploadFile):
-    # if file.content_type and file.content_type.startswith("image/"):
+        """
+    Endpoint for uploading and processing image frames.
+
+    Args:
+        file: An uploaded image frame file.
+
+    Returns:
+        JSONResponse: A JSON response containing the result of the frame processing.
+
+    This endpoint allows you to upload an image frame, which is then processed using the
+    'process_frame' function. The result is returned as a JSON response.
+
+    Example:
+    Use a tool like cURL or a web application to send a POST request with an image file
+    to this endpoint for processing.
+
+    """
         frame_data = await file.read()
         return process_frame(frame_data)
 

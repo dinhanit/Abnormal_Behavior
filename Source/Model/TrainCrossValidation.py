@@ -1,7 +1,7 @@
 from ConfigModel import *
 from sklearn.metrics import f1_score
 import argparse
-from param import *
+from Param import *
 from sklearn.model_selection import StratifiedKFold
 
 parser = argparse.ArgumentParser(description='Your script description')

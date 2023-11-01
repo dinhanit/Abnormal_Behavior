@@ -1,10 +1,10 @@
 from Inference import Inference
 import cv2
 import torch
-from param import DEVICE
+from Param import DEVICE
 import argparse
 parser = argparse.ArgumentParser(description='Your script description')
-parser.add_argument('--source', type=str, default='head1.mp4', help='Path to save the trained model')
+parser.add_argument('--source', type=str, default='video_test2.mp4', help='Path to save the trained model')
 args = parser.parse_args()
 
 model = torch.load("model/Weight").to(DEVICE)
@@ -18,12 +18,13 @@ font_scale = 1
 thickness = 2
 
 op = args.source
+if op == "0":
+    op = 0
 cap = cv2.VideoCapture(op)
 
 if not cap.isOpened():
     print("Error: Could not open the camera.")
     exit()
-
 
 while True:
     ret, frame = cap.read()
