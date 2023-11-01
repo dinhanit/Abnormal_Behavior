@@ -60,8 +60,8 @@ def PreprocessData(save_directory, train_data, test_data, train_file_name='train
     - save_directory: The directory where the .npz files will be saved.
     - train_data: The DataFrame for the training data.
     - test_data: The DataFrame for the testing data.
-    - train_file_name: The name of the .npz file for the training data (default is 'PreprocessedData_train.npz').
-    - test_file_name: The name of the .npz file for the testing data (default is 'PreprocessedData_test.npz').
+    - train_file_name: The name of the .npz file for the training data (default is 'train.npz').
+    - test_file_name: The name of the .npz file for the testing data (default is 'test.npz').
     """
     def is_row_all_zero_except_label(df):
         """
