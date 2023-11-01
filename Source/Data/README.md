@@ -1,4 +1,4 @@
-# Exam Abnormal Behavior Recognition (Data Branch).
+# Exam Abnormal Behavior Recognition
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -170,8 +170,8 @@ Firstly, Mediapipe API return 468 landmark points on human face (more 10 points 
 
 + Visualize PCA.
 
-![gif_train](SampleImage\visual_pca_train.gif)
-![gif_test](SampleImage\visual_pca_test.gif)
+![gif_train](SampleImage/visual_pca_train.gif)
+![gif_test](SampleImage/visual_pca_test.gif)
 
 ### 5.5 Visualize on Image.
 <a id="visual_image"></a>
