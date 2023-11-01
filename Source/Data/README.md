@@ -1,5 +1,4 @@
 # Exam Abnormal Behavior Recognition (Data Branch).
-<p id="top"></p>
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -18,14 +17,15 @@
     </li>
     </li>
     <li><a href="#development_history">Development History.</a></li>
+    <li><a href="#choose_keypoints">Choose Keypoints.</a></li>
     <li>
       <a href="#exploratory_data_analysis_eda">Exploratory Data Analysis (EDA.)</a>
       <ul>
-        <li><a href="#dataframe">4.1 Dataframe.</a></li>
-        <li><a href="#check_imbalanced">4.2 Check Imbalanced Data.</a></li>
-        <li><a href="#kernel_den">4.3 Kernel Density Plots.</a></li>
-        <li><a href="#pca">4.4 PCA.</a></li>
-        <li><a href="#visual_image">4.5 Visual On Image.</a></li>
+        <li><a href="#dataframe">5.1 Dataframe.</a></li>
+        <li><a href="#check_imbalanced">5.2 Check Imbalanced Data.</a></li>
+        <li><a href="#kernel_den">5.3 Kernel Density Plots.</a></li>
+        <li><a href="#pca">5.4 PCA.</a></li>
+        <li><a href="#visual_image">5.5 Visual On Image.</a></li>
       </ul>
     <!-- </li>
     <li><a href="#development_history">Development History.</a></li> -->
@@ -39,10 +39,7 @@
 
 This is an overview of the branch directory.
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/eb0aa49c-f755-44da-b07b-4be5b9c72331" width="420" height="330">
-
-
-<p align="right"><a href="#top">Back to Top</a></p>
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/eb0aa49c-f755-44da-b07b-4be5b9c72331" width="440" height="350">
 
 
 <!-- GETTING STARTED -->
@@ -55,7 +52,7 @@ This is an instructions on setting up project locally.
 
 This is our flow to run this branch.
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/8e577622-29f6-46c8-b3a4-54a03c3cc030" width="420" height="330">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/90c04253-513d-4b5d-a3d9-557240e07a6d" width="440" height="350">
 
 ### 2.2 Installation.
 <a id="installation"></a>
@@ -93,9 +90,6 @@ Below is all nesscesary packages that need to be installed.
 
 3. Run `EDA_data.ipynb`, return the numpy array data for tranning. 
 
-<p align="right"><a href="#top">Back to Top</a></p>
-
-
 
 <!-- CONTRIBUTING -->
 ## 3. Development History.
@@ -104,13 +98,15 @@ Below is all nesscesary packages that need to be installed.
 
 ![image](https://github.com/DangLeChi/ChiTest/assets/122540817/ba2cf671-7881-4f5b-8c9f-8b70c86406a8)
 
-<p align="right"><a href="#top">Back to Top</a></p>
+## 4. Choose Keypoints.
+<a id="choose_keypoints"></a>
+
 
 <!-- USAGE EXAMPLES -->
-## 4. Exploratory Data Analysis (EDA).
+## 5. Exploratory Data Analysis (EDA).
 <a id="exploratory_data_analysis_eda"></a>
 
-### 4.1 Dataframe.
+### 5.1 Dataframe.
 <a id="dataframe"></a>
 
 + This is the original dataframe.
@@ -125,14 +121,14 @@ Below is all nesscesary packages that need to be installed.
 
 ![image](https://github.com/DangLeChi/ChiTest/assets/122540817/44024f0f-2a57-4b78-81b6-20f965e1b7f5)
 
-### 4.2 Check imbalanced data.
+### 5.2 Check imbalanced data.
 <a id="check_imbalanced"></a>
 
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/63439c89-8425-41ae-8d54-092b84d857bd" width="600" height="280">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/63439c89-8425-41ae-8d54-092b84d857bd" width="630" height="300">
 
 
-### 4.3 Kernel Density Plots to visualize values in data.
+### 5.3 Kernel Density Plots to visualize values in data.
 <a id="kernel_den"></a> 
 
 
@@ -144,46 +140,66 @@ Below is all nesscesary packages that need to be installed.
 <img src="https://github.com/DangLeChi/ChiTest/assets/122540817/e37f89c6-2433-4a82-96bd-48e6519a0afc" width="500" height="290">
 
 
-### 4.4 PCA.
+### 5.4 PCA.
 <a id="pca"></a>
 
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/7cf42411-0d25-4551-8b9e-1908d167e0b0" width="370" height="370">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/7cf42411-0d25-4551-8b9e-1908d167e0b0" width="430" height="430">
 
 
 
 + Histogram for Label in pca_dataframe.
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/9e86edf7-5dd3-4098-b14b-92589d06c7eb" width="580" height="230">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/9e86edf7-5dd3-4098-b14b-92589d06c7eb" width="610" height="270">
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/4541c132-3139-4ce3-9cde-b83dccc7e704" width="580" height="230">
+
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/4541c132-3139-4ce3-9cde-b83dccc7e704" width="610" height="270">
 
 + Visualize PCA.
 
-![gif_train](visual_pca_train.gif)
-![gif_test](visual_pca_test.gif)
+![gif_train](SampleImage\visual_pca_train.gif)
+![gif_test](SampleImage\visual_pca_test.gif)
 
-### 4.5 Visualize on Image.
+### 5.5 Visualize on Image.
 <a id="visual_image"></a>
 
-+ Visualize selected keypoints on image.
+<table>
+  <tr>
+    <td>
+      + Visualize selected keypoints on image.
+      
+  <br>
+      <img src="https://github.com/DangLeChi/ChiTest/assets/122540817/1c317e33-0533-4d29-8a4d-652bda25d4e6" width="450" height="350">
+    </td>
+    <td>
+      + Visual distances between selected keypoints on image.
+  
+  <br>
+      <img src="https://github.com/DangLeChi/ChiTest/assets/122540817/431bb2a9-16c6-464f-b603-5a3bcfcd2c46" width="450" height="350">
+    </td>
+  </tr>
+</table>
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/1c317e33-0533-4d29-8a4d-652bda25d4e6" width="400" height="300">
-
-+ Visual distances between selected keypoints on image.
-
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/431bb2a9-16c6-464f-b603-5a3bcfcd2c46" width="400" height="300">
-
-+ Visualize selected keypoints in 3D.
-
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/01540066-b940-4611-819d-3dc39df0b005" width="400" height="300">
-
-+ Visualize all keypoints on 3D.
-
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/ec61d54a-4999-43b2-a98e-02a5937afa2b" width="350" height="300">
 
 
-<p align="right"><a href="#top">Back to Top</a></p>
+
+<table>
+  <tr>
+    <td>
+      + Visualize selected keypoints in 3D.
+      
+  <br>
+      <img src="https://github.com/DangLeChi/ChiTest/assets/122540817/01540066-b940-4611-819d-3dc39df0b005" width="450" height="350">
+    </td>
+    <td>
+      + Visualize all keypoints on 3D.
+  
+  <br>
+      <img src="https://github.com/DangLeChi/ChiTest/assets/122540817/ec61d54a-4999-43b2-a98e-02a5937afa2b" width="450" height="350">
+    </td>
+  </tr>
+</table>
+
 
 
 
