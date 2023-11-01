@@ -156,10 +156,13 @@ Firstly, Mediapipe API return 468 landmark points on human face (more 10 points 
 ### 5.4 PCA.
 <a id="pca"></a>
 
++ Dataframe before PCA.
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/7cf42411-0d25-4551-8b9e-1908d167e0b0" width="430" height="430">
+![image](https://github.com/DangLeChi/ChiTest/assets/122540817/44024f0f-2a57-4b78-81b6-20f965e1b7f5)
 
++ Dataframe after PCA.
 
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/931668e4-f916-4ab4-ba0d-6ea30cb4689e" width="240" height="360">
 
 + Histogram for Label in pca_dataframe.
 

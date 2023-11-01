@@ -52,7 +52,7 @@ PreData("train")
 PreData("test")
 print("Prepare all data to csv done")
 
-def PreprocessData(save_directory, train_data, test_data, train_file_name='PreprocessedData_train.npz', test_file_name='PreprocessedData_test.npz'):
+def PreprocessData(save_directory, train_data, test_data, train_file_name='train.npz', test_file_name='test.npz'):
     """
     Preprocess data, remove null rows, and save it to .npz files.
 
