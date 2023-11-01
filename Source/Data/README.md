@@ -94,9 +94,9 @@ Below is all nesscesary packages that need to be installed.
    python PreData.py
    ```
    This code will call `PreImage.py` (Pre_Image return the landmarks from an image). `PreData.py` will take all images from `SplitData/train` folder and get landmarks from all images, and save them to `PreparedData_train.csv` files. 
-   Then, this files will have 638 rows represent for 638 images in train set. Similarly, `PreparedData_test.csv` will contain 162 rows for 162 images in test set.
+   Then, this files will have 638 rows represent for 638 images in train set. Similarly, `PreparedData_test.csv` will contain 162 rows for 162 images in test set. The two `.csv` files are used to visualize, `PreData.py` also return the numpy array data for tranning. 
 
-3. Run `AnalyzeData.ipynb`, return the numpy array data for tranning. 
+3. Run `AnalyzeData.ipynb` to analyze the data.  
 
 
 <!-- CONTRIBUTING -->
@@ -156,7 +156,7 @@ Firstly, Mediapipe API return 468 landmark points on human face (more 10 points 
 ### 5.4 PCA.
 <a id="pca"></a>
 
-+ Dataframe before PCA.
++ Origin data.
 
 ![image](https://github.com/DangLeChi/ChiTest/assets/122540817/44024f0f-2a57-4b78-81b6-20f965e1b7f5)
 
@@ -164,7 +164,7 @@ Firstly, Mediapipe API return 468 landmark points on human face (more 10 points 
 
 <img src="https://github.com/DangLeChi/ChiTest/assets/122540817/931668e4-f916-4ab4-ba0d-6ea30cb4689e" width="240" height="360">
 
-+ Histogram for Label in pca_dataframe.
++ Histogram for label in pca_dataframe.
 
 <img src="https://github.com/DangLeChi/ChiTest/assets/122540817/9e86edf7-5dd3-4098-b14b-92589d06c7eb" width="610" height="270">
 
