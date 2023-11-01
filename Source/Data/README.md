@@ -81,7 +81,7 @@ Below is all nesscesary packages that need to be installed.
 
 1. As above pipeline charts, you need to collect data first. Open folder `DataSets`, run `CollectData2.py`
    ```python
-   python CollectData2.py
+   python CollectData.py
    ```
    After run that file, we will have images that will be data in `Origin` folder (we have already collected 800 images, namely 400/class). Then, run `SplitData.py`
    ```
