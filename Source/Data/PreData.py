@@ -48,9 +48,9 @@ def PreData(p):# Define the path to your dataset folder
     csv_filename = "PreparedData_" + p + ".csv"
     df.to_csv(csv_filename, index=False)
 
-# PreData("train")
-# PreData("test")
-# print("Preprocess all data done")
+PreData("train")
+PreData("test")
+print("Prepare all data to csv done")
 
 def PreprocessData(save_directory, train_data, test_data, train_file_name='PreprocessedData_train.npz', test_file_name='PreprocessedData_test.npz'):
     """

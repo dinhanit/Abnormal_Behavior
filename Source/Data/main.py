@@ -1,7 +1,7 @@
 import numpy as np
 
 # Load the data from the .npz file
-data = np.load('landmarks_and_labels.npz', allow_pickle=True)
+data = np.load('PreprocessedData_test.npz', allow_pickle=True)
 print(data)
 
 # Get the names of all the arrays in the .npz file
