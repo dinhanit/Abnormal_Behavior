@@ -1,0 +1,7 @@
+numpy
+fastapi
+opencv-python
+python-multipart
+uvicorn
+mediapipe
+onnxruntime
