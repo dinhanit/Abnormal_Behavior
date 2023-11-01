@@ -1,4 +1,4 @@
-# Exam Abnormal Behavior Recognition (Data Branch).
+# Exam Abnormal Behavior Recognition
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -79,9 +79,9 @@ Below is all nesscesary packages that need to be installed.
 ### 2.3 Instructions Manual.
 <a id="instructions_manual"></a>
 
-1. As above pipeline charts, you need to collect data first. Open folder `DataSets`, run `CollectData2.py`
+1. As above pipeline charts, you need to collect data first. Open folder `DataSets`, run `CollectData.py`
    ```python
-   python CollectData2.py
+   python CollectData.py
    ```
    After run that file, we will have images that will be data in `Origin` folder (we have already collected 800 images, namely 400/class). Then, run `SplitData.py`
    ```
@@ -173,8 +173,8 @@ Firstly, Mediapipe API return 468 landmark points on human face (more 10 points 
 
 + Visualize PCA.
 
-![gif_train](SampleImage\visual_pca_train.gif)
-![gif_test](SampleImage\visual_pca_test.gif)
+![gif_train](SampleImage/visual_pca_train.gif)
+![gif_test](SampleImage/visual_pca_test.gif)
 
 ### 5.5 Visualize on Image.
 <a id="visual_image"></a>

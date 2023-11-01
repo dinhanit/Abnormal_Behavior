@@ -1,12 +1,11 @@
-Normal: 
-Ngồi thằng, nhìn trong khoảng màn hình (20 ảnh)
-Ngồi thoải mái, nhìn trong màn hình (20)
-Xoay trái, phải, trên, dưới nhẹ (40, 10 mỗi loại)
-Ngồi chống cằm, nghiêng trái phải (20)
+Normal:
+Sit straight, gaze at the screen (20 images)
+Sit comfortably, gaze at the screen (20)
+Slightly tilt left, right, up, and down (40, 10 of each type)
+Rest your chin on your hand, tilt left and right (20)
 
 Abnormal:
-Cúi xuống nhìn đt (20)
-Ngồi thẳng, xoay trái, phải nhiều (20)
-Ngồi thoải mái, xoay trái, phải nhiều 2 (20)
-Nghiêng, nhón người nhìn màn hình phía trên (40)
-
+Bend down to look at the phone (20)
+Sit upright, frequently turn left and right (20)
+Sit comfortably, frequently turn left and right 2 (20)
+Lean forward, arch your back to look at others screen (40)
