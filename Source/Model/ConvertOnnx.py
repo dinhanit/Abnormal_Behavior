@@ -1,5 +1,5 @@
 import torch
-from param import *
+from Param import *
 
 # Load the model
 model = torch.load("model/Weight")

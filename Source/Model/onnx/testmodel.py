@@ -1,8 +1,9 @@
 import numpy as np
-from utils import *
+from Utils import *
 from MediapipeFaceMesh import get_landmark_from_image
 import cv2
 import numpy as np
+
 session = load_session("model.onnx")
 
 def softmax(x):
@@ -25,7 +26,7 @@ font_scale = 1
 font_thickness = 2
 
 # Use cv2.putText to add the text to the image
-cap = cv2.VideoCapture("head1.mp4") 
+cap = cv2.VideoCapture("video_test2.mp4") 
 label =["Abnormal","Normal"]
 color =[(0,0,255),(0,255,0)]
 while True:

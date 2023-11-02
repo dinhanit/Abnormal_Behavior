@@ -1,7 +1,7 @@
 import numpy as np
 from fastapi import FastAPI, UploadFile
 import cv2
-from utils import *
+from Utils import *
 from MediapipeFaceMesh import get_landmark_from_image
 import numpy as np
 app = FastAPI()
@@ -40,3 +40,4 @@ async def upload_frame(file: UploadFile):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8501)
+
