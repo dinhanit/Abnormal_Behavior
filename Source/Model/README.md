@@ -18,7 +18,7 @@
 
   - ### Gradient Over Epochs ###
   
-![img_gradient](ReadmeImage/GradientNorm.png)
+![img_gradient](ReadMeImage/GradientNorm.png)
 
 <!-- GETTING STARTED -->
 # Instructions. #
@@ -34,8 +34,7 @@ This is a guide for testing models and testing model performance in practice
   ***First:***
   
   ```bash
-  cd Source
-  cd model
+  cd Source/model
   ```
 
   - Test with video
@@ -52,8 +51,6 @@ This is a guide for testing models and testing model performance in practice
 
   - Test with webcam on desktop
     ```sh
-    cd Source
-    cd model
     python test.py --source 0
     ```
 2.2 Actual performance testing:
@@ -66,14 +63,13 @@ This is a guide for testing models and testing model performance in practice
     ```
   - Examples of results you can see:
   
-    ![Alt text](ReadMeImage/ResultPerformance.png)
+    ![Alt text](ReadMeImage/ResultRealPerf.png)
 
 
 
 ## 2.3 Use FastApi for testing:
 
   ```sh
-  cd onnx
   python FApi.py
   ```
 

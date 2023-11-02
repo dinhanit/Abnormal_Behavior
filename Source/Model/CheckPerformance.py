@@ -6,16 +6,13 @@ from Inference import Inference
 
 model = torch.load("model/Weight").to(DEVICE)
 
-
-font_color = {"Normal": (0, 255, 0),
-              "Abnormal": (0, 0, 255)}
+font_color = {"Normal": (0, 255, 0), "Abnormal": (0, 0, 255)}
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 org = (50, 50)
 font_scale = 1
 thickness = 2
 
-# Change the 'video_file' variable to the path of your video file
 video_file = 'video_test2.mp4'
 cap = cv2.VideoCapture(video_file)
 
@@ -24,36 +21,47 @@ if not cap.isOpened():
     exit()
 
 true_predicted = 0
-frame_count = 0  # Initialize frame count
-
+true_normal = 0
+predicted_normal = 0
+frame_count = 0
+false_positives = 0
+false_negatives = 0
 
 while True:
     ret, frame = cap.read()
     if not ret:
         break
-    frame_count += 1  # Increment the frame count
-    label = Inference(model,frame)
+    frame_count += 1
+    label = Inference(model, frame)
     frame = cv2.putText(frame, label, org, font, font_scale, font_color[label], thickness, cv2.LINE_AA)
     cv2.imshow('Video Stream', frame)
     key = cv2.waitKey(0)
 
-    # If true frame is Abnormal then press "1"
     if key == ord('1') and label == "Abnormal":
         true_predicted += 1
-    # If true frame is Normal then press "0"
     elif key == ord('0') and label == "Normal":
         true_predicted += 1
-    #press "q" to exit
-    elif key & 0xFF == ord('q'):
+        true_normal += 1
+    elif label == "Abnormal":
+        false_negatives += 1
+    elif label == "Normal":
+        false_positives += 1
+
+    if key & 0xFF == ord('q'):
         break
     else:
         pass
+
 cap.release()
 cv2.destroyAllWindows()
 
-print("Total Frames Processed:", frame_count)  # Print the total frame count
+print("Total Frames Processed:", frame_count)
 print("True Predictions:", true_predicted)
 
-performance = true_predicted / frame_count
-print("Performance (Accuracy): {:.2f}%".format(performance * 100))
+precision = true_predicted / (true_predicted + false_positives)
+recall = true_predicted / (true_predicted + false_negatives)
+f1_score = 2 * (precision * recall) / (precision + recall)
 
+print("Precision: {:.0%}".format(precision))
+print("Recall: {:.0%}".format(recall))
+print("F1 Score: {:.0%}".format(f1_score))
