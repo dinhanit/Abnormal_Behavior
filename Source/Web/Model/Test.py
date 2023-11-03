@@ -4,10 +4,10 @@ import torch
 from param import DEVICE
 import argparse
 parser = argparse.ArgumentParser(description='Your script description')
-parser.add_argument('--source', type=str, default='', help='Path to save the trained model')
+parser.add_argument('--source', type=str, default='head1.mp4', help='Path to save the trained model')
 args = parser.parse_args()
 
-model = torch.load(".model/Weight").to(DEVICE)
+model = torch.load("abmodel/Weight").to(DEVICE)
 
 font_color = {"Normal" : (0, 255, 0),
               "Abnormal": (0,0,255)}
@@ -18,7 +18,7 @@ font_scale = 1
 thickness = 2
 
 op = args.source
-cap = cv2.VideoCapture(op)
+cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
     print("Error: Could not open the camera.")

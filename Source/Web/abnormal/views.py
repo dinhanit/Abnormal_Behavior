@@ -1,33 +1,34 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.shortcuts import render
-from django.http import JsonResponse,HttpResponse, StreamingHttpResponse
-from .model_utils import model, tokenizer, model1, A
-import torch
-# from .SetModel import Model
-# from .VniAcronym import Acronym
-import pandas as pd
-import matplotlib.pyplot as plt
-import base64
-from io import BytesIO
-import json
-from .Pho_Chat import Chat
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse,HttpResponse, StreamingHttpResponse
 
 
 import torch
 import torch.nn.functional as F
 import cv2
+import requests
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import base64
+from io import BytesIO
+import json
+
+
+from .model_utils import sentiment_model, abnormal_model, A
+from .Pho_Chat import Chat
 from .Inference import Inference
 from .param import DEVICE
 
 
-#python manage.py runsslserver --cert abnormal_certificate.crt --key abnormal.key 0.0.0.0:8000
+#python manage.py runsslserver --cert abnormal_certificate.crt --key abnormal.key 0.0.0.0:443
 #python manage.py runsslserver --cert abnormal_certificate.crt --key abnormal.key 192.168.1.8:8000
 def analyze_sentiment1(request):
-    global model1, A
-    M = model1
+    global sentiment_model, A
+    M = sentiment_model
     A = A
     if request.method == 'POST':
         input_text = request.POST['text']
@@ -138,21 +139,52 @@ def hischatbot(request):
         return JsonResponse(response_data)
 
 def exam(request):
-    return render(request, 'abnormal/exam.html')
+    context = {
+        'abnormal_url': reverse('abnormal')  # Use the reverse function to get the URL
+    }
+    return render(request, 'abnormal/exam.html', context)
 
-@csrf_exempt
+abnormal_count = 0
 def abnormal(request):
-    global model1
+    global abnormal_model, abnormal_count
     if request.method == 'POST':
-        frame_data = request.POST.get('frame_data')  # Get the captured frame data
-        # Perform your model prediction or processing on the frame_data here
-        # ...
-        label = Inference(frame_data)
-        print(label)
+        frame_data = request.FILES.get('frame_data')  # Get the uploaded file
+        if frame_data:
+            # Read the image from the uploaded file
+            frame = cv2.imdecode(np.frombuffer(frame_data.read(), np.uint8), cv2.IMREAD_COLOR)
 
-        response_data = {'label': label}  # Replace with your actual response data
-        return JsonResponse(response_data)
-    else:
-        return JsonResponse({'message': 'Invalid request method'})
+            # # Perform your model prediction or processing on the frame here
+            # label = Inference(abnormal_model, frame)
+            # print(label)
+            # if label == "Abnormal":
+            #     abnormal_count += 1
+            #     print(abnormal_count)
+                
+            # elif label == "Normal":
+            #     abnormal_count = 0
+            
+            _, image = cv2.imencode(".jpg", frame)
+            url = "http://192.168.1.3:8501/process_frame/" 
+            files = {'file': ('image.jpg', image)}
+            response = requests.post(url, files=files)
+            label = response.text
+            print(label)
+            if label == '"Abnormal"':
+                abnormal_count += 1
+                print(abnormal_count)
+                
+            elif label == '"Normal"':
+                abnormal_count = 0
+            
+            
+
+            # You can also convert the processed frame back to a response
+            # _, buffer = cv2.imencode(".jpg", frame)
+            # frame_data = base64.b64encode(buffer).decode('utf-8')
+
+        #     response_data = {'label': label, 'processed_frame_data': frame_data}
+        # else:
+        #     response_data = {'label': 0}
+    return JsonResponse({'abnormal_count': abnormal_count})
     
     

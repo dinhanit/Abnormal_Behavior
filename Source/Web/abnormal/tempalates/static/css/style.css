@@ -398,8 +398,10 @@ ol {
 
 .header__nav__social {
   display: inline-block;
-  position: relative;
-  padding-left: 50px;
+  position: fixed;
+  bottom: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  z-index: 1000; /* To ensure they are above other elements */
 }
 .header__nav__social:before {
   position: absolute;

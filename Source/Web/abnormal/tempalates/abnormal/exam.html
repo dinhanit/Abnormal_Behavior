@@ -5,12 +5,58 @@
     <title>Live Webcam Feed</title>
 </head>
 <body>
-    <h1>Live Webcam Feed</h1>
-    <video id="webcam-stream" autoplay></video>
+    <div class="container">
+        <div class="webcam">
+            <h1>Student Webcam</h1>
+            <video id="webcam-stream" autoplay></video>
+        </div>
+        <div class="exam">
+            <label for="gender">Gender:</label><br>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br>
 
+            <label for="campus">Campus:</label><br>
+            <input type="radio" id="HCM" name="campus" value="HCM">
+            <label for="HCM">Ho Chi Minh</label><br>
+            <input type="radio" id="QN" name="campus" value="QN">
+            <label for="female">Quy Nhon</label><br>
+
+            <label for="accommodation">Accommodation:</label><br>
+            <input type="radio" id="dormitory" name="accommodation" value="dormitory">
+            <label for="male">Dormitory</label><br>
+            <input type="radio" id="other" name="accommodation" value="other">
+            <label for="female">Other</label><br>
+        </div>
+    </div>
+    <div id="warning-message" style="display: none;">
+        Abnormal behavior detected. Interaction disabled.
+    </div>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .webcam {
+            flex: 1;
+            border: 2px solid #000; /* Add a 2px black border around the webcam stream */
+            padding: 0; /* Add some padding inside the border */
+        }
+
+        .exam {
+            flex: 1; /* Take up half of the container's width */
+            border: 2px solid #000; /* Add a 2px black border around the webcam stream */
+            padding: 0; /* Add some padding inside the border */
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const videoElement = document.getElementById('webcam-stream');
         const csrfToken = '{{ csrf_token }}';
+        const abnormalUrl = "{{ abnormal_url }}";  // Use the URL from the context
+        let frameCount = 0;
 
         // Function to capture and send frames to Django server
         const captureAndSendFrame = () => {
@@ -20,28 +66,41 @@
             // Capture a frame from the webcam
             context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
             
-            // Convert the captured frame to a data URL (base64 encoded image)
-            const imageData = canvasElement.toDataURL('image/jpeg');
+            // Convert the captured frame to a binary blob (image/jpeg)
+            canvasElement.toBlob(function(blob) {
+                // Create a FormData object to send the binary blob
+                const formData = new FormData();
+                formData.append('frame_data', blob, 'frame.jpg');
+                
+                // Increment frame count
+                frameCount++;
 
-            // Send the captured frame to the Django server
-            fetch("{% url 'abnormal' %}", {
-                method: 'POST',
-                body: JSON.stringify({ frame_data: imageData, csrfmiddlewaretoken: '{{ csrf_token }}' }),
-                headers: {
-                    'Content-Type': 'application/json',
+                if (frameCount >= 1) {
+                    // Send the captured frames as a binary file
+                    fetch(abnormalUrl, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRFToken': csrfToken
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.message);
+                    })
+                    .catch(error => {
+                        console.error('Error sending frames:', error);
+                    });
+
+                    // Reset frame count
+                    frameCount = 0;
                 }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.message); // Log the response from the server
-            })
-            .catch(error => {
-                console.error('Error sending frame:', error);
-            });
-
+            }, 'image/jpeg');
+            
             // Repeat the process to capture and send frames
             requestAnimationFrame(captureAndSendFrame);
         };
+        
 
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(function (stream) {
@@ -51,6 +110,51 @@
             .catch(function (error) {
                 console.error('Error accessing camera:', error);
             });
+            var abnormalCount = 0;
+            var webcamStream = null;
+        
+            // Function to periodically update the abnormal count
+            function updateAbnormalCount() {
+                $.ajax({
+                    url: '{% url "abnormal" %}',  // Use the URL pattern name for the "abnormal" view
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.abnormal_count !== undefined) {
+                            abnormalCount = data.abnormal_count;
+        
+                            // Check and take action based on abnormalCount
+                            if (abnormalCount >= 800) {
+                                disableInteraction();
+                            }
+                        }
+                    },
+                    error: function () {
+                        // Handle any errors if the AJAX request fails
+                    }
+                });
+            }
+        
+            // Function to disable user interaction and stop webcam stream
+            function disableInteraction() {
+                var radioButtons = document.querySelectorAll('input[type="radio"]');
+                for (var i = 0; i < radioButtons.length; i++) {
+                    radioButtons[i].disabled = true;
+                }
+        
+                // Stop the webcam stream (assuming the webcamStream is correctly defined elsewhere)
+                if (webcamStream) {
+                    var videoElement = document.getElementById('webcam-stream');
+                    videoElement.pause();
+                    videoElement.srcObject.getTracks().forEach(function (track) {
+                        track.stop();
+                    });
+                    webcamStream = null;
+                }
+            }
+        
+            // Periodically update the abnormalCount
+            setInterval(updateAbnormalCount, 1000);  // Adjust the interval as needed
     </script>
 </body>
 </html>
