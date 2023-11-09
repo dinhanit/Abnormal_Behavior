@@ -12,4 +12,5 @@ urlpatterns = [
     path('hischatbot/', views.hischatbot, name='hischatbot'),
     path('exam/', views.exam, name='exam'),
     path('abnormal/', views.abnormal, name='abnormal'),
+    path('verify_code/', views.verify_code, name='verify_code'),
 ]

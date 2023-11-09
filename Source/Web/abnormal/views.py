@@ -16,12 +16,13 @@ import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
 import json
+import random
+import string
 
 
-from .model_utils import sentiment_model, abnormal_model, A
+from .model_utils import sentiment_model, A
 from .Pho_Chat import Chat
-from .Inference import Inference
-from .param import DEVICE
+
 
 
 #python manage.py runsslserver --cert abnormal_certificate.crt --key abnormal.key 0.0.0.0:443
@@ -138,53 +139,51 @@ def hischatbot(request):
         response_data = {'data': json_data}  # You can add more keys to the dictionary if needed
         return JsonResponse(response_data)
 
+abnormal_count = 0
 def exam(request):
     context = {
         'abnormal_url': reverse('abnormal')  # Use the reverse function to get the URL
     }
+            
     return render(request, 'abnormal/exam.html', context)
 
-abnormal_count = 0
 def abnormal(request):
-    global abnormal_model, abnormal_count
+    global abnormal_count, random_code
     if request.method == 'POST':
         frame_data = request.FILES.get('frame_data')  # Get the uploaded file
         if frame_data:
             # Read the image from the uploaded file
             frame = cv2.imdecode(np.frombuffer(frame_data.read(), np.uint8), cv2.IMREAD_COLOR)
-
-            # # Perform your model prediction or processing on the frame here
-            # label = Inference(abnormal_model, frame)
-            # print(label)
-            # if label == "Abnormal":
-            #     abnormal_count += 1
-            #     print(abnormal_count)
-                
-            # elif label == "Normal":
-            #     abnormal_count = 0
-            
             _, image = cv2.imencode(".jpg", frame)
-            url = "http://192.168.1.3:8501/process_frame/" 
+            url = "http://192.168.0.199:8501/process_frame/" 
             files = {'file': ('image.jpg', image)}
             response = requests.post(url, files=files)
             label = response.text
             print(label)
+            if 800 == abnormal_count:
+                # Generate a random code with 5 characters
+                random_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+                with open("exam_code.txt", "w+") as f:
+                    f.write(random_code)
             if label == '"Abnormal"':
                 abnormal_count += 1
                 print(abnormal_count)
-                
             elif label == '"Normal"':
                 abnormal_count = 0
-            
-            
-
-            # You can also convert the processed frame back to a response
-            # _, buffer = cv2.imencode(".jpg", frame)
-            # frame_data = base64.b64encode(buffer).decode('utf-8')
-
-        #     response_data = {'label': label, 'processed_frame_data': frame_data}
-        # else:
-        #     response_data = {'label': 0}
     return JsonResponse({'abnormal_count': abnormal_count})
     
-    
+@csrf_exempt
+def verify_code(request):
+    global random_code, abnormal_count
+    print(random_code)
+    if request.method == 'POST':
+        entered_code = request.POST.get('entered_code')
+        print(entered_code)
+        if entered_code == random_code:
+            abnormal_count = 0
+            # Code is correct, implement your logic to restart camera and exam
+            return JsonResponse({'code_verified': True})
+        else:
+            return JsonResponse({'code_verified': False})
+    else:
+        return JsonResponse({'code_verified': False})

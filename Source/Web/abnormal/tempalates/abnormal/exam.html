@@ -30,8 +30,13 @@
             <label for="female">Other</label><br>
         </div>
     </div>
-    <div id="warning-message" style="display: none;">
-        Abnormal behavior detected. Interaction disabled.
+    <div id="code-form-container" style="display: none;">
+        <form id="code-form">
+            Abnormal behavior detected. Interaction disabled.
+            <label for="code">Enter Code:</label>
+            <input type="text" id="code" name="code" required>
+            <button type="submit" >Submit</button>
+        </form>
     </div>
     <style>
         .container {
@@ -57,9 +62,13 @@
         const csrfToken = '{{ csrf_token }}';
         const abnormalUrl = "{{ abnormal_url }}";  // Use the URL from the context
         let frameCount = 0;
+        let captureFrames = true;  // Flag to control whether frames should be captured
 
         // Function to capture and send frames to Django server
         const captureAndSendFrame = () => {
+            if (!captureFrames) {
+                return;  // Skip capturing frames if the flag is false
+            }
             const canvasElement = document.createElement('canvas');
             const context = canvasElement.getContext('2d');
             
@@ -105,7 +114,7 @@
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(function (stream) {
                 videoElement.srcObject = stream;
-                captureAndSendFrame(); // Start capturing and sending frames
+                captureAndSendFrame(); // Start capturing and sending framesa
             })
             .catch(function (error) {
                 console.error('Error accessing camera:', error);
@@ -125,7 +134,9 @@
         
                             // Check and take action based on abnormalCount
                             if (abnormalCount >= 800) {
+                                captureFrames = false;
                                 disableInteraction();
+                                checkexamcode()
                             }
                         }
                     },
@@ -145,16 +156,83 @@
                 // Stop the webcam stream (assuming the webcamStream is correctly defined elsewhere)
                 if (webcamStream) {
                     var videoElement = document.getElementById('webcam-stream');
-                    videoElement.pause();
-                    videoElement.srcObject.getTracks().forEach(function (track) {
+                    var tracks = videoElement.srcObject.getTracks();
+                    
+                    tracks.forEach(function (track) {
                         track.stop();
                     });
+            
+                    videoElement.srcObject = null;
                     webcamStream = null;
                 }
+                // Update the flag to stop capturing frames
+                captureFrames = false;
+                // Show the code form container
+                document.getElementById('code-form-container').style.display = 'block';
+
+                // Prevent the form from submitting
+                return false;
             }
         
             // Periodically update the abnormalCount
             setInterval(updateAbnormalCount, 1000);  // Adjust the interval as needed
+            
+
+            //Function to creat random exam code
+            function checkexamcode() {
+                document.getElementById('code-form').addEventListener('submit', function (event) {
+                    event.preventDefault();
+            
+                    const enteredCode = document.getElementById('code').value;
+            
+                    // Send the entered code to the server for verification
+                    const formData = new FormData();
+                    formData.append('entered_code', enteredCode);
+                    formData.append('csrfmiddlewaretoken', csrfToken);
+            
+                    fetch('{% url "verify_code" %}', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.code_verified) {
+                            // Re-enable the camera and exam
+                            enableInteraction();
+                        } else {
+                            alert('Incorrect code. Please try again.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error verifying code:', error);
+                    });
+                });
+            }
+            
+            // Function to re-enable user interaction and start webcam stream
+            function enableInteraction() {
+                var radioButtons = document.querySelectorAll('input[type="radio"]');
+                for (var i = 0; i < radioButtons.length; i++) {
+                    radioButtons[i].disabled = false;
+                }
+            
+                // Restart the webcam stream (assuming the webcamStream is correctly defined elsewhere)
+                if (webcamStream) {
+                    var videoElement = document.getElementById('webcam-stream');
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                        .then(function (stream) {
+                            videoElement.srcObject = stream;
+                            captureAndSendFrame(); // Start capturing and sending frames
+                        })
+                        .catch(function (error) {
+                            console.error('Error accessing camera:', error);
+                        });
+                }
+                captureFrames = true
+                document.getElementById('code-form-container').style.display = 'none';
+                captureAndSendFrame();
+            }
+            
     </script>
 </body>
 </html>

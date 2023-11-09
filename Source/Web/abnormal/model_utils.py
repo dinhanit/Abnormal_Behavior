@@ -10,5 +10,3 @@ sentiment_model = Model('fine_tuned_model_best')
 A = Acronym()
 
 
-from .param import DEVICE
-abnormal_model = torch.load("./abmodel/weight").to(DEVICE)

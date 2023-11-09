@@ -2,3 +2,7 @@ fine_tuned_model_best
 saved_weights.pth
 abnormal_certificate.crt
 abnormal.key
+main.py
+test.png
+Dat.jpg
+test.ipynb
