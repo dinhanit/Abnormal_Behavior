@@ -61,7 +61,10 @@ print("True Predictions:", true_predicted)
 precision = true_predicted / (true_predicted + false_positives)
 recall = true_predicted / (true_predicted + false_negatives)
 f1_score = 2 * (precision * recall) / (precision + recall)
+true_negatives = frame_count - true_predicted - false_positives - false_negatives
+accuracy = (true_predicted + true_negatives) / frame_count
 
-print("Precision: {:.0%}".format(precision))
-print("Recall: {:.0%}".format(recall))
-print("F1 Score: {:.0%}".format(f1_score))
+print("Precision: {:.2%}".format(precision))
+print("Recall: {:.2%}".format(recall))
+print("F1 Score: {:.2%}".format(f1_score))
+print("Accuracy: {:.2%}".format(accuracy))
