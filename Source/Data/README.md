@@ -44,9 +44,13 @@
 ### Abnormal Criteria:
 - As above, cover the camera
 - Look outside (up/down/left/right) too long (over 5s)
-- Wear face mask or sun glasses.
+- Cover part of your face/wear face mask or sun glasses.
 
-This is an overview of the branch directory.
+#### This is some example of the Normal/Abnormal criteria
+
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/5cca2bd6-6d4e-4480-81f5-c9020bbadcc7" height="350">
+
+### Below is an overview of the branch directory:
 
 <img src="https://github.com/DangLeChi/ChiTest/assets/122540817/eb0aa49c-f755-44da-b07b-4be5b9c72331" width="440" height="350">
 
