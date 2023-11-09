@@ -37,13 +37,14 @@
 <a id="about-the-branch"></a>
 
 ### Examination regulations:
-
 - Student's laptop mush have camera, and it can work
 - While taking exam, don't cover the camera. If you cover, it means you're cheating 
+- Classroom conditions: good light conditions (lights on). 
 
 ### Abnormal Criteria:
 - As above, cover the camera
-- Look outside (up/down/left/right) too long (over 10s)
+- Look outside (up/down/left/right) too long (over 5s)
+- Wear face mask or sun glasses.
 
 This is an overview of the branch directory.
 
