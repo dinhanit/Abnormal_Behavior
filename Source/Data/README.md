@@ -143,7 +143,7 @@ Firstly, Mediapipe API return 468 landmark points on human face (more 10 points 
 <a id="check_imbalanced"></a>
 
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/63439c89-8425-41ae-8d54-092b84d857bd" width="630" height="300">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/8de300b1-6c34-4791-b2eb-3c150117b899" width="700" height="270">
 
 
 ### 5.3 Kernel Density Plots to visualize values in data.
