@@ -1,3 +1,4 @@
+
 import torch
 import torch.nn.functional as F
 from Param import DEVICE
@@ -49,3 +50,4 @@ def Inference(model,img,threshold=0.5):
         return label[predicted_class]
     except:
         return label[0]
+    

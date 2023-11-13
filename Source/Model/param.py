@@ -1,4 +1,6 @@
-
+"""
+Contain parameters to easily tuning
+"""
 import torch
 PATH_TRAIN = "../Data/train.npz"
 PATH_TEST = "../Data/test.npz"

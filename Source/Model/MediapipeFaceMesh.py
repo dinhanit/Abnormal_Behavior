@@ -3,14 +3,13 @@ import mediapipe as mp
 import numpy as np
 import math
 '''
-TEST NEW METHOD WITH DISTANCE (ADD IRIS)
+Facemesh use to extract features from face
 '''
 # Initialize MediaPipe Face Detection and Facial Landmarks models
 mp_face_mesh = mp.solutions.face_mesh
 face_mesh = mp_face_mesh.FaceMesh(refine_landmarks=True)
 
 # Define the indices of the desired keypoints (0 to 467)
-#cheeks = [454, 234, 151, 152, 10, 376, 352, 433, 123, 147, 213, 58, 132, 288, 361]#
 right_iris = [469, 470, 471, 472]
 left_iris = [474, 475, 476, 477]
 ##new points
@@ -70,7 +69,6 @@ def get_landmark_from_image(image):
     landmarks = face_mesh.process(rgb_image)
 
     if landmarks.multi_face_landmarks:
-        #frame_data = []
         ih, iw, _ = image.shape 
         for face_landmarks in landmarks.multi_face_landmarks:
             cheek_points = [(face_landmarks.landmark[i].x *iw,
@@ -88,13 +86,7 @@ def get_landmark_from_image(image):
                 np.mean([landmark.y *ih for landmark in right_iris_landmarks]),
             )
 
-            iris_center = (
-                (left_iris_center[0] + right_iris_center[0]) / 2,
-                (left_iris_center[1] + right_iris_center[1]) / 2
-            )
-
             points = cheek_points + [left_iris_center, right_iris_center]
-            #print(points)
             distances = calculate_distances(points)
 
         return np.array(distances, dtype=np.float32) 

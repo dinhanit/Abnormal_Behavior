@@ -1,5 +1,8 @@
+"""
+Convert model to onnx for faster inference
+"""
 import torch
-from Param import *
+from Param import DEVICE
 
 # Load the model
 model = torch.load("model/Weight")

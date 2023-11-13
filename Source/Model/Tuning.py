@@ -1,8 +1,11 @@
+"""
+Module for tuning learning rate, optimizer type
+"""
+
 import optuna
 from sklearn.metrics import f1_score
 import numpy as np
 from lion_pytorch import Lion
-import numpy as np
 from ConfigModel import *
 
 

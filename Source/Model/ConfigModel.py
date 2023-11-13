@@ -1,12 +1,16 @@
-from BaseModel import *
-import torch.nn as nn
+"""
+Module: config_model.py
+Description: This module contains the configuration for the model.
+"""
+
+from torch import nn
 import torch
-import torch.optim as optim
+from torch import optim
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
-from Param import *
 from torchsummary import summary
-    
+from BaseModel import BinaryClassifier 
+from Param import LEARNING_RATE, BATCH_SIZE, PATH_TRAIN, PATH_TEST, DEVICE, EPOCHS 
 #Load DataSet
 class CustomDataset(Dataset):
     def __init__(self, features, labels):

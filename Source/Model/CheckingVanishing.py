@@ -1,8 +1,11 @@
+"""
+Module: checking_vanishing.py
+Description: This module checks for vanishing gradients during training.
+"""
 from ConfigModel import *
 from sklearn.metrics import f1_score
 import pandas as pd
 import argparse
-import matplotlib.pyplot as plt
 
 
 

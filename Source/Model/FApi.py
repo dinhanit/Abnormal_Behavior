@@ -1,9 +1,13 @@
+"""
+Create API
+"""
+
 import numpy as np
-from Inference import Inference
-import torch
-from Param import *
-from fastapi import FastAPI, UploadFile
 import cv2
+from fastapi import FastAPI, UploadFile
+import torch
+from Inference import Inference
+from Param import DEVICE
 
 
 app = FastAPI()
@@ -44,7 +48,7 @@ def process_frame(frame_data):
 
 @app.post("/process_frame/")
 async def upload_frame(file: UploadFile):
-        """
+    """
     Endpoint for uploading and processing image frames.
 
     Args:
@@ -59,13 +63,9 @@ async def upload_frame(file: UploadFile):
     Example:
     Use a tool like cURL or a web application to send a POST request with an image file
     to this endpoint for processing.
-
     """
-        frame_data = await file.read()
-        return process_frame(frame_data)
-
-    
-# app.mount("/", StaticFiles(directory="ui", html=True), name="ui")
+    frame_data = await file.read()
+    return process_frame(frame_data)
 
 if __name__ == "__main__":
     import uvicorn
