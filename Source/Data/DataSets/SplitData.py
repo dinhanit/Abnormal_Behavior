@@ -1,7 +1,7 @@
 import os
 import random
 import shutil
-
+#print(os.getcwd())
 origin_dir = "Origin" 
 split_data_dir ="SplitData"
 train_dir = os.path.join(split_data_dir, "train")
@@ -24,6 +24,7 @@ normal_dir = os.path.join(origin_dir, "Normal")
 abnormal_images = os.listdir(abnormal_dir)
 normal_images = os.listdir(normal_dir)
 
+random.seed(42)
 random.shuffle(abnormal_images)
 random.shuffle(normal_images)
 
