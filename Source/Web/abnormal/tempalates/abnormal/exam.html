@@ -2,12 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Live Webcam Feed</title>
+    <title>Exam Online</title>
 </head>
 <body>
+    <h1 class="exam-title">EXAM ONLINE</h1>
     <div class="container">
         <div class="webcam">
-            <h1>Student Webcam</h1>
+            <h2 class="camera-name">Student Webcam</h2>
             <video id="webcam-stream" autoplay></video>
         </div>
         <div class="exam">
@@ -21,39 +22,173 @@
             <input type="radio" id="HCM" name="campus" value="HCM">
             <label for="HCM">Ho Chi Minh</label><br>
             <input type="radio" id="QN" name="campus" value="QN">
-            <label for="female">Quy Nhon</label><br>
+            <label for="QN">Quy Nhon</label><br>
 
             <label for="accommodation">Accommodation:</label><br>
             <input type="radio" id="dormitory" name="accommodation" value="dormitory">
-            <label for="male">Dormitory</label><br>
+            <label for="dormitory">Dormitory</label><br>
             <input type="radio" id="other" name="accommodation" value="other">
-            <label for="female">Other</label><br>
+            <label for="other">Other</label><br>
         </div>
     </div>
     <div id="code-form-container" style="display: none;">
         <form id="code-form">
-            Abnormal behavior detected. Interaction disabled.
+            <h3 style="color: red;">Abnormal behavior detected. Interaction disabled.</h3>
             <label for="code">Enter Code:</label>
             <input type="text" id="code" name="code" required>
-            <button type="submit" >Submit</button>
+            <button type="submit">Submit</button>
         </form>
     </div>
+    <div class="wrapper">
+        <div class="galaxy">
+            <div class="sun"></div>
+            <div class="orbit earth">
+                <div class="globe earth">
+                    <div class="orbit moon">
+                        <div class="globe moon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clock">
+            <p class="date">2023-11-13 MON</p>
+            <p class="time">14:15:00</p>
+            <p class="text">Good Luck!</p>
+        </div>
+    </div>
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'img/breadcrumb-bg.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+        }
+        .exam-title {
+            text-align: center;
+        }
+        .camera-name{
+            text-align: center;
+        }
         .container {
             display: flex;
             justify-content: space-between;
+            margin-top: 50px;
         }
-
-        .webcam {
-            flex: 1;
-            border: 2px solid #000; /* Add a 2px black border around the webcam stream */
-            padding: 0; /* Add some padding inside the border */
-        }
-
+        
+        .webcam,
         .exam {
-            flex: 1; /* Take up half of the container's width */
-            border: 2px solid #000; /* Add a 2px black border around the webcam stream */
-            padding: 0; /* Add some padding inside the border */
+            flex: 1;
+            border: 2px solid #ffffff;
+            padding: 0;
+        }
+        
+        #code-form-container {
+            text-align: center;
+        }
+        
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .galaxy {
+            height: 400px;
+            width: 400px;
+            position: relative;
+        }
+        
+        .sun {
+            height: 100px;
+            width: 100px;
+            background-color: yellow;
+            border-radius: 50%;
+            box-shadow: 0 0 30px white;
+            position: absolute;
+            top: 150px;
+            left: 150px;
+        }
+        
+        .globe.earth {
+            background: aqua;
+            height: 30px;
+            right: 28px;
+            top: 28px;
+            width: 30px;
+        }
+        
+        .globe.moon {
+            width: 12px;
+            height: 12px;
+            background: #d6d6d6;
+            right: 2px;
+            top: 8px;
+        }
+        
+        .globe {
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .orbit.earth {
+            position: relative;
+            animation: orbit 60s linear infinite;
+            height: 300px;
+            left: 50px;
+            top: 50px;
+            width: 300px;
+        }
+        
+        .orbit.moon {
+            animation: orbit 1s linear infinite;
+            height: 80px;
+            left: -25px;
+            top: -25px;
+            width: 80px;
+        }
+        
+        .orbit {
+            position: relative;
+            border: solid;
+            border-color: white transparent transparent transparent;
+            border-radius: 50%;
+            border-width: 1px 1px 0 0;
+            box-sizing: border-box;
+            transform: rotate(0deg);
+            transform-origin: center;
+        }
+        
+        .clock {
+            font-family: 'Share Tech Mono', monospace;
+            text-align: right;
+            color: #d6f6ff;
+            text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 203, 0);
+            margin-top: 40px;
+            margin-right: 20px;
+        }
+        
+        .date {
+            letter-spacing: 0.1em;
+            font-size: 10px;
+        }
+        
+        .time {
+            letter-spacing: 0.05em;
+            font-size: 15px;
+        }
+        
+        .text {
+            letter-spacing: 0.1em;
+            font-size: 10px;
+        }
+        
+        @keyframes orbit {
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -63,7 +198,7 @@
         const abnormalUrl = "{{ abnormal_url }}";  // Use the URL from the context
         let frameCount = 0;
         let captureFrames = true;  // Flag to control whether frames should be captured
-
+        
         // Function to capture and send frames to Django server
         const captureAndSendFrame = () => {
             if (!captureFrames) {
@@ -83,7 +218,7 @@
                 
                 // Increment frame count
                 frameCount++;
-
+        
                 if (frameCount >= 1) {
                     // Send the captured frames as a binary file
                     fetch(abnormalUrl, {
@@ -100,7 +235,7 @@
                     .catch(error => {
                         console.error('Error sending frames:', error);
                     });
-
+        
                     // Reset frame count
                     frameCount = 0;
                 }
@@ -110,7 +245,7 @@
             requestAnimationFrame(captureAndSendFrame);
         };
         
-
+        
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(function (stream) {
                 videoElement.srcObject = stream;
@@ -169,7 +304,7 @@
                 captureFrames = false;
                 // Show the code form container
                 document.getElementById('code-form-container').style.display = 'block';
-
+        
                 // Prevent the form from submitting
                 return false;
             }
@@ -177,7 +312,7 @@
             // Periodically update the abnormalCount
             setInterval(updateAbnormalCount, 1000);  // Adjust the interval as needed
             
-
+        
             //Function to creat random exam code
             function checkexamcode() {
                 document.getElementById('code-form').addEventListener('submit', function (event) {
@@ -232,7 +367,33 @@
                 document.getElementById('code-form-container').style.display = 'none';
                 captureAndSendFrame();
             }
-            
+        const dayOfWeek = [
+        "SUN", "MON", "TUE",
+        "WED", "THU", "FRI", "SAT"
+        ];
+        const $time = document.querySelector(".time");
+        const $date = document.querySelector(".date");
+        
+        function padStart(value, length) {
+            return String(value).padStart(length, "0");
+        }
+        
+        function update() {
+            const now = new Date();
+            const [
+                hours, minutes, seconds,
+                year, month, date, day,
+            ] = [
+                now.getHours(), now.getMinutes(), now.getSeconds(),
+                now.getFullYear(), now.getMonth(), now.getDate(), now.getDay(),
+            ];
+        
+            $time.innerText = `${padStart(hours, 2)}:${padStart(minutes, 2)}:${padStart(seconds, 2)}`;
+            $date.innerText = `${padStart(year, 4)}-${padStart(month + 1, 2)}-${padStart(date, 2)} ${dayOfWeek[day]}`;
+        }
+        
+        update();
+        setInterval(update, 1000);
     </script>
 </body>
 </html>

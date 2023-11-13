@@ -9,10 +9,11 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(device)
 
 # Load train and validation dataset
-with open('content.json', 'r', encoding="utf-8") as c:
+with open('chatbot/content.json', 'r', encoding="utf-8") as c:
     contents = json.load(c)
-with open('val_content.json', 'r', encoding="utf-8") as v:
+with open('chatbot/val_content.json', 'r', encoding="utf-8") as v:
     val_contents = json.load(v)
+
 # Load model PhoBERT and its tokenizer
 phobert = AutoModel.from_pretrained('vinai/phobert-base')
 tokenizer = AutoTokenizer.from_pretrained('vinai/phobert-base')
@@ -33,7 +34,7 @@ tags_set = sorted(set(tags))
 for tag in tags:
     label = tags_set.index(tag)
     y.append(label)
-token_train = {}
+
 token_train = tokenizer.batch_encode_plus(
     X,
     max_length=13,
@@ -58,7 +59,7 @@ for val_content in val_contents['intents']:
 for tag_val in tags_val:
     label = tags_set.index(tag_val)
     y_val.append(label)
-token_val = {}
+
 token_val = tokenizer.batch_encode_plus(
     X_val,
     max_length=13,
@@ -69,7 +70,7 @@ X_val_mask = torch.tensor(token_val['attention_mask'])
 X_val = torch.tensor(token_val['input_ids'])
 y_val = torch.tensor(y_val)
 
-# Hyperparameter:
+# Hyperparameters:
 batch_size = 8
 hidden_size = 512
 num_class = len(tags_set)
@@ -77,23 +78,26 @@ lr = 7.5e-5
 num_epoch = 500
 
 dataset = TensorDataset(X_train, X_train_mask, y_train)
-train_data = DataLoader(dataset=dataset, batch_size=batch_size,
-                        shuffle=True)
+train_data = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True)
 val_dataset = TensorDataset(X_val, X_val_mask, y_val)
-val_data = DataLoader(dataset=val_dataset, batch_size=batch_size,
-                      shuffle=True)
+val_data = DataLoader(dataset=val_dataset, batch_size=batch_size, shuffle=True)
 
 # Model:
 for param in phobert.parameters():
     param.requires_grad = False
-model = PhoBERT_finetuned(phobert, hidden_size=hidden_size,
-                          num_class=num_class)
+model = PhoBERT_finetuned(phobert, hidden_size=hidden_size, num_class=num_class)
 model = model.to(device)
 optimizer = AdamW(model.parameters(), lr=lr)
 loss_f = nn.NLLLoss()
 
 
 def train():
+    """
+    Performs one epoch of training.
+
+    Returns:
+        float: Average training loss.
+    """
     print("Training...")
     model.train()
     total_loss = 0
@@ -111,11 +115,17 @@ def train():
         # It helps in preventing the exploding gradient problem
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
         optimizer.step()
-    avg_loss = total_loss/len(train_data)
+    avg_loss = total_loss / len(train_data)
     return avg_loss
 
 
 def evaluate():
+    """
+    Evaluates the model on the validation set.
+
+    Returns:
+        float: Average validation loss.
+    """
     print("Evaluating...")
     # deactivate dropout layers
     model.eval()
@@ -139,7 +149,11 @@ def evaluate():
     avg_loss = total_loss / len(val_data)
     return avg_loss
 
+
 def StartTrain():
+    """
+    Initiates the model training loop.
+    """
     best_valid_loss = float('inf')
     train_losses = []
     valid_losses = []
@@ -157,4 +171,6 @@ def StartTrain():
         print(f'\nTraining Loss: {train_loss:.3f}')
         print(f'Validation Loss: {valid_loss:.3f}')
 
+
+# Uncomment the line below to start training
 # StartTrain()

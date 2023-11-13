@@ -1,27 +1,42 @@
-from transformers import RobertaForSequenceClassification,AutoModelForSequenceClassification
-from transformers import AdamW
-from transformers import get_scheduler,AutoTokenizer
+from transformers import RobertaForSequenceClassification, AutoModelForSequenceClassification
+from transformers import AdamW, get_scheduler, AutoTokenizer
 import torch
 from datasets import load_metric
-from .Remove import remove_punctuation
+from .remove import remove_punctuation
 from tqdm.auto import tqdm
 
 checkpoint = "wonrax/phobert-base-vietnamese-sentiment"
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+
 class Model:
-    def __init__(self,name_model="wonrax/phobert-base-vietnamese-sentiment"):
+    def __init__(self, name_model="wonrax/phobert-base-vietnamese-sentiment"):
+        """
+        Initializes the Model.
+
+        Args:
+            name_model (str, optional): Pretrained model name or path. Defaults to "wonrax/phobert-base-vietnamese-sentiment".
+        """
         self.device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
         print(self.device)
         try:
             self.model = AutoModelForSequenceClassification.from_pretrained(name_model)
-            print('Load Model: ',name_model)
+            print('Load Model: ', name_model)
         except:
-            print('Load Model: ',name_model)
+            print('Load Model: ', name_model)
             self.model = RobertaForSequenceClassification.from_pretrained(name_model)
 
         self.model.to(self.device)
 
-    def Train(self,train_dataloader,learning_rate = 5e-5,epoch = 3,save_model = ''):
+    def Train(self, train_dataloader, learning_rate=5e-5, epoch=3, save_model=''):
+        """
+        Trains the model.
+
+        Args:
+            train_dataloader (DataLoader): DataLoader for training data.
+            learning_rate (float, optional): Learning rate for optimization. Defaults to 5e-5.
+            epoch (int, optional): Number of training epochs. Defaults to 3.
+            save_model (str, optional): Path to save the trained model. Defaults to ''.
+        """
         optimizer = AdamW(self.model.parameters(), lr=learning_rate)
         num_epochs = epoch
         num_training_steps = num_epochs * len(train_dataloader)
@@ -34,7 +49,7 @@ class Model:
 
         progress_bar = tqdm(range(num_training_steps))
         self.model.train()
-        print('Training on ',epoch,' epoch')
+        print('Training on ', epoch, ' epoch')
         for epoch in range(num_epochs):
             total_loss = 0
             for batch in train_dataloader:
@@ -51,12 +66,19 @@ class Model:
             print(f"Epoch {epoch + 1} - Average Loss: {average_loss:.4f}")
 
         if save_model != '':
-            print('Saved ',save_model)
+            print('Saved ', save_model)
             self.model.save_pretrained(save_model)
 
-
-
     def Train_CrossValidation(self, train_dataloader, learning_rate=5e-5, epoch=3, save_model=''):
+        """
+        Trains the model using k-fold cross-validation.
+
+        Args:
+            train_dataloader (DataLoader): DataLoader for training data.
+            learning_rate (float, optional): Learning rate for optimization. Defaults to 5e-5.
+            epoch (int, optional): Number of training epochs. Defaults to 3.
+            save_model (str, optional): Path to save the trained model. Defaults to ''.
+        """
         optimizer = AdamW(self.model.parameters(), lr=learning_rate)
         num_epochs = epoch
 
@@ -113,7 +135,16 @@ class Model:
             print('Saved', save_model)
             self.model.save_pretrained(save_model)
 
-    def Predict(self,input_text=''):
+    def Predict(self, input_text=''):
+        """
+        Performs inference on a given input text.
+
+        Args:
+            input_text (str): Input text for prediction.
+
+        Returns:
+            Tuple[str, float]: Predicted label and confidence score.
+        """
         if input_text == "":
             return '', ''
         inputs = tokenizer(input_text, padding=True, truncation=True, return_tensors="pt")
@@ -132,7 +163,13 @@ class Model:
 
         return predicted_label, probabilities[0][predicted_class]
 
-    def Eval(self,eval_dataloader):
+    def Eval(self, eval_dataloader):
+        """
+        Evaluates the model on validation data.
+
+        Args:
+            eval_dataloader (DataLoader): DataLoader for evaluation data.
+        """
         self.model.to(self.device)
         print(self.device)
         metric = load_metric("accuracy")
