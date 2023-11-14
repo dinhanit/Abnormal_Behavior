@@ -1,7 +1,7 @@
 from Inference import Inference
 import cv2
 import torch
-from Param import DEVICE
+from param import DEVICE
 import argparse
 parser = argparse.ArgumentParser(description='Your script description')
 parser.add_argument('--source', type=str, default='video_test2.mp4', help='Path to save the trained model')

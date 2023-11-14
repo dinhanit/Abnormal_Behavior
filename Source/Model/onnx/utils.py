@@ -2,7 +2,7 @@ import onnxruntime as ort
 import numpy as np
 
 def load_session(path: str) -> ort.InferenceSession:
-    providers = ['CUDAExecutionProvider', 'CPUExecutionProvider']
+    providers = ['CPUExecutionProvider']
     session = ort.InferenceSession(path, providers=providers)   
     return session
 

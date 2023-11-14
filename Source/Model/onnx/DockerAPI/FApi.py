@@ -17,10 +17,13 @@ def Inference(img):
     cov_img = get_landmark_from_image(img)
     if np.all(cov_img==0):
         return 0
-    
     input_data = np.array([[cov_img]])
     results = infer(session, input_data)
-    return np.argmax(softmax(results))
+    results = softmax(results)
+    if results[0][1]>=0.5:
+        return 1
+    else:
+        return 0
 
 def process_frame(frame_data):
     nparr = np.frombuffer(frame_data, np.uint8)

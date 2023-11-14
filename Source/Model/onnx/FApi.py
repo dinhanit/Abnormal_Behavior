@@ -1,26 +1,11 @@
 import numpy as np
 from fastapi import FastAPI, UploadFile
 import cv2
-from Utils import *
+from utils import *
 from MediapipeFaceMesh import get_landmark_from_image
 import numpy as np
+from Inference import Inference
 app = FastAPI()
-
-label =["Abnormal","Normal"]
-session = load_session("model.onnx")
-
-def softmax(x):
-    e_x = np.exp(x - np.max(x))
-    return e_x / e_x.sum()
-
-def Inference(img):
-    cov_img = get_landmark_from_image(img)
-    if np.all(cov_img==0):
-        return 0
-    
-    input_data = np.array([[cov_img]])
-    results = infer(session, input_data)
-    return np.argmax(softmax(results))
 
 def process_frame(frame_data):
     nparr = np.frombuffer(frame_data, np.uint8)
