@@ -48,7 +48,7 @@
 
 #### This is some example of the Normal/Abnormal criteria
 
-<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/5cca2bd6-6d4e-4480-81f5-c9020bbadcc7" height="350">
+<img src="https://github.com/DangLeChi/ChiTest/assets/122540817/8ee1a346-267a-4b96-92e8-c5cd62dc299e" height="350">
 
 ### Below is an overview of the branch directory:
 
