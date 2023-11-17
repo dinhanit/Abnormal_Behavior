@@ -16,6 +16,10 @@
   
 ![img_loss](ReadMeImage/LossOverEpochs.png)
 
+  - ### Confusion Matrix ###
+  
+![img_loss](ReadMeImage/ConfusionMatrix.png)
+
   - ### Gradient Over Epochs ###
   
 ![img_gradient](ReadMeImage/GradientNorm.png)
