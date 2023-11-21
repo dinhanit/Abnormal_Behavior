@@ -5,10 +5,13 @@
 <!-- ABOUT THE PROJECT -->
 ## 1. Performance of model: ##
 
-#### The model is evaluated on F1-Score, Loss after 100 epochs and calculates gradient norm to evaluate whether vanishing gradient appears or not. ####
+#### The model is evaluated on Precision, Loss after 100 epochs and calculates gradient norm to evaluate whether vanishing gradient appears or not. ####
 
 <a id="about-the-branch"></a>
-  - ### F1-Score Over Epochs ###
+  - ### Precision Over Epochs ###
+    ***Positive : Abnormal***
+
+    ***Negative : Normal***
   
 ![img_f1](ReadMeImage/F1OverEpochs.png)
 

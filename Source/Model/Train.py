@@ -1,10 +1,11 @@
 from ConfigModel import *
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, precision_score, recall_score
 import pandas as pd
 import argparse
 
 performance= []
-
+best_precision = 0.0
+best_model = None
 for epoch in range(EPOCHS):
     model.train()
     running_loss = 0.0
@@ -31,11 +32,13 @@ for epoch in range(EPOCHS):
     if scheduler is not None:
         scheduler.step()
 
-    model.eval() 
+    model.eval()
     total_loss_test = 0.0
     total_samples = 0
     predictions_test = []
     true_labels_test = []
+    correct = 0
+    total = 0
     with torch.no_grad():
         for inputs, labels in TESTLOADER:
             inputs = inputs.to(DEVICE)
@@ -49,15 +52,24 @@ for epoch in range(EPOCHS):
             predictions_test.extend(predicted.tolist())
             true_labels_test.extend(labels.tolist())
 
+            correct += (predicted == labels).sum().item()
+            total += labels.size(0)
+
+    accuracy = correct / total
     avg_loss_test = total_loss_test / total_samples
     
     test_f1 = f1_score(true_labels_test, predictions_test, average='weighted')
-    
-    performance.append([running_loss / len(TRAINLOADER),avg_loss_test,train_f1,test_f1])
-    print(f"Epoch [{epoch+1}/{EPOCHS}] Loss Train: {performance[epoch][0] :.4f} Loss Test: {performance[epoch][1]:.4f} F1 Train: {performance[epoch][2]:.4f} F1 Test: {performance[epoch][3] :.4f}")
+    precision = precision_score(true_labels_test, predictions_test, average='weighted', pos_label=1, zero_division=1)
+    recall = recall_score(true_labels_test, predictions_test, average='weighted', pos_label=1, zero_division=1)
+    if precision > best_precision:
+        best_precision = precision
+        best_model = model.state_dict()  # Save the best model's state
+
+    performance.append([running_loss / len(TRAINLOADER), avg_loss_test, accuracy, precision, recall])
+    print(f"Epoch [{epoch+1}/{EPOCHS}] Loss Train: {performance[epoch][0]:.4f} Loss Test: {performance[epoch][1]:.4f} Accuracy Test: {performance[epoch][2]:.4f} Precision: {performance[epoch][3]:.4f} Recall: {performance[epoch][4]:.4f}")
 
 
-
+print("Best Precision", best_precision)
 parser = argparse.ArgumentParser(description='Your script description')
 parser.add_argument('--save-csv', type=str, default='', help='Path to save the performance CSV file')
 parser.add_argument('--save-model', type=str, default='', help='Path to save the trained model')
@@ -65,7 +77,7 @@ args = parser.parse_args()
 
 def Save_Perform():
     global performance
-    df = pd.DataFrame(performance, columns=['Loss Train', 'Loss Test', 'F1 Train','F1 Test'])
+    df = pd.DataFrame(performance, columns=['Loss Train', 'Loss Test', 'Accuracy' , 'Precision', 'Recall'])
     df.to_csv('Performance.csv',index=False)
 
 if args.save_csv != "":

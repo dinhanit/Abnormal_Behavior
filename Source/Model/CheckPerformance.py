@@ -41,20 +41,18 @@ while True:
     key = cv2.waitKey(0)
 
     if key == ord('1') and label == "Abnormal":
-        TRUE_NEGATIVES += 1
-        TRUE_PREDICTIONS +=1
-    elif key == ord('0') and label == "Normal":
         TRUE_POSITIVES += 1
         TRUE_PREDICTIONS +=1
+    elif key == ord('0') and label == "Normal":
+        TRUE_NEGATIVES
+        TRUE_PREDICTIONS +=1
     elif label == "Abnormal":
-        FALSE_NEGATIVES += 1
-    elif label == "Normal":
         FALSE_POSITIVES += 1
+    elif label == "Normal":
+        FALSE_NEGATIVES += 1
 
     if key & 0xFF == ord('q'):
         break
-    else:
-        pass
 
 cap.release()
 cv2.destroyAllWindows()
@@ -62,10 +60,10 @@ cv2.destroyAllWindows()
 print("Total Frames Processed:", FRAME_COUNT)
 print("True Predictions:", TRUE_PREDICTIONS)
 
-PRECISION = TRUE_POSITIVES / (TRUE_POSITIVES + FALSE_POSITIVES) 
+PRECISION = TRUE_POSITIVES / (TRUE_POSITIVES + FALSE_POSITIVES)
 RECALL = TRUE_POSITIVES / (TRUE_POSITIVES + FALSE_NEGATIVES)
-F1_SCORE = 2 * (PRECISION * RECALL) / (PRECISION + RECALL) 
-ACCURACY = (TRUE_POSITIVES + TRUE_NEGATIVES) / (TRUE_POSITIVES + TRUE_NEGATIVES + FALSE_POSITIVES + FALSE_NEGATIVES) 
+F1_SCORE = 2 * (PRECISION * RECALL) / (PRECISION + RECALL)
+ACCURACY = (TRUE_POSITIVES + TRUE_NEGATIVES) / (TRUE_POSITIVES + TRUE_NEGATIVES + FALSE_POSITIVES + FALSE_NEGATIVES)
 
 print("Precision: {:.2%}".format(PRECISION))
 print("Recall: {:.2%}".format(RECALL))
