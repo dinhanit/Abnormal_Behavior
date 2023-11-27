@@ -199,13 +199,13 @@ def abnormal(request):
             # Read the image from the uploaded file
             frame = cv2.imdecode(np.frombuffer(frame_data.read(), np.uint8), cv2.IMREAD_COLOR)
             _, image = cv2.imencode(".jpg", frame)
-            url = "http://192.168.0.199:8501/process_frame/"
+            url = "http://192.168.204.22:8501/process_frame/"
             files = {'file': ('image.jpg', image)}
             i += 1
             response = requests.post(url, files=files)
             label = response.text
             print(label)
-            if 800 == abnormal_count:
+            if abnormal_count >= 160:
                 # Generate a random code with 5 characters
                 random_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
                 with open(EXAM_CODE_FILE, "w+") as f:

@@ -2,7 +2,7 @@
 # Group 2. Welcome to our web application!
 [MINDMAP](https://www.mindmeister.com/app/map/2959987752?t=k466Mfuf5F)
 
-<div align=center><img src="src/home.png"><div>
+<div align=center><img src="src/home.png"></div>
 
 ## Table of Contents
 
@@ -39,8 +39,8 @@ You need to get your ipv4 by:
 ipconfig
 ```
 Then you need to get the ip and come into **setting.py**, put it in ALLOWED_HOSTS:
-<div align=center><img src="src/ip1.png"><div>
-<div align=center><img src="src/ip2.png"><div>
+<div align=center><img src="src/ip1.png"></div>
+<div align=center><img src="src/ip2.png"></div>
 
 Run the web:
 ```shell
